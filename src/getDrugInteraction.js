@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default () => {
 
-    const[rxcuiID, updateRxcuiID] = useState(null);
+    const[rxcuiID, updateRxcuiID] = useState("");
     const[nameOne, updateNameOne] = useState("");
     const [nameTwo, updateNameTwo] = useState("");
     const[search, updateSearch] = useState(1);
@@ -20,24 +20,58 @@ export default () => {
         updateNameTwo(enteredName);
     }
 
+    async function getRxcuiIDMethod() {
+
+        const getRxcuiIDAPI = `https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${nameOne}&search=${search}`;
+        const getRxcuiIDResponse = await fetch(getRxcuiIDAPI)
+        const getRxcuiIDData = await getRxcuiIDResponse.json();
+
+        console.log(getRxcuiIDData);
+
+        if (getRxcuiIDData.idGroup.rxnormId !== undefined) {
+
+            console.log(getRxcuiIDData.idGroup.rxnormId[0]);
+            updateRxcuiID(getRxcuiIDData.idGroup.rxnormId[0]);
+
+            var passableRxcui = getRxcuiIDData.idGroup.rxnormId[0];
+            
+        }
+
+        else {
+
+            console.log("No matching Rxcui Id!");
+            alert("No Match...");
+            
+        }
+
+        return passableRxcui;
+    }
+
+    async function getInteractionsMethod() {
+
+        var rxcui = await getRxcuiIDMethod();
+
+        const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcui}&sources=${source}`;
+        const getInteractionsResponse = await fetch(getInteractionsAPI)
+        const getInteractionsData = await getInteractionsResponse.json();
+
+        console.log(getInteractionsData);
+        return;
+    }
+
     const onSubmit = event => {
 
         event.preventDefault();
 
         (async () => {
 
-            const url = "https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=88014&sources=ONCHigh";
-            const response = await fetch(url)
-            const data = await response.json();
+            await getInteractionsMethod();
 
-            console.log(data);
+            console.log("WaitedTwice!");
 
-            
-        })();
+        })();     
+        
     }
-
-
-
 
 
     //return method
@@ -59,6 +93,10 @@ export default () => {
 
 
                 <button type="submit" className="find_btn">Find</button>
+
+                <div className="rxcui_div">
+                    <p className="rxcui_id">ID: {rxcuiID}</p>
+                </div>
             </form>
         </div>
 

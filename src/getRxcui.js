@@ -23,6 +23,8 @@ export default () => {
             const url = `https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${name}&search=${search}`;
             const response = await fetch(url)
             const data = await response.json();
+
+            console.log(data);
             
             
             if (data.idGroup.rxnormId !== undefined) {
