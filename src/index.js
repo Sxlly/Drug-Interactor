@@ -4,10 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { render } from 'react-dom';
+
+//Importing Pages ~ Shae
+import AllDrugTerms from './getDrugTerms';
+import getRxcuiId from './getRxcui';
+import getDrugInteraction from './getDrugInteraction';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Switch>
+      <Route exact path = "/" component = {getDrugInteraction} />
+    </Switch>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

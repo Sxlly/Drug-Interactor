@@ -1,0 +1,90 @@
+body {
+
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: rgba(0,0,0,0.25);
+}
+
+
+.main_form {
+
+    width: 300px;
+    padding: 40px;
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    transform: translate(-50%,50%);
+    background: #191919;
+    text-align: center;
+    
+}
+
+.title {
+
+    text-transform: uppercase;
+    color: rgba(100, 217, 125);
+    font-weight: 500;
+}
+
+.name_input {
+
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+
+}
+
+.name_input:focus {
+
+    width: 280px;
+    border-color: #2ecc71;
+}
+
+.find_btn {
+
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.find_btn:hover {
+
+    background: #2ecc71;
+}
+
+.rxcui_div {
+
+    width: 300px;
+    height: 30px;
+    color: white;
+    background: rgba(52, 152, 219, 0.45);
+    border: 0;
+    border-radius: 24px;
+
+}
+
+.rxcui_id {
+
+    text-align: center;
+    padding: 5px;
+}
