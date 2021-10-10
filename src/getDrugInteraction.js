@@ -1,15 +1,19 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
+import './getDrugInteractionCSS.css';
 
 
 
 export default () => {
 
+    //variables using this.state functionality
     const[rxcuiID, updateRxcuiID] = useState("");
     const[nameOne, updateNameOne] = useState("");
     const [nameTwo, updateNameTwo] = useState("");
     const[search, updateSearch] = useState(1);
     const[source, updateSource] = useState("DrugBank");
+    const [loading, updateLoading] = useState("Loading...");
+    const [InteractionsList, updateInteractionsList] = useState([]);
 
     //function to update nameOne state 
     function nameChangeOne(enteredName) {
@@ -62,6 +66,8 @@ export default () => {
             const getInteractionsData = await getInteractionsResponse.json();
 
             console.log(getInteractionsData);
+
+            
             return;
         }
 
@@ -91,7 +97,7 @@ export default () => {
     return (
 
         <div className="main_div">
-            <form className="main_form" onSubmit={onSubmit}>
+            <form className="form_main" onSubmit={onSubmit}>
                 <h1 className="title">Drug Interaction</h1>
 
                 <input
@@ -107,12 +113,12 @@ export default () => {
 
                 <button type="submit" className="find_btn">Find</button>
 
-                <div className="rxcui_div">
-                    <p className="rxcui_id">ID: {rxcuiID}</p>
+                <p className="rxcui_id">ID: {rxcuiID}</p>
 
-                    <p>{nameOne} Interacts With The Following</p>
-                    <p></p>
-                </div>
+                <p className="sentence_one">{nameOne} Interacts With The Following</p>
+                
+                <p className="sentence_two">Total Number of Drugs {nameOne} Interacts With: {InteractionsList.length}</p>
+
             </form>
         </div>
 
