@@ -11,14 +11,15 @@ export default () => {
     const[search, updateSearch] = useState(1);
     const[source, updateSource] = useState("DrugBank");
 
-
+    //function to update nameOne state 
     function nameChangeOne(enteredName) {
         updateNameOne(enteredName);
-    }
+    };
 
+    //function to update nameTwo state
     function nameChangeTwo(enteredName) {
         updateNameTwo(enteredName);
-    }
+    };
 
     //asynchronus method to get rxcui ID of drug in search bar
     async function getRxcuiIDMethod() {
@@ -79,7 +80,6 @@ export default () => {
         (async () => {
 
             await getInteractionsMethod();
-
             console.log("Waited!");
 
         })();     
@@ -111,6 +111,7 @@ export default () => {
                     <p className="rxcui_id">ID: {rxcuiID}</p>
 
                     <p>{nameOne} Interacts With The Following</p>
+                    <p></p>
                 </div>
             </form>
         </div>
