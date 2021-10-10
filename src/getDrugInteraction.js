@@ -14,6 +14,7 @@ export default () => {
     const[source, updateSource] = useState("DrugBank");
     const [loading, updateLoading] = useState("Loading...");
     const [InteractionsList, updateInteractionsList] = useState([]);
+    const [interactionCount, updateInteractionCount] = useState(0);
 
     //function to update nameOne state 
     function nameChangeOne(enteredName) {
@@ -67,7 +68,9 @@ export default () => {
 
             console.log(getInteractionsData);
 
-            
+            updateInteractionCount(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
+
+
             return;
         }
 
@@ -117,7 +120,7 @@ export default () => {
 
                 <p className="sentence_one">{nameOne} Interacts With The Following</p>
                 
-                <p className="sentence_two">Total Number of Drugs {nameOne} Interacts With: {InteractionsList.length}</p>
+                <p className="sentence_two">Total Number of Drugs {nameOne} Interacts With: {interactionCount}</p>
 
             </form>
         </div>
