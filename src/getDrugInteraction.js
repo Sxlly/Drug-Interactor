@@ -20,6 +20,7 @@ export default () => {
         updateNameTwo(enteredName);
     }
 
+    //asynchronus method to get rxcui ID of drug in search bar
     async function getRxcuiIDMethod() {
 
         const getRxcuiIDAPI = `https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${nameOne}&search=${search}`;
@@ -40,25 +41,37 @@ export default () => {
         else {
 
             console.log("No matching Rxcui Id!");
-            alert("No Match...");
+            updateRxcuiID("No Match...");
+            return;
             
         }
 
         return passableRxcui;
     }
 
+    //asynchronus method to get all interactions of drug in search bar
     async function getInteractionsMethod() {
 
         var rxcui = await getRxcuiIDMethod();
 
-        const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcui}&sources=${source}`;
-        const getInteractionsResponse = await fetch(getInteractionsAPI)
-        const getInteractionsData = await getInteractionsResponse.json();
+        if (rxcui !== undefined) {
 
-        console.log(getInteractionsData);
-        return;
+            const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcui}&sources=${source}`;
+            const getInteractionsResponse = await fetch(getInteractionsAPI)
+            const getInteractionsData = await getInteractionsResponse.json();
+
+            console.log(getInteractionsData);
+            return;
+        }
+
+        else {
+
+            console.log("Did not progress!");
+            return;
+        }
     }
 
+    //constant submit method
     const onSubmit = event => {
 
         event.preventDefault();
@@ -67,7 +80,7 @@ export default () => {
 
             await getInteractionsMethod();
 
-            console.log("WaitedTwice!");
+            console.log("Waited!");
 
         })();     
         
@@ -96,6 +109,8 @@ export default () => {
 
                 <div className="rxcui_div">
                     <p className="rxcui_id">ID: {rxcuiID}</p>
+
+                    <p>{nameOne} Interacts With The Following</p>
                 </div>
             </form>
         </div>
