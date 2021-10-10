@@ -13,7 +13,7 @@ export default () => {
     const[search, updateSearch] = useState(1);
     const[source, updateSource] = useState("DrugBank");
     const [loading, updateLoading] = useState("Loading...");
-    const [InteractionsList, updateInteractionsList] = useState([]);
+    const interactionsList = [];
     const [interactionCount, updateInteractionCount] = useState(0);
 
     //function to update nameOne state 
@@ -65,10 +65,23 @@ export default () => {
             const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcui}&sources=${source}`;
             const getInteractionsResponse = await fetch(getInteractionsAPI)
             const getInteractionsData = await getInteractionsResponse.json();
+            
+            const interactionsArray = [];
 
+            console.log(interactionsArray);
             console.log(getInteractionsData);
+            console.log(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
+            console.log(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair);
 
             updateInteractionCount(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
+
+            for (var index = 0; index < getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length-1; index++) {
+
+                interactionsArray[index] = getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair[index];
+                interactionsList[index] = interactionsArray[index].interactionConcept[1].minConceptItem.name;
+                console.log(interactionsList[index]);
+
+            }
 
 
             return;
@@ -121,6 +134,7 @@ export default () => {
                 <p className="sentence_one">{nameOne} Interacts With The Following</p>
                 
                 <p className="sentence_two">Total Number of Drugs {nameOne} Interacts With: {interactionCount}</p>
+
 
             </form>
         </div>
