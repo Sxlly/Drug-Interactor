@@ -24,10 +24,19 @@ export default () => {
                         <div className="navbar-collapse collapse" id="navbarContent">
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item active">
-                                    <a className="nav-link" href="">Home</a>
+                                    <a className="nav-link" href="/HomePage">Home</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="">All Drugs</a>
+                                    <a className="nav-link" href="">Interaction Pair Tool</a>
+                                </li>
+                                <li className="nav-link">
+                                    <a className="nav-link" href="/getDrugInteraction">All Interactions Tool</a>
+                                </li>
+                                <li className="nav-link">
+                                    <a className="nav-link" href="/AllDrugTerms">All Drugs Tool</a>
+                                </li>
+                                <li className="nav-link">
+                                    <a className="nav-link" href="getRxcuiId">Rxcui ID Tool</a>
                                 </li>
                             </ul>
                         </div>
@@ -78,7 +87,7 @@ export default () => {
                                 <div className="body">
                                     <h5 className="text-secondary">All Drug Terms</h5>
                                     <p>The online tool</p>
-                                    <a href="" className="btn btn-primary">Explore</a>
+                                    <a href="/AllDrugTerms" className="btn btn-primary">Explore</a>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +100,7 @@ export default () => {
                                 <div className="body">
                                     <h5 className="text-secondary">Rxcui ID Finder</h5>
                                     <p>The online tool</p>
-                                    <a href="" className="btn btn-primary">Explore</a>
+                                    <a href="/getRxcuiId" className="btn btn-primary">Explore</a>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +113,7 @@ export default () => {
                                 <div className="body">
                                     <h5 className="text-secondary">All Interactions</h5>
                                     <p>The online tool</p>
-                                    <a href="" className="btn btn-primary">Explore</a>
+                                    <a href="/getDrugInteraction" className="btn btn-primary">Explore</a>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +135,7 @@ export default () => {
                         </div>
                         <div className="col-lg-6 py-3 wow fadeInRight">
                             <div className="img-fluid py-3 text-center">
-                                <img src="" alt="image" />
+                                <img src="https://www.svgrepo.com/show/71137/globe.svg" alt="image" />
                             </div>
                         </div>
                     </div>
@@ -138,6 +147,7 @@ export default () => {
                     <div className="row mb-5">
                         <div className="col-lg-3 py-3">
                             <h3>Drug Interactor</h3>
+                            <p>Take substances safely</p>
                         </div>
                     </div>
                 </div>
