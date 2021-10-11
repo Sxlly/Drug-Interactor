@@ -10,12 +10,13 @@ import { render } from 'react-dom';
 import AllDrugTerms from './getDrugTerms';
 import getRxcuiId from './getRxcui';
 import getDrugInteraction from './getDrugInteraction';
+import HomePage from './HomePage';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route exact path = "/" component = {getDrugInteraction} />
+      <Route exact path = "/" component = {HomePage} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
