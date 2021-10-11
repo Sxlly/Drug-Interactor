@@ -60,7 +60,7 @@ export default () => {
                         <div className="col-lg-4">
                             <div className="card-service wow fadeInUp">
                                 <div className="header">
-                                    <img src="" alt="image" />
+                                    <img src="https://www.svgrepo.com/show/106499/chemistry.svg" alt="image" />
                                 </div>
                                 <div className="body">
                                     <h5 className="text-secondary">Drug Interactor</h5>
@@ -73,7 +73,7 @@ export default () => {
                         <div className="col-lg-4">
                             <div className="card-service wow fadeInUp">
                                 <div className="header">
-                                    <img src="" alt="image" />
+                                    <img src="https://www.svgrepo.com/show/259280/chemistry-laboratory.svg" alt="image" />
                                 </div>
                                 <div className="body">
                                     <h5 className="text-secondary">All Drug Terms</h5>
@@ -86,10 +86,23 @@ export default () => {
                         <div className="col-lg-4">
                             <div className="card-service wow fadeInUp">
                                 <div className="header">
-                                    <img src="" alt="image" />
+                                    <img src="https://www.svgrepo.com/show/256763/id-id.svg" alt="image" />
                                 </div>
                                 <div className="body">
                                     <h5 className="text-secondary">Rxcui ID Finder</h5>
+                                    <p>The online tool</p>
+                                    <a href="" className="btn btn-primary">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-4">
+                            <div className="card-service wow fadeInUp">
+                                <div className="header">
+                                    <img src="https://www.svgrepo.com/show/126805/chemistry.svg" alt="image" />
+                                </div>
+                                <div className="body">
+                                    <h5 className="text-secondary">All Interactions</h5>
                                     <p>The online tool</p>
                                     <a href="" className="btn btn-primary">Explore</a>
                                 </div>
