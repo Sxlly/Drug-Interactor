@@ -139,9 +139,9 @@ export default () => {
                 
                 <p className="sentence_two">Total Number of Drugs {nameOne} Interacts With: {interactionCount}</p>
                 
-                <ul>
+                <ul className="interactions_list">
                     {
-                        interactionsList.map(Interaction => <li key={Interaction}>{Interaction}</li>)
+                        interactionsList.map(Interaction => <li className="interaction" key={Interaction}>{Interaction}</li>)
                     }
                 </ul>
 

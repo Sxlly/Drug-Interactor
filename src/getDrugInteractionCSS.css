@@ -10,9 +10,8 @@ body {
 .form_main {
 
     width: 750px;
-    padding: 40px;
+    padding: 25px;
     position: absolute;
-    top: 10vh;
     left: 50%;
     transform: translate(-50%,50%);
     background: #191919;
@@ -102,4 +101,18 @@ body {
     text-align: center;
     padding: 5px;
     color: white;
+}
+
+.interactions_list {
+
+    color: white;
+    padding: 20px;
+
+}
+
+.interaction {
+
+    background: rgba(52, 152, 219, 0.45);
+    margin: 10px;
+    
 }
