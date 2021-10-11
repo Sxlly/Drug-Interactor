@@ -13,7 +13,7 @@ export default () => {
     const[search, updateSearch] = useState(1);
     const[source, updateSource] = useState("DrugBank");
     const [loading, updateLoading] = useState("Loading...");
-    const interactionsList = [];
+    const [interactionsList, updateInteractionsList] = useState([]);
     const [interactionCount, updateInteractionCount] = useState(0);
 
     //function to update nameOne state 
@@ -67,6 +67,7 @@ export default () => {
             const getInteractionsData = await getInteractionsResponse.json();
             
             const interactionsArray = [];
+            const staticInteractionsList = [];
 
             console.log(interactionsArray);
             console.log(getInteractionsData);
@@ -78,10 +79,13 @@ export default () => {
             for (var index = 0; index < getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length-1; index++) {
 
                 interactionsArray[index] = getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair[index];
-                interactionsList[index] = interactionsArray[index].interactionConcept[1].minConceptItem.name;
-                console.log(interactionsList[index]);
+                staticInteractionsList[index] = interactionsArray[index].interactionConcept[1].minConceptItem.name;
+                console.log(staticInteractionsList[index]);
+
 
             }
+
+            updateInteractionsList(staticInteractionsList);
 
 
             return;
@@ -134,7 +138,12 @@ export default () => {
                 <p className="sentence_one">{nameOne} Interacts With The Following</p>
                 
                 <p className="sentence_two">Total Number of Drugs {nameOne} Interacts With: {interactionCount}</p>
-
+                
+                <ul>
+                    {
+                        interactionsList.map(Interaction => <li key={Interaction}>{Interaction}</li>)
+                    }
+                </ul>
 
             </form>
         </div>
