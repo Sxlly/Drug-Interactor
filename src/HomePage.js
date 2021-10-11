@@ -118,11 +118,46 @@ export default () => {
                         <div className="col-lg-6 py-3 wow fadeInUp">
                             <span className="subhead">About Us</span>
                             <h2 className="title-section">A cool project gone public!</h2>
-                        </div>
+                            <div className="divider"></div>
 
+                            <p>Drug interactor started as a cool idea and self help tool for the creator, although after the completion of the website</p>
+                            <p>it was obvious that it would be of use to the public, and the rest was history!</p>
+                            <a href="" className="btn btn-primary mt-3">Read More</a>
+                        </div>
+                        <div className="col-lg-6 py-3 wow fadeInRight">
+                            <div className="img-fluid py-3 text-center">
+                                <img src="" alt="image" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <footer className="page-footer bg-image">
+                <div className="container">
+                    <div className="row mb-5">
+                        <div className="col-lg-3 py-3">
+                            <h3>Drug Interactor</h3>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
 
     );
