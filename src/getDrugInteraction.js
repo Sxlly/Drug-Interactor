@@ -161,6 +161,25 @@ export default () => {
                 </div>
             </header>
 
+            <div className="page-section">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-4">
+                            <div className="card-service wow fadeInUp">
+                                <div className="header">
+                                    <img src="" alt="image" />
+                                </div>
+                                <div className="body">
+                                    <h5 className="text-secondary">Drug Interactor</h5>
+                                    <p>The online tool</p>
+                                    <a href="" className="btn btn-primary">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         <div className="back-to-top"></div>
         <div className="main_div">
