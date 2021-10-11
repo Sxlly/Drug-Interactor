@@ -1,6 +1,8 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
 import './getDrugInteractionCSS.css';
+import './bootstrap.css';
+import './theme.css';
 
 
 
@@ -138,9 +140,28 @@ export default () => {
                             </ul>
                         </div>
                     </div>
-
                 </nav>
+
+                <div className="container">
+                    <div className="page-banner home-banner">
+                        <div className="row align-items-center flex-wrap-reverse h-100">
+                            <div className="col-md-6 py-5 wow fadeInleft">
+                                <h1 className="mb-4">Welcome to Drug Interactor!</h1>
+                                <p className="text-lg text-grey mb-5">Take Substances Safely</p>
+                                <a href="#" className="btn btn-primary btn-split">Dive In</a>
+                            </div>
+                            <div className="col-md-6 py-5 wow zoomIn">
+                                <div className="img-fluid text-center">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/LSD_Structure.svg" alt="STRUCTURE" />
+                                </div>
+                            </div>
+                        </div>
+                        <a href="" className="btn-scroll" data-role="smoothscroll"><span className="mai-arrow-down"></span> </a>
+                    </div>
+                </div>
             </header>
+
+
         <div className="back-to-top"></div>
         <div className="main_div">
 
