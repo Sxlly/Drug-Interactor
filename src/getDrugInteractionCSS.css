@@ -137,5 +137,5 @@ body {
 .interaction:hover {
 
     border-radius: 15px;
-    border: 1px solid rgba(52, 152, 219, 0.45);
+    border: 3px solid rgba(52, 152, 219, 0.45);
 }
