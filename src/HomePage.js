@@ -117,6 +117,7 @@ export default () => {
                     <div className="row align-items-center">
                         <div className="col-lg-6 py-3 wow fadeInUp">
                             <span className="subhead">About Us</span>
+                            <h2 className="title-section">A cool project gone public!</h2>
                         </div>
 
                     </div>
