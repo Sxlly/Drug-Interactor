@@ -40,7 +40,7 @@ export default () => {
                             <div className="col-md-6 py-5 wow fadeInleft">
                                 <h1 className="mb-4">Welcome to Drug Interactor!</h1>
                                 <p className="text-lg text-grey mb-5">Take Substances Safely</p>
-                                <a href="#" className="btn btn-primary btn-split">Dive In</a>
+                                <a href="#" className="btn btn-primary">Dive In</a>
                             </div>
                             <div className="col-md-6 py-5 wow zoomIn">
                                 <div className="img-fluid text-center">
@@ -56,6 +56,7 @@ export default () => {
             <div className="page-section">
                 <div className="container">
                     <div className="row">
+
                         <div className="col-lg-4">
                             <div className="card-service wow fadeInUp">
                                 <div className="header">
@@ -63,6 +64,32 @@ export default () => {
                                 </div>
                                 <div className="body">
                                     <h5 className="text-secondary">Drug Interactor</h5>
+                                    <p>The online tool</p>
+                                    <a href="" className="btn btn-primary">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-4">
+                            <div className="card-service wow fadeInUp">
+                                <div className="header">
+                                    <img src="" alt="image" />
+                                </div>
+                                <div className="body">
+                                    <h5 className="text-secondary">All Drug Terms</h5>
+                                    <p>The online tool</p>
+                                    <a href="" className="btn btn-primary">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-4">
+                            <div className="card-service wow fadeInUp">
+                                <div className="header">
+                                    <img src="" alt="image" />
+                                </div>
+                                <div className="body">
+                                    <h5 className="text-secondary">Rxcui ID Finder</h5>
                                     <p>The online tool</p>
                                     <a href="" className="btn btn-primary">Explore</a>
                                 </div>
