@@ -20,6 +20,7 @@ ReactDOM.render(
       <Route path = "/AllDrugTerms" component={AllDrugTerms} />
       <Route path = "/getRxcuiId" component={getRxcuiId} />
       <Route path = "/getDrugInteraction" component={getDrugInteraction} />
+      <Route path = "/HomePage" component={HomePage} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
