@@ -98,6 +98,17 @@ export default () => {
                     </div>
                 </div>
             </div>
+
+            <div className="page-section" id="about">
+                <div className="container">
+                    <div className="row align-items-center">
+                        <div className="col-lg-6 py-3 wow fadeInUp">
+                            <span className="subhead">About Us</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
 
     );
