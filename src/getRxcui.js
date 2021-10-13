@@ -95,7 +95,7 @@ export default () => {
                         <h2 className="rxcui-subheader">Enter drug name below</h2>
 
                         <input
-                            className="name_input"
+                            className="rxcui-name-input"
                             id="name"
                             name="name"
                             type="text"
@@ -104,10 +104,10 @@ export default () => {
                             onChange={(event) => nameChange(event.target.value)}
                         />
 
-                        <button type="submit" className="find_btn">Find</button>
+                        <button type="submit" className="rxcui-find-btn">Find</button>
 
-                        <div className="rxcui_div">
-                            <p className="rxcui_id">ID: {rxcuiID}</p>
+                        <div className="rxcui-answer-div">
+                            <p className="rxcui-answer">ID: {rxcuiID}</p>
                         </div>
                     </form>
 
