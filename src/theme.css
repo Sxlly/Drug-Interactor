@@ -1468,6 +1468,8 @@ a.text-dark:hover, a.text-dark:focus {
   box-shadow: 0 3px 12px rgba(95, 92, 120, 0.12);
 }
 
+/* BEGINNING OF CSS CHANGES AND ADDITIONS */
+
 .card-service-large {
 
   display: block;
@@ -1503,6 +1505,41 @@ a.text-dark:hover, a.text-dark:focus {
 
   color: #555555;
   font-size: 20px;
+}
+
+.rxcui-header {
+
+  color: #555555;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.rxcui-subheader {
+
+  color: #555555;
+  font-size: 20px;
+}
+
+.rxcui-name-input {
+
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: #555555;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+.rxcui-name-input:focus {
+
+  width: 280px;
+  border-color: #2ecc71;
 }
 
 .card-service .header {

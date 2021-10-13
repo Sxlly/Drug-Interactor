@@ -86,35 +86,37 @@ export default () => {
         </nav>
 
 
+        <div className="page-section">
+            <div className="container">
+                <div className="card-service-large wow fadeInUp">
+                    <form onSubmit={onSubmit}>
+
+                        <h1 className="rxcui-header">Find Rxcui ID</h1>
+                        <h2 className="rxcui-subheader">Enter drug name below</h2>
+
+                        <input
+                            className="name_input"
+                            id="name"
+                            name="name"
+                            type="text"
+                            placeholder="Enter Drug Name..."
+                            value={name}
+                            onChange={(event) => nameChange(event.target.value)}
+                        />
+
+                        <button type="submit" className="find_btn">Find</button>
+
+                        <div className="rxcui_div">
+                            <p className="rxcui_id">ID: {rxcuiID}</p>
+                        </div>
+                    </form>
 
 
-        
-
-        <div className="main_div">
-            <form className="main_form" onSubmit={onSubmit}>
-                <h1 className="title">Find Rxcui Id</h1>
-
-                <input
-                    className="name_input"
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Enter Drug Name..."
-                    value={name}
-                    onChange={(event) => nameChange(event.target.value)}
-                />
-                <button type="submit" className="find_btn">Find</button>
-
-                
-                <div className="rxcui_div">
-                    <p className="rxcui_id">ID: {rxcuiID}</p>
                 </div>
-                
-
-
-            </form>
+            </div>
         </div>
+
     </div>
-    
+
     );
 };
