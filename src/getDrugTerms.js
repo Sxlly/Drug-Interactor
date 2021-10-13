@@ -70,8 +70,8 @@ class AllDrugTerms extends Component {
                     <div className="container">
                         <div className="card-service-large wow fadeInUp">
 
-                            <h1>List of all Drug Names</h1>
-                            <h2>Total Number Of Drug Terms: {DrugTerms.length}</h2>
+                            <h1 className="drug-terms-header">List of all Drug Names</h1>
+                            <h2 className="drug-terms-subheader">Total Number Of Drug Terms: {DrugTerms.length}</h2>
                             {
                                 //map all drug terms individually from DrugTerms array and display on screen through HTML
                                 DrugTerms.map(Term => <div className="card-service-large-item">Term: {Term}</div>)
