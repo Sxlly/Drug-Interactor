@@ -103,18 +103,7 @@ body {
     color: white;
 }
 
-.interactions_list {
 
-    color: white;
-    padding: 10px;
-    margin: 10px;
-    display: grid;
-    grid-gap: 10px;
-    list-style-type: none;
-
-
-
-}
 
 .interaction {
 
@@ -130,6 +119,7 @@ body {
     font-size: 13px;
     grid-gap: 10px;
     border: 1px solid transparent;
+    color: black;
 
     
 }

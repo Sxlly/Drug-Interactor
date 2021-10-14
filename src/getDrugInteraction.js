@@ -165,9 +165,9 @@ export default () => {
                             <p className="">{nameOne} Interacts With The Following</p>
                             <p className="">Total Number of Drugs {nameOne} Interacts With: {interactionCount}</p>
 
-                            <ul className="interactions_list">
+                            <ul className="card-service-large wow fadeInUp">
                                 {
-                                    interactionsList.map(Interaction => <li className="interaction" key={Interaction}>{Interaction}</li>)
+                                    interactionsList.map(Interaction => <li className="interaction-item" key={Interaction}>{Interaction}</li>)
                                 }
                             </ul>
 
@@ -176,43 +176,6 @@ export default () => {
                 </div>
             </div>
 
-
-
-
-
-
-        <div className="main_div">
-
-            <form className="form_main" onSubmit={onSubmit}>
-                <h1 className="title">Drug Interaction</h1>
-
-                <input
-                    className="name_input"
-                    id="nameOne"
-                    name="name"
-                    type="text"
-                    placeholder="Enter Drug One Name..."
-                    value={nameOne}
-                    onChange={(event) => nameChangeOne(event.target.value)}
-                />
-
-
-                <button type="submit" className="find_btn">Find</button>
-
-                <p className="rxcui_id">ID: {rxcuiID}</p>
-
-                <p className="sentence_one">{nameOne} Interacts With The Following</p>
-                
-                <p className="sentence_two">Total Number of Drugs {nameOne} Interacts With: {interactionCount}</p>
-                
-                <ul className="interactions_list">
-                    {
-                        interactionsList.map(Interaction => <li className="interaction" key={Interaction}>{Interaction}</li>)
-                    }
-                </ul>
-
-            </form>
-        </div>
         </div>
 
     );
