@@ -44,25 +44,41 @@ export default () => {
 
         console.log(getRxcuiIDAPITwoData);
 
-        if (getRxcuiIDAPIOneData.idGroup.rxnormId || getRxcuiIDAPITwoData.idGroup.rxnormId == undefined) {
+        if (getRxcuiIDAPIOneData.idGroup.rxnormId && getRxcuiIDAPITwoData.idGroup.rxnormId !== undefined) {
 
-            console.log("No matching Rxcui Id!");
-            updateRxcuiIDOne("No Match...");
-            updateRxcuiIDTwo("No Match...");
+            var passableRxcuiOne = getRxcuiIDAPIOneData.idGroup.rxnormId[0];
+            var passableRxcuiTwo = getRxcuiIDAPITwoData.idGroup.rxnormId[0];
+            updateRxcuiIDOne(passableRxcuiOne);
+            updateRxcuiIDTwo(passableRxcuiTwo);
+            return {
+                passableRxcuiOne: passableRxcuiOne,
+                passableRxcuiTwo: passableRxcuiTwo
+            };
         }
 
         else {
 
-            var passableRxcuiOne = getRxcuiIDAPIOneData.idGroup.rxnormId[0];
-            var passableRxcuiTwo = getRxcuiIDAPITwoData.idGroup.rxnormId[0];
+            
+            console.log("No matching Rxcui Id!");
+            updateRxcuiIDOne("No Match...");
+            updateRxcuiIDTwo("No Match...");
+            return;
         }
 
-        return {
-            passableRxcuiOne: passableRxcuiOne,
-            passableRxcuiTwo: passableRxcuiTwo
-        };
+    }
 
 
+    //constant submit method
+    const onSubmit = event => {
+
+        event.preventDefault();
+
+        (async () => {
+
+            await getRxcuiIdMethod();
+            console.log("Waited!");
+
+        })();
     }
 
 
@@ -109,7 +125,7 @@ export default () => {
             <div className="page-section">
                 <div className="container">
                     <div className="card-service-large wow fadeInUp">
-                        <form>
+                        <form onSubmit={onSubmit}>
                             <h1 className="rxcui-header">Interaction Pair</h1>
                             <h2 className="rxcui-subheader">subheader</h2>
 
@@ -122,6 +138,21 @@ export default () => {
                                 value={nameOne}
                                 onChange={(event) => nameChangeOne(event.target.value)}
                             />
+
+                            <input
+                                className="rxcui-name-input"
+                                id="nameTwo"
+                                name="nameTwo"
+                                type="text"
+                                placeholder="Enter Drug Name..."
+                                value={nameTwo}
+                                onChange={(event) => nameChangeTwo(event.target.value)}
+                            />
+
+                            <button type="submit" className="rxcui-find-btn">Test</button>
+
+                            <p className="rxcui-answer">ID: {rxcuiIDOne}</p>
+                            <p className="rxcui-answer">ID: {rxcuiIDTwo}</p>
                         </form>
                     </div>
                 </div>
