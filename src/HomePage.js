@@ -14,7 +14,7 @@ export default () => {
             <header>
                 <nav className="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
                     <div className="container">
-                        <a href="#" className="navbar-brand">Drug<span className="text-primary">Interactor</span></a>
+                        <a href="/HomePage" className="navbar-brand">Drug<span className="text-primary">Interactor</span></a>
 
                         <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
