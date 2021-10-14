@@ -11,6 +11,7 @@ import AllDrugTerms from './getDrugTerms';
 import getRxcuiId from './getRxcui';
 import getDrugInteraction from './getDrugInteraction';
 import HomePage from './HomePage';
+import getInteractionPair from './getInteractionPair';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 ReactDOM.render(
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path = "/getRxcuiId" component={getRxcuiId} />
       <Route path = "/getDrugInteraction" component={getDrugInteraction} />
       <Route path = "/HomePage" component={HomePage} />
+      <Route path = "/getInteractionPair" component={getInteractionPair} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
