@@ -19,6 +19,52 @@ export default () => {
     const[interactionPair, updateInteractionPair] = useState([]);
     const[interationCount, updateInteractionCount] = useState(0);
 
+    //function to update nameOne state
+    function nameChangeOne(enteredName) {
+        updateNameOne(enteredName);
+    };
+
+    //function to update nameTwo state
+    function nameChangeTwo(enteredName) {
+        updateNameTwo(enteredName);
+    };
+
+    //asynchronus method to get rxcui Id of drugs One and Two
+    async function getRxcuiIdMethod() {
+
+        const getRxcuiIDAPIOne = `https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${nameOne}&search=${search}`;
+        const getRxcuiIDAPIOneResponse = await fetch(getRxcuiIDAPIOne)
+        const getRxcuiIDAPIOneData = await getRxcuiIDAPIOneResponse.json();
+
+        console.log(getRxcuiIDAPIOneData);
+
+        const getRxcuiIDAPITwo = `https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${nameTwo}&search=${search}`;
+        const getRxcuiIDAPITwoResponse = await fetch(getRxcuiIDAPITwo)
+        const getRxcuiIDAPITwoData = await getRxcuiIDAPITwoResponse.json();
+
+        console.log(getRxcuiIDAPITwoData);
+
+        if (getRxcuiIDAPIOneData.idGroup.rxnormId || getRxcuiIDAPITwoData.idGroup.rxnormId == undefined) {
+
+            console.log("No matching Rxcui Id!");
+            updateRxcuiIDOne("No Match...");
+            updateRxcuiIDTwo("No Match...");
+        }
+
+        else {
+
+            var passableRxcuiOne = getRxcuiIDAPIOneData.idGroup.rxnormId[0];
+            var passableRxcuiTwo = getRxcuiIDAPITwoData.idGroup.rxnormId[0];
+        }
+
+        return {
+            passableRxcuiOne: passableRxcuiOne,
+            passableRxcuiTwo: passableRxcuiTwo
+        };
+
+
+    }
+
 
 
 
@@ -59,6 +105,27 @@ export default () => {
                     </div>
                 </div>
             </nav>
+
+            <div className="page-section">
+                <div className="container">
+                    <div className="card-service-large wow fadeInUp">
+                        <form>
+                            <h1 className="rxcui-header">Interaction Pair</h1>
+                            <h2 className="rxcui-subheader">subheader</h2>
+
+                            <input
+                                className="rxcui-name-input"
+                                id="nameOne"
+                                name="name"
+                                type="text"
+                                placeholder="Enter Drug Name..."
+                                value={nameOne}
+                                onChange={(event) => nameChangeOne(event.target.value)}
+                            />
+                        </form>
+                    </div>
+                </div>
+            </div>
         
 
 
