@@ -67,6 +67,26 @@ export default () => {
 
     }
 
+    //asynchronus method to get determine if pair of substaces interact
+    async function getInteractionMethod() {
+
+        var rxcui = await getRxcuiIdMethod();
+        var rxcuiOne = rxcui.passableRxcuiOne;
+        var rxcuiTwo = rxcui.passableRxcuiTwo;
+
+        if (rxcuiOne && rxcuiTwo !== undefined) {
+
+            const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcui}&sources=${source}`;
+            const getInteractionsResponse = await fetch(getInteractionsAPI)
+            const getInteractionsData = await getInteractionsResponse.json();
+
+            const interactionsArray = [];
+            const staticInteractionsList = [];
+
+            updateInteractionCount(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
+        }
+    }
+
 
     //constant submit method
     const onSubmit = event => {
