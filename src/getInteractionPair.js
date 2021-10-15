@@ -55,8 +55,22 @@ export default () => {
 
         else if (getRxcuiIDAPIOneData.idGroup.rxnormId || getRxcuiIDAPITwoData.idGroup.rxnormId !== undefined) {
 
+            console.log("1/2 No Matching Rxcui ID...")
+            
+            if (getRxcuiIDAPIOneData.idGroup.rxnormId !== undefined) {
+
+                updateRxcuiIDOne(getRxcuiIDAPIOne.idGroup.rxnormId);
+            }
+
+            else {
+
+                updateRxcuiIDTwo(getRxcuiIDAPITwoData.idGroup.rxnormId);
+            }
+
             var passableRxcuiOne = "";
             var passableRxcuiTwo = "";
+
+            
         }
 
         else {
@@ -67,7 +81,6 @@ export default () => {
             updateRxcuiIDTwo("No Match...");
             var passableRxcuiOne = "";
             var passableRxcuiTwo = "";
-            return;
         }
 
         return {
