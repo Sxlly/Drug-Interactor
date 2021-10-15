@@ -73,12 +73,10 @@ export default () => {
     async function getInteractionMethod() {
 
         var rxcui = await getRxcuiIdMethod();
-        var rxcuiOne = rxcui.passableRxcuiOne;
-        var rxcuiTwo = rxcui.passableRxcuiTwo;
 
-        if (rxcuiOne && rxcuiTwo !== undefined) {
+        if (rxcui.passableRxcuiOne && rxcui.passableRxcuiTwo !== undefined) {
 
-            const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcuiOne}&sources=${source}`;
+            const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcui.passableRxcuiOne}&sources=${source}`;
             const getInteractionsResponse = await fetch(getInteractionsAPI)
             const getInteractionsData = await getInteractionsResponse.json();
 
@@ -95,7 +93,7 @@ export default () => {
                 var interactionName = interactionsArray[index].interactionConcept[1].minConceptItem.name;
                 var interactionRxcui = interactionsArray[index].interactionConcept[1].minConceptItem.rxcui;
 
-                if (interactionRxcui == rxcuiTwo) {
+                if (interactionRxcui == rxcui.passableRxcuiTwo) {
 
                     updateInteractionResult("Yes!");
                 }
