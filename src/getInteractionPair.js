@@ -84,6 +84,30 @@ export default () => {
             const staticInteractionsList = [];
 
             updateInteractionCount(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
+
+            for (var index = 0; index < getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length-1; index++) {
+
+                interactionsArray[index] = getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair[index];
+                staticInteractionsList[index] = interactionsArray[index].interactionConcept[1].minConceptItem.name;
+                
+                var interactionName = interactionsArray[index].interactionConcept[1].minConceptItem.name;
+                var interactionRxcui = interactionsArray[index].interactionConcept[1].minConceptItem.rxcui;
+
+                if (interactionRxcui == rxcuiTwo) {
+
+
+                }
+
+                else {
+
+
+                }
+
+                return;
+
+            }
+
+            
         }
     }
 
