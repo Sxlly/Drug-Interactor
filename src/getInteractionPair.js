@@ -135,24 +135,24 @@ export default () => {
                 var altInteractionName = interactionsArray[index].interactionConcept[1].minConceptItem.name;
                 var altInteractionRxcui = interactionsArray[index].interactionConcept[1].minConceptItem.rxcui;
 
-                if (altInteractionName == "nicotine") {
 
-                    console.log("YESSSSSSSSSSSSSSSSSSSSSSSSs");
-                }
-
-                /*console.log("Lead Name: " + leadInteractionName);
+                console.log("Lead Name: " + leadInteractionName);
                 console.log("Lead Rxcui: " + leadInteractionRxcui);
                 console.log("Alt Name: " + altInteractionName);
-                console.log("Alt Rxcui: " + altInteractionRxcui);*/
+                console.log("Alt Rxcui: " + altInteractionRxcui);
 
-                if (altInteractionName == nameTwo.toLowerCase()) {
+                if (altInteractionName == drugNameTwo) {
 
                     updateInteractionResult("Yes!");
+                    updateInteractionsList(staticInteractionsList);
+                    return;
                 }
 
                 if (altInteractionRxcui == rxcuiTwo) {
 
                     updateInteractionResult("Yes!");
+                    updateInteractionsList(staticInteractionsList);
+                    return;
                 }
 
                 else {
