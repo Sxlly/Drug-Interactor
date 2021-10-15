@@ -18,6 +18,7 @@ export default () => {
     const[loading, updateLoading] = useState("Loading...");
     const[interactionPair, updateInteractionPair] = useState([]);
     const[interationCount, updateInteractionCount] = useState(0);
+    const[interactionResult, updateInteractionResult] = useState("");
 
     //function to update nameOne state
     function nameChangeOne(enteredName) {
@@ -50,10 +51,6 @@ export default () => {
             var passableRxcuiTwo = getRxcuiIDAPITwoData.idGroup.rxnormId[0];
             updateRxcuiIDOne(passableRxcuiOne);
             updateRxcuiIDTwo(passableRxcuiTwo);
-            return {
-                passableRxcuiOne: passableRxcuiOne,
-                passableRxcuiTwo: passableRxcuiTwo
-            };
         }
 
         else {
@@ -64,6 +61,11 @@ export default () => {
             updateRxcuiIDTwo("No Match...");
             return;
         }
+
+        return {
+            passableRxcuiOne: passableRxcuiOne,
+            passableRxcuiTwo: passableRxcuiTwo
+        };
 
     }
 
@@ -76,7 +78,7 @@ export default () => {
 
         if (rxcuiOne && rxcuiTwo !== undefined) {
 
-            const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcui}&sources=${source}`;
+            const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcuiOne}&sources=${source}`;
             const getInteractionsResponse = await fetch(getInteractionsAPI)
             const getInteractionsData = await getInteractionsResponse.json();
 
@@ -95,20 +97,27 @@ export default () => {
 
                 if (interactionRxcui == rxcuiTwo) {
 
+                    updateInteractionResult("Yes!");
+                }
 
+                else if (interactionName == nameOne) {
+
+                    updateInteractionResult("Yes!");
                 }
 
                 else {
 
-
+                    updateInteractionResult("No!");
                 }
 
                 return;
-
             }
-
-            
         }
+        else {
+
+            console.log("Did not progress!");
+            return;
+        }     
     }
 
 
@@ -119,7 +128,7 @@ export default () => {
 
         (async () => {
 
-            await getRxcuiIdMethod();
+            await getInteractionMethod();
             console.log("Waited!");
 
         })();
@@ -197,6 +206,7 @@ export default () => {
 
                             <p className="rxcui-answer">ID: {rxcuiIDOne}</p>
                             <p className="rxcui-answer">ID: {rxcuiIDTwo}</p>
+                            <p className="rxcui-answer">Interacion: {interactionResult}</p>
                         </form>
                     </div>
                 </div>
