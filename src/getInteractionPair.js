@@ -53,12 +53,20 @@ export default () => {
             updateRxcuiIDTwo(passableRxcuiTwo);
         }
 
+        else if (getRxcuiIDAPIOneData.idGroup.rxnormId || getRxcuiIDAPITwoData.idGroup.rxnormId !== undefined) {
+
+            var passableRxcuiOne = "";
+            var passableRxcuiTwo = "";
+        }
+
         else {
 
             
             console.log("No matching Rxcui Id!");
             updateRxcuiIDOne("No Match...");
             updateRxcuiIDTwo("No Match...");
+            var passableRxcuiOne = "";
+            var passableRxcuiTwo = "";
             return;
         }
 
