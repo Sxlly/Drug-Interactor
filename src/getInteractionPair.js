@@ -49,6 +49,8 @@ export default () => {
 
             var passableRxcuiOne = getRxcuiIDAPIOneData.idGroup.rxnormId[0];
             var passableRxcuiTwo = getRxcuiIDAPITwoData.idGroup.rxnormId[0];
+            var passableNameOne = getRxcuiIDAPIOneData.idGroup.name.toLowerCase();
+            var passableNameTwo = getRxcuiIDAPITwoData.idGroup.name.toLowerCase();
             updateRxcuiIDOne(passableRxcuiOne);
             updateRxcuiIDTwo(passableRxcuiTwo);
         }
@@ -73,6 +75,8 @@ export default () => {
 
             var passableRxcuiOne = null;
             var passableRxcuiTwo = null;
+            var passableNameOne = null;
+            var passableNameTwo = null;
 
             
         }
@@ -86,11 +90,15 @@ export default () => {
             alert("Both drugs do not exist within database records...");
             var passableRxcuiOne = null;
             var passableRxcuiTwo = null;
+            var passableNameOne = null;
+            var passableNameTwo = null;
         }
 
         return {
             passableRxcuiOne: passableRxcuiOne,
-            passableRxcuiTwo: passableRxcuiTwo
+            passableRxcuiTwo: passableRxcuiTwo,
+            passableNameOne: passableNameOne,
+            passableNameTwo: passableNameTwo
         };
 
     }
@@ -101,6 +109,8 @@ export default () => {
         var rxcui = await getRxcuiIdMethod();
         var rxcuiOne = rxcui.passableRxcuiOne;
         var rxcuiTwo = rxcui.passableRxcuiTwo;
+        var drugNameOne = rxcui.passableNameOne;
+        var drugNameTwo = rxcui.passableNameTwo;
 
         if (rxcuiOne && rxcuiTwo !== null) {
 
@@ -112,11 +122,6 @@ export default () => {
             const interactionsArray = [];
             const staticInteractionsList = [];
 
-            console.log(interactionsArray);
-            console.log(getInteractionsData);
-            console.log(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
-            console.log(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair);
-
             updateInteractionCount(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
 
 
@@ -124,21 +129,28 @@ export default () => {
 
                 interactionsArray[index] = getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair[index];
                 staticInteractionsList[index] = interactionsArray[index].interactionConcept[1].minConceptItem.name;
-
-                console.log(staticInteractionsList[index]);
                 
-                var interactionName = interactionsArray[index].interactionConcept[1].minConceptItem.name;
-                var interactionRxcui = interactionsArray[index].interactionConcept[1].minConceptItem.rxcui;
+                var leadInteractionName = interactionsArray[index].interactionConcept[0].minConceptItem.name;
+                var leadInteractionRxcui = interactionsArray[index].interactionConcept[0].minConceptItem.rxcui;
+                var altInteractionName = interactionsArray[index].interactionConcept[1].minConceptItem.name;
+                var altInteractionRxcui = interactionsArray[index].interactionConcept[1].minConceptItem.rxcui;
 
-                console.log(interactionName);
-                console.log(interactionRxcui);
+                if (altInteractionName == "nicotine") {
 
-                if (interactionRxcui == rxcui.passableRxcuiTwo) {
+                    console.log("YESSSSSSSSSSSSSSSSSSSSSSSSs");
+                }
+
+                /*console.log("Lead Name: " + leadInteractionName);
+                console.log("Lead Rxcui: " + leadInteractionRxcui);
+                console.log("Alt Name: " + altInteractionName);
+                console.log("Alt Rxcui: " + altInteractionRxcui);*/
+
+                if (altInteractionName == nameTwo.toLowerCase()) {
 
                     updateInteractionResult("Yes!");
                 }
 
-                if (interactionName == nameOne) {
+                if (altInteractionRxcui == rxcuiTwo) {
 
                     updateInteractionResult("Yes!");
                 }
@@ -148,10 +160,11 @@ export default () => {
                     updateInteractionResult("No!");
                 }
 
-                return;
+                
             }
 
             updateInteractionsList(staticInteractionsList);
+            return;
         }
         else {
 
