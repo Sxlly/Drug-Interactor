@@ -83,8 +83,6 @@ export default () => {
                 interactionsArray[index] = getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair[index];
                 staticInteractionsList[index] = interactionsArray[index].interactionConcept[1].minConceptItem.name;
                 
-
-
             }
 
             updateInteractionsList(staticInteractionsList);

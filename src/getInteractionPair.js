@@ -16,9 +16,9 @@ export default () => {
     const[search, updateSearch] = useState(1);
     const[source, updateSource] = useState("DrugBank");
     const[loading, updateLoading] = useState("Loading...");
-    const[interactionPair, updateInteractionPair] = useState([]);
     const[interationCount, updateInteractionCount] = useState(0);
     const[interactionResult, updateInteractionResult] = useState("");
+    const[interactionsList, updateInteractionsList] = useState([]);
 
     //function to update nameOne state
     function nameChangeOne(enteredName) {
@@ -59,16 +59,20 @@ export default () => {
             
             if (getRxcuiIDAPIOneData.idGroup.rxnormId !== undefined) {
 
-                updateRxcuiIDOne(getRxcuiIDAPIOne.idGroup.rxnormId);
+                updateRxcuiIDOne(getRxcuiIDAPIOneData.idGroup.rxnormId[0]);
+                updateRxcuiIDTwo("No Match...");
+                alert("Drug Name One Does not exist within database records...");
             }
 
             else {
 
-                updateRxcuiIDTwo(getRxcuiIDAPITwoData.idGroup.rxnormId);
+                updateRxcuiIDTwo(getRxcuiIDAPITwoData.idGroup.rxnormId[0]);
+                updateRxcuiIDOne("No Match...");
+                alert("Drug Name Two Does not exist within database records...");
             }
 
-            var passableRxcuiOne = "";
-            var passableRxcuiTwo = "";
+            var passableRxcuiOne = null;
+            var passableRxcuiTwo = null;
 
             
         }
@@ -79,8 +83,9 @@ export default () => {
             console.log("No matching Rxcui Id!");
             updateRxcuiIDOne("No Match...");
             updateRxcuiIDTwo("No Match...");
-            var passableRxcuiOne = "";
-            var passableRxcuiTwo = "";
+            alert("Both drugs do not exist within database records...");
+            var passableRxcuiOne = null;
+            var passableRxcuiTwo = null;
         }
 
         return {
@@ -94,32 +99,46 @@ export default () => {
     async function getInteractionMethod() {
 
         var rxcui = await getRxcuiIdMethod();
+        var rxcuiOne = rxcui.passableRxcuiOne;
+        var rxcuiTwo = rxcui.passableRxcuiTwo;
 
-        if (rxcui.passableRxcuiOne && rxcui.passableRxcuiTwo !== undefined) {
+        if (rxcuiOne && rxcuiTwo !== null) {
 
-            const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcui.passableRxcuiOne}&sources=${source}`;
+            const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcuiOne}&sources=${source}`;
             const getInteractionsResponse = await fetch(getInteractionsAPI)
             const getInteractionsData = await getInteractionsResponse.json();
+
 
             const interactionsArray = [];
             const staticInteractionsList = [];
 
+            console.log(interactionsArray);
+            console.log(getInteractionsData);
+            console.log(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
+            console.log(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair);
+
             updateInteractionCount(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
+
 
             for (var index = 0; index < getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length-1; index++) {
 
                 interactionsArray[index] = getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair[index];
                 staticInteractionsList[index] = interactionsArray[index].interactionConcept[1].minConceptItem.name;
+
+                console.log(staticInteractionsList[index]);
                 
                 var interactionName = interactionsArray[index].interactionConcept[1].minConceptItem.name;
                 var interactionRxcui = interactionsArray[index].interactionConcept[1].minConceptItem.rxcui;
+
+                console.log(interactionName);
+                console.log(interactionRxcui);
 
                 if (interactionRxcui == rxcui.passableRxcuiTwo) {
 
                     updateInteractionResult("Yes!");
                 }
 
-                else if (interactionName == nameOne) {
+                if (interactionName == nameOne) {
 
                     updateInteractionResult("Yes!");
                 }
@@ -131,6 +150,8 @@ export default () => {
 
                 return;
             }
+
+            updateInteractionsList(staticInteractionsList);
         }
         else {
 
@@ -231,9 +252,6 @@ export default () => {
                 </div>
             </div>
         
-
-
-
 
         </div>
 
