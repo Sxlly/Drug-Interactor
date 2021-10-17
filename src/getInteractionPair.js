@@ -254,7 +254,15 @@ export default () => {
 
                             <p className="rxcui-answer">ID: {rxcuiIDOne}</p>
                             <p className="rxcui-answer">ID: {rxcuiIDTwo}</p>
-                            <p className="rxcui-answer">Interacion: {interactionResult}</p>
+                            <p className="interaction-readmore-wrap">Interaction: {interactionResult}</p>
+
+                            <ul className="interaction-readmore-wrap">
+                                <li>Interaction: {interactionResult}</li>
+                                <li className="interaction-readmore-target">Two</li>
+                                <li className="interaction-readmore-target">Three</li>
+                            </ul>
+
+                            <label for="interaction-readmore" className="interaction-readmore-trigger"></label>
                         </form>
                     </div>
                 </div>
