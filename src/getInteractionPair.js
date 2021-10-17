@@ -256,13 +256,17 @@ export default () => {
                             <p className="rxcui-answer">ID: {rxcuiIDTwo}</p>
                             <p className="interaction-readmore-wrap">Interaction: {interactionResult}</p>
 
-                            <ul className="interaction-readmore-wrap">
-                                <li>Interaction: {interactionResult}</li>
-                                <li className="interaction-readmore-target">Two</li>
-                                <li className="interaction-readmore-target">Three</li>
-                            </ul>
+                            <div className="card-service-large wow fadeInUp">
+                                <input type="checkbox" className="interaction-readmore-state" id="interaction-readmore" />
+                                <ul className="interaction-readmore-wrap">
+                                    <li>Interaction: {interactionResult}</li>
+                                    <li className="interaction-readmore-target">Two</li>
+                                    <li className="interaction-readmore-target">Three</li>
+                                </ul>
 
-                            <label for="interaction-readmore" className="interaction-readmore-trigger"></label>
+                                <label for="interaction-readmore" className="interaction-readmore-trigger"></label>
+                            </div>
+
                         </form>
                     </div>
                 </div>
