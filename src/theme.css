@@ -1611,6 +1611,28 @@ a.text-dark:hover, a.text-dark:focus {
   font-weight: 600;
 }
 
+.interaction-readmore-state {
+
+  display: none;
+}
+
+.interaction-readmore-target {
+
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: 0.25s ease;
+}
+
+.interaction-readmore-state:checked ~ .interaction-readmore-wrap .interaction-readmore-target {
+
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+
+}
+
+
 .card-service .header {
   margin-bottom: 24px;
 }
