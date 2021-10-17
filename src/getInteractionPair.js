@@ -19,6 +19,7 @@ export default () => {
     const[interationCount, updateInteractionCount] = useState(0);
     const[interactionResult, updateInteractionResult] = useState("");
     const[interactionsList, updateInteractionsList] = useState([]);
+    const[interactionDescription, updateInteractionDescription] = useState("");
 
     //function to update nameOne state
     function nameChangeOne(enteredName) {
@@ -118,6 +119,8 @@ export default () => {
             const getInteractionsResponse = await fetch(getInteractionsAPI)
             const getInteractionsData = await getInteractionsResponse.json();
 
+            console.log(getInteractionsData);
+
 
             const interactionsArray = [];
             const staticInteractionsList = [];
@@ -134,17 +137,20 @@ export default () => {
                 var leadInteractionRxcui = interactionsArray[index].interactionConcept[0].minConceptItem.rxcui;
                 var altInteractionName = interactionsArray[index].interactionConcept[1].minConceptItem.name;
                 var altInteractionRxcui = interactionsArray[index].interactionConcept[1].minConceptItem.rxcui;
+                var interactionDesc = interactionsArray[index].description;
 
 
                 console.log("Lead Name: " + leadInteractionName);
                 console.log("Lead Rxcui: " + leadInteractionRxcui);
                 console.log("Alt Name: " + altInteractionName);
                 console.log("Alt Rxcui: " + altInteractionRxcui);
+                console.log("Description: " + interactionDesc);
 
                 if (altInteractionName == drugNameTwo) {
 
                     updateInteractionResult("Yes!");
                     updateInteractionsList(staticInteractionsList);
+                    updateInteractionDescription(interactionDesc);
                     return;
                 }
 
@@ -152,12 +158,14 @@ export default () => {
 
                     updateInteractionResult("Yes!");
                     updateInteractionsList(staticInteractionsList);
+                    updateInteractionDescription(interactionDesc);
                     return;
                 }
 
                 else {
 
                     updateInteractionResult("No!");
+                    updateInteractionDescription("None...");
                 }
 
                 
@@ -254,14 +262,12 @@ export default () => {
 
                             <p className="rxcui-answer">ID: {rxcuiIDOne}</p>
                             <p className="rxcui-answer">ID: {rxcuiIDTwo}</p>
-                            <p className="rxcui-answer">Interaction: {interactionResult}</p>
 
                             <div className="card-service-large wow fadeInUp">
                                 <input type="checkbox" className="interaction-readmore-state" id="interaction-readmore" />
                                 <ul className="interaction-readmore-wrap">
                                     <li className="interaction-answer">Interaction: {interactionResult}</li>
-                                    <li className="interaction-readmore-target">Two</li>
-                                    <li className="interaction-readmore-target">Three</li>
+                                    <li className="interaction-readmore-target">Description: {interactionDescription}</li>
                                 </ul>
 
                                 <label for="interaction-readmore" className="interaction-readmore-trigger"></label>
