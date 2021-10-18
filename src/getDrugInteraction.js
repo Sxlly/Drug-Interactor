@@ -3,6 +3,7 @@ import axios from "axios";
 import './getDrugInteractionCSS.css';
 import './bootstrap.css';
 import './theme.css';
+import * as ReactBootStrap from "react-bootstrap";
 
 
 
@@ -11,10 +12,9 @@ export default () => {
     //variables using this.state functionality
     const[rxcuiID, updateRxcuiID] = useState("");
     const[nameOne, updateNameOne] = useState("");
-    const [nameTwo, updateNameTwo] = useState("");
     const[search, updateSearch] = useState(1);
     const[source, updateSource] = useState("DrugBank");
-    const [loading, updateLoading] = useState("Loading...");
+    const [interactionLoader, updateInteractionLoader] = useState(true);
     const [interactionsList, updateInteractionsList] = useState([]);
     const [interactionCount, updateInteractionCount] = useState(0);
 
@@ -23,10 +23,7 @@ export default () => {
         updateNameOne(enteredName);
     };
 
-    //function to update nameTwo state
-    function nameChangeTwo(enteredName) {
-        updateNameTwo(enteredName);
-    };
+
 
     //asynchronus method to get rxcui ID of drug in search bar
     async function getRxcuiIDMethod() {
@@ -86,6 +83,7 @@ export default () => {
             }
 
             updateInteractionsList(staticInteractionsList);
+            updateInteractionLoader(true);
 
 
             return;
@@ -94,7 +92,23 @@ export default () => {
         else {
 
             console.log("Did not progress!");
+            updateInteractionLoader(true);
             return;
+        }
+    }
+
+    //constant loading all interactions of drug method
+    const loadingFunction = () => {
+
+        if (interactionLoader == false) {
+
+            return <ReactBootStrap.Spinner animation="border" />;
+        }
+
+        else {
+
+        return interactionsList.map(Interaction => <li className="interaction-item" key={Interaction}>{Interaction}</li>);
+
         }
     }
 
@@ -104,6 +118,8 @@ export default () => {
         event.preventDefault();
 
         (async () => {
+
+            updateInteractionLoader(false);
 
             await getInteractionsMethod();
             console.log("Waited!");
@@ -172,11 +188,8 @@ export default () => {
                             <p className="">{nameOne} Interacts With The Following</p>
                             <p className="">Total Number of Drugs {nameOne} Interacts With: {interactionCount}</p>
 
-                            <ul className="card-service-large wow fadeInUp">
-                                {
-                                    interactionsList.map(Interaction => <li className="interaction-item" key={Interaction}>{Interaction}</li>)
-                                }
-                            </ul>
+                            {loadingFunction()}
+
 
                         </form>
                     </div>
