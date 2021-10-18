@@ -24,6 +24,7 @@ export default () => {
     const[interactionResult, updateInteractionResult] = useState("");
     const[interactionsList, updateInteractionsList] = useState([]);
     const[interactionDescription, updateInteractionDescription] = useState("");
+    const[show, updateShow] = useState(false);
 
     //function to update nameOne state
     function nameChangeOne(enteredName) {
@@ -72,7 +73,7 @@ export default () => {
                 updateRxcuiIDTwo("No Match...");
                 updateRxcuiIDOneLoader(true);
                 updateRxcuiIDTwoLoader(true);
-                alert("Drug Name One Does not exist within database records...");
+
             }
 
             else {
@@ -81,7 +82,7 @@ export default () => {
                 updateRxcuiIDOne("No Match...");
                 updateRxcuiIDOneLoader(true);
                 updateRxcuiIDTwoLoader(true);
-                alert("Drug Name Two Does not exist within database records...");
+
             }
 
             var passableRxcuiOne = null;
@@ -200,6 +201,23 @@ export default () => {
     }
 
 
+    const alertMethod = () => {
+
+        if (show == true) {
+
+            return (
+
+                <ReactBootStrap.Alert variant="danger" onClose={() => updateShow(false)} dismissible>
+                    <ReactBootStrap.Alert.Heading>Error!</ReactBootStrap.Alert.Heading>
+                    <p>You faced an error!</p>
+                </ReactBootStrap.Alert>
+
+            );
+
+        }
+    }
+
+
     //constant submit method
     const onSubmit = event => {
 
@@ -222,6 +240,7 @@ export default () => {
 
     //return method
     return (
+
 
         <div>
 
@@ -259,6 +278,17 @@ export default () => {
             <div className="page-section">
                 <div className="container">
                     <div className="card-service-large wow fadeInUp">
+
+
+
+
+
+
+
+
+
+                        
+
                         <form onSubmit={onSubmit}>
                             <h1 className="rxcui-header">Interaction Pair</h1>
                             <h2 className="rxcui-subheader">subheader</h2>
@@ -286,6 +316,8 @@ export default () => {
                             <button type="submit" className="rxcui-find-btn">Test</button>
 
                             <div className="card-service-large wow fadeInUp">
+
+                                {alertMethod()}
 
                                 <p className="rxcui-answer">Rxcui ID One: {rxcuiIDOneLoader ? rxcuiIDOne : <ReactBootStrap.Spinner animation="border" size="sm" />}</p>
                                 <p className="rxcui-answer">Rxcui ID Two: {rxcuiIDTwoLoader ? rxcuiIDTwo : <ReactBootStrap.Spinner animation="border" size="sm" />}</p>
