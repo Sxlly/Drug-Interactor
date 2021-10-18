@@ -15,6 +15,8 @@ export default () => {
     const[search, updateSearch] = useState(1);
     const[source, updateSource] = useState("DrugBank");
     const [interactionLoader, updateInteractionLoader] = useState(true);
+    const [rxcuiIDLoader, updateRxcuiIDLoader] = useState(true);
+    const [interactionCountLoader, updateInteractionCountLoader] = useState(true);
     const [interactionsList, updateInteractionsList] = useState([]);
     const [interactionCount, updateInteractionCount] = useState(0);
 
@@ -38,6 +40,7 @@ export default () => {
 
             console.log(getRxcuiIDData.idGroup.rxnormId[0]);
             updateRxcuiID(getRxcuiIDData.idGroup.rxnormId[0]);
+            updateRxcuiIDLoader(true);
 
             var passableRxcui = getRxcuiIDData.idGroup.rxnormId[0];
             
@@ -47,6 +50,7 @@ export default () => {
 
             console.log("No matching Rxcui Id!");
             updateRxcuiID("No Match...");
+            updateRxcuiIDLoader(true);
             return;
             
         }
@@ -74,6 +78,7 @@ export default () => {
             console.log(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair);
 
             updateInteractionCount(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
+            updateInteractionCountLoader(true);
 
             for (var index = 0; index < getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length-1; index++) {
 
@@ -120,6 +125,8 @@ export default () => {
         (async () => {
 
             updateInteractionLoader(false);
+            updateInteractionCountLoader(false);
+            updateRxcuiIDLoader(false);
 
             await getInteractionsMethod();
             console.log("Waited!");
@@ -184,9 +191,9 @@ export default () => {
 
                             <button type="submit" className="rxcui-find-btn">Find</button>
 
-                            <p className="rxcui-answer">ID: {rxcuiID}</p>
+                            <p className="rxcui-answer">Rxcui ID: { rxcuiIDLoader ? rxcuiID : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color:"#2ecc71" }}/> }</p>
                             <p className="">{nameOne} Interacts With The Following</p>
-                            <p className="">Total Number of Drugs {nameOne} Interacts With: {interactionCount}</p>
+                            <p className="">Total Number of Drugs {nameOne} Interacts With: { interactionCountLoader ? interactionCount : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color:"#2ecc71"}}/> }</p>
 
                             {loadingFunction()}
 
