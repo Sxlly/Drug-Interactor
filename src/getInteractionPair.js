@@ -210,9 +210,8 @@ export default () => {
 
             return (
 
-                <ReactBootStrap.Alert variant="danger" onClose={() => updateShow(false)} dismissible>
-                    <ReactBootStrap.Alert.Heading>Error!</ReactBootStrap.Alert.Heading>
-                    <p>You faced an error!</p>
+                <ReactBootStrap.Alert variant="danger">
+                    One or more drug names do not exist within current drug terms records...
                 </ReactBootStrap.Alert>
 
             );
