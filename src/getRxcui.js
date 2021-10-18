@@ -1,11 +1,12 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
 import './getRxcuiCSS.css';
+import * as ReactBootStrap from "react-bootstrap";
 
 
 export default () => {
 
-    const [loading, updateLoading] = useState(true);
+    const [rxcuiIDLoader, updateRxcuiIDLoader] = useState(true);
     const [rxcuiID, updateRxcuiID] = useState(null);
     const [name, updateName] = useState("");
     const [search, updateSearch] = useState(1);
@@ -15,7 +16,10 @@ export default () => {
     }
 
     const onSubmit = event => {
+
         event.preventDefault();
+
+        updateRxcuiIDLoader(false);
 
 
         (async () => {
@@ -32,6 +36,7 @@ export default () => {
                 console.log(data.idGroup.rxnormId[0]);
 
                 updateRxcuiID(data.idGroup.rxnormId[0]);
+                updateRxcuiIDLoader(true);
             }
 
             else {
@@ -39,6 +44,7 @@ export default () => {
                 console.log("No matching Rxcui Id!");
 
                 updateRxcuiID("No Match...");
+                updateRxcuiIDLoader(true);
             }
 
 
@@ -107,7 +113,7 @@ export default () => {
                         <button type="submit" className="rxcui-find-btn">Find</button>
 
                         <div className="rxcui-answer-div">
-                            <p className="rxcui-answer">ID: {rxcuiID}</p>
+                            <p className="rxcui-answer">Rxcui ID: {rxcuiIDLoader ? rxcuiID : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }}/> }</p>
                         </div>
                     </form>
 
@@ -116,7 +122,7 @@ export default () => {
             </div>
         </div>
 
-        
+
         <footer className="page-footer bg-image">
                 <div className="container">
                     <div className="row mb-5">
