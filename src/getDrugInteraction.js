@@ -102,7 +102,7 @@ export default () => {
 
         if (interactionLoader == false) {
 
-            return <ReactBootStrap.Spinner animation="border" />;
+            return <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}  />;
         }
 
         else {
