@@ -73,6 +73,7 @@ export default () => {
                 updateRxcuiIDTwo("No Match...");
                 updateRxcuiIDOneLoader(true);
                 updateRxcuiIDTwoLoader(true);
+                updateShow(true);
 
             }
 
@@ -82,6 +83,7 @@ export default () => {
                 updateRxcuiIDOne("No Match...");
                 updateRxcuiIDOneLoader(true);
                 updateRxcuiIDTwoLoader(true);
+                updateShow(true);
 
             }
 
@@ -101,6 +103,7 @@ export default () => {
             updateRxcuiIDTwo("No Match...");
             updateRxcuiIDOneLoader(true);
             updateRxcuiIDTwoLoader(true);
+            updateShow(true);
             alert("Both drugs do not exist within database records...");
             var passableRxcuiOne = null;
             var passableRxcuiTwo = null;
