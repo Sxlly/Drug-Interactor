@@ -231,6 +231,7 @@ export default () => {
             updateInteractionDescLoader(false);
             updateRxcuiIDOneLoader(false);
             updateRxcuiIDTwoLoader(false);
+            updateShow(false);
 
 
             await getInteractionMethod();
