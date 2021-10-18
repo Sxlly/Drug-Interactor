@@ -112,7 +112,7 @@ export default () => {
 
         else {
 
-        return interactionsList.map(Interaction => <li className="interaction-item" key={Interaction}>{Interaction}</li>);
+            return interactionsList.map(Interaction => <li className="interaction-item" key={Interaction}>{Interaction}</li>);
 
         }
     }

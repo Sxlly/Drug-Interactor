@@ -26,7 +26,22 @@ export default () => {
         }
 
         updateDrugTerms(termsArray);
+        updateTermsLoader(true);
         return;
+    }
+
+
+    const loadingFunction = () => {
+
+        if (termsLoader == false) {
+
+            return <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }} />;
+        }
+
+        else {
+
+            return drugTerms.map(Term => <li className="interaction-item" key={Term}>{Term}</li>);
+        }
     }
 
     const onSubmit = event => {
@@ -34,6 +49,8 @@ export default () => {
         event.preventDefault();
 
         (async () => {
+
+            updateTermsLoader(false);
 
             await getDrugTerms();
             console.log("Waited!");
@@ -82,10 +99,7 @@ export default () => {
 
                         <h1 className="drug-terms-header">List of all Drug Names</h1>
                         <h2 className="drug-terms-subheader">Total Number Of Drug Terms: {drugTerms.length}</h2>
-                        {
-                            //map all drug terms individually from DrugTerms array and display on screen through HTML
-                            drugTerms.map(Term => <div className="card-service-large-item">Term: {Term}</div>)
-                        }
+                        {loadingFunction()}
                     </div>
 
                     <button className="rxcui-find-btn" onClick={onSubmit}>Load Terms</button>
