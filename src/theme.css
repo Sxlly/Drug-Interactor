@@ -1616,7 +1616,7 @@ a.text-dark:hover, a.text-dark:focus {
 
   display: inline-block;
   padding: 5px;
-  width: 300px;
+  width: 500px;
   background-color: rgba(85, 85, 85, 0.10);
   color: #555555;
 
@@ -1631,6 +1631,11 @@ a.text-dark:hover, a.text-dark:focus {
 .interaction-readmore-wrap {
 
   text-align: center;
+  display: block;
+  margin: 16px auto;
+  padding: 32px 20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 12px rgba(85, 85, 85, 0.10);
 }
 
 .interaction-readmore-target {
@@ -1639,9 +1644,9 @@ a.text-dark:hover, a.text-dark:focus {
   max-height: 0;
   font-size: 0;
   transition: 0.25s ease;
-  display: block;
+  display: inline-block;
   padding: 5px;
-  width: 300px;
+  width: 500px;
   background-color: rgba(85, 85, 85, 0.10);
   color: #555555;
 
