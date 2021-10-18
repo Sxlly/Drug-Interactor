@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import './bootstrap.css';
 import './theme.css';
+import * as ReactBootStrap from "react-bootstrap";
 
 
 
@@ -15,7 +16,7 @@ export default () => {
     const[nameTwo, updateNameTwo] = useState("");
     const[search, updateSearch] = useState(1);
     const[source, updateSource] = useState("DrugBank");
-    const[loading, updateLoading] = useState("Loading...");
+    const[loading, updateLoading] = useState(false);
     const[interationCount, updateInteractionCount] = useState(0);
     const[interactionResult, updateInteractionResult] = useState("");
     const[interactionsList, updateInteractionsList] = useState([]);
@@ -200,6 +201,8 @@ export default () => {
     return (
 
         <div>
+
+            {<ReactBootStrap.Spinner animation="border"/>}
             <nav className="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
                 <div className="container">
                     <a href="/HomePage" className="navbar-brand">Drug<span className="text-primary">Interactor</span></a>
