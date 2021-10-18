@@ -16,7 +16,7 @@ export default () => {
     const[nameTwo, updateNameTwo] = useState("");
     const[search, updateSearch] = useState(1);
     const[source, updateSource] = useState("DrugBank");
-    const[loading, updateLoading] = useState(false);
+    const[interactionResultLoader, updateInteractionResultLoader] = useState(true);
     const[interationCount, updateInteractionCount] = useState(0);
     const[interactionResult, updateInteractionResult] = useState("");
     const[interactionsList, updateInteractionsList] = useState([]);
@@ -152,6 +152,7 @@ export default () => {
                     updateInteractionResult("Yes!");
                     updateInteractionsList(staticInteractionsList);
                     updateInteractionDescription(interactionDesc);
+                    updateLoading(true);
                     return;
                 }
 
@@ -160,6 +161,7 @@ export default () => {
                     updateInteractionResult("Yes!");
                     updateInteractionsList(staticInteractionsList);
                     updateInteractionDescription(interactionDesc);
+                    updateLoading(true);
                     return;
                 }
 
@@ -167,6 +169,7 @@ export default () => {
 
                     updateInteractionResult("No!");
                     updateInteractionDescription("None...");
+                    updateLoading(true);
                 }
 
                 
@@ -190,6 +193,9 @@ export default () => {
 
         (async () => {
 
+            updateLoading(false);
+
+
             await getInteractionMethod();
             console.log("Waited!");
 
@@ -202,7 +208,6 @@ export default () => {
 
         <div>
 
-            {<ReactBootStrap.Spinner animation="border"/>}
             <nav className="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
                 <div className="container">
                     <a href="/HomePage" className="navbar-brand">Drug<span className="text-primary">Interactor</span></a>
@@ -269,7 +274,7 @@ export default () => {
                             <div className="card-service-large wow fadeInUp">
                                 <input type="checkbox" className="interaction-readmore-state" id="interaction-readmore" />
                                 <ul className="interaction-readmore-wrap">
-                                    <li className="interaction-answer">Interaction: {interactionResult}</li>
+                                    <li className="interaction-answer">Interaction: {loading ? interactionResult : <ReactBootStrap.Spinner animation="border" size="sm" />}</li>
                                     <li className="interaction-readmore-target">Description: {interactionDescription}</li>
                                 </ul>
 
