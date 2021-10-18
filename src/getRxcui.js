@@ -10,9 +10,24 @@ export default () => {
     const [rxcuiID, updateRxcuiID] = useState(null);
     const [name, updateName] = useState("");
     const [search, updateSearch] = useState(1);
+    const [show, updateShow] = useState(false);
 
     function nameChange(enteredName) {
         updateName(enteredName);
+    }
+
+    const alertMethod = () => {
+
+        if (show == true) {
+
+            return (
+
+                <ReactBootStrap.Alert variant="danger">
+                    One or more drug names do not exist within current drug terms records...
+                </ReactBootStrap.Alert>
+
+            );
+        }
     }
 
     const onSubmit = event => {
@@ -20,6 +35,7 @@ export default () => {
         event.preventDefault();
 
         updateRxcuiIDLoader(false);
+        updateShow(false);
 
 
         (async () => {
@@ -45,6 +61,7 @@ export default () => {
 
                 updateRxcuiID("No Match...");
                 updateRxcuiIDLoader(true);
+                updateShow(true);
             }
 
 
@@ -113,6 +130,7 @@ export default () => {
                         <button type="submit" className="rxcui-find-btn">Find</button>
 
                         <div className="rxcui-answer-div">
+                            {alertMethod()}
                             <p className="rxcui-answer">Rxcui ID: {rxcuiIDLoader ? rxcuiID : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }}/> }</p>
                         </div>
                     </form>

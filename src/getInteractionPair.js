@@ -283,15 +283,6 @@ export default () => {
                     <div className="card-service-large wow fadeInUp">
 
 
-
-
-
-
-
-
-
-                        
-
                         <form onSubmit={onSubmit}>
                             <h1 className="rxcui-header">Interaction Pair</h1>
                             <h2 className="rxcui-subheader">subheader</h2>

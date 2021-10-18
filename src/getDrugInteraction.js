@@ -19,6 +19,7 @@ export default () => {
     const [interactionCountLoader, updateInteractionCountLoader] = useState(true);
     const [interactionsList, updateInteractionsList] = useState([]);
     const [interactionCount, updateInteractionCount] = useState(0);
+    const [show, updateShow] = useState(false);
 
     //function to update nameOne state 
     function nameChangeOne(enteredName) {
@@ -51,6 +52,7 @@ export default () => {
             console.log("No matching Rxcui Id!");
             updateRxcuiID("No Match...");
             updateRxcuiIDLoader(true);
+            updateShow(true);
             return;
             
         }
@@ -117,6 +119,20 @@ export default () => {
         }
     }
 
+    const alertMethod = () => {
+
+        if (show == true) {
+
+            return (
+
+                <ReactBootStrap.Alert variant="danger">
+                    One or more drug names do not exist within current drug terms records...
+                </ReactBootStrap.Alert>
+
+            );
+        }
+    }
+
     //constant submit method
     const onSubmit = event => {
 
@@ -127,6 +143,7 @@ export default () => {
             updateInteractionLoader(false);
             updateInteractionCountLoader(false);
             updateRxcuiIDLoader(false);
+            updateShow(false);
 
             await getInteractionsMethod();
             console.log("Waited!");
@@ -190,6 +207,8 @@ export default () => {
                             />
 
                             <button type="submit" className="rxcui-find-btn">Find</button>
+
+                            {alertMethod()}
 
                             <p className="rxcui-answer">Rxcui ID: { rxcuiIDLoader ? rxcuiID : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color:"#2ecc71" }}/> }</p>
                             <p className="">{nameOne} Interacts With The Following</p>
