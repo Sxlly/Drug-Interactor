@@ -17,6 +17,9 @@ export default () => {
     const[search, updateSearch] = useState(1);
     const[source, updateSource] = useState("DrugBank");
     const[interactionResultLoader, updateInteractionResultLoader] = useState(true);
+    const[interactionDescLoader, updateInteractionDescLoader] = useState(true);
+    const[rxcuiIDOneLoader, updateRxcuiIDOneLoader] = useState(true);
+    const[rxcuiIDTwoLoader, updateRxcuiIDTwoLoader] = useState(true);
     const[interationCount, updateInteractionCount] = useState(0);
     const[interactionResult, updateInteractionResult] = useState("");
     const[interactionsList, updateInteractionsList] = useState([]);
@@ -65,6 +68,8 @@ export default () => {
 
                 updateRxcuiIDOne(getRxcuiIDAPIOneData.idGroup.rxnormId[0]);
                 updateRxcuiIDTwo("No Match...");
+                updateRxcuiIDOneLoader(true);
+                updateRxcuiIDTwoLoader(true);
                 alert("Drug Name One Does not exist within database records...");
             }
 
@@ -72,6 +77,8 @@ export default () => {
 
                 updateRxcuiIDTwo(getRxcuiIDAPITwoData.idGroup.rxnormId[0]);
                 updateRxcuiIDOne("No Match...");
+                updateRxcuiIDOneLoader(true);
+                updateRxcuiIDTwoLoader(true);
                 alert("Drug Name Two Does not exist within database records...");
             }
 
@@ -89,6 +96,8 @@ export default () => {
             console.log("No matching Rxcui Id!");
             updateRxcuiIDOne("No Match...");
             updateRxcuiIDTwo("No Match...");
+            updateRxcuiIDOneLoader(true);
+            updateRxcuiIDTwoLoader(true);
             alert("Both drugs do not exist within database records...");
             var passableRxcuiOne = null;
             var passableRxcuiTwo = null;
@@ -152,7 +161,7 @@ export default () => {
                     updateInteractionResult("Yes!");
                     updateInteractionsList(staticInteractionsList);
                     updateInteractionDescription(interactionDesc);
-                    updateLoading(true);
+                    updateInteractionResultLoader(true);
                     return;
                 }
 
@@ -161,7 +170,7 @@ export default () => {
                     updateInteractionResult("Yes!");
                     updateInteractionsList(staticInteractionsList);
                     updateInteractionDescription(interactionDesc);
-                    updateLoading(true);
+                    updateInteractionResultLoader(true);
                     return;
                 }
 
@@ -169,7 +178,7 @@ export default () => {
 
                     updateInteractionResult("No!");
                     updateInteractionDescription("None...");
-                    updateLoading(true);
+                    updateInteractionResultLoader(true);
                 }
 
                 
@@ -193,7 +202,10 @@ export default () => {
 
         (async () => {
 
-            updateLoading(false);
+            updateInteractionResultLoader(false);
+            updateInteractionDescLoader(false);
+            updateRxcuiIDOneLoader(false);
+            updateRxcuiIDTwoLoader(false);
 
 
             await getInteractionMethod();
@@ -274,7 +286,7 @@ export default () => {
                             <div className="card-service-large wow fadeInUp">
                                 <input type="checkbox" className="interaction-readmore-state" id="interaction-readmore" />
                                 <ul className="interaction-readmore-wrap">
-                                    <li className="interaction-answer">Interaction: {loading ? interactionResult : <ReactBootStrap.Spinner animation="border" size="sm" />}</li>
+                                    <li className="interaction-answer">Interaction: {interactionResultLoader ? interactionResult : <ReactBootStrap.Spinner animation="border" size="sm" />}</li>
                                     <li className="interaction-readmore-target">Description: {interactionDescription}</li>
                                 </ul>
 
