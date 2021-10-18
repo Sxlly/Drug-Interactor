@@ -203,6 +203,20 @@ export default () => {
                 </div>
             </div>
 
+
+            <footer className="page-footer bg-image">
+                <div className="container">
+                    <div className="row mb-5">
+                        <div className="col-lg-3 py-3">
+                            <h3>Drug Interactor</h3>
+                            <p>Take substances safely</p>
+                            <p>Medical Grade Information provided by DrugBank Official Research Records</p>
+                            <p>Creator: Shae Sullivan</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
         </div>
 
     );

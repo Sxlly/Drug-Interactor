@@ -49,7 +49,7 @@ export default () => {
                             <div className="col-md-6 py-5 wow fadeInleft">
                                 <h1 className="mb-4">Welcome to Drug Interactor!</h1>
                                 <p className="text-lg text-grey mb-5">Take Substances Safely</p>
-                                <a href="#" className="btn btn-primary">Dive In</a>
+                                <a href="/getInteractionPair" className="btn btn-primary">Dive In</a>
                             </div>
                             <div className="col-md-6 py-5 wow zoomIn">
                                 <div className="img-fluid text-center">
@@ -74,7 +74,7 @@ export default () => {
                                 <div className="body">
                                     <h5 className="text-secondary">Drug Interactor</h5>
                                     <p>The online tool</p>
-                                    <a href="" className="btn btn-primary">Explore</a>
+                                    <a href="/getInteractionPair" className="btn btn-primary">Explore</a>
                                 </div>
                             </div>
                         </div>
@@ -148,25 +148,12 @@ export default () => {
                         <div className="col-lg-3 py-3">
                             <h3>Drug Interactor</h3>
                             <p>Take substances safely</p>
+                            <p>Medical Grade Information provided by DrugBank Official Research Records</p>
+                            <p>Creator: Shae Sullivan</p>
                         </div>
                     </div>
                 </div>
             </footer>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         </div>
 
