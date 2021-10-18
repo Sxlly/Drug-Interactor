@@ -58,6 +58,8 @@ export default () => {
             var passableNameTwo = getRxcuiIDAPITwoData.idGroup.name.toLowerCase();
             updateRxcuiIDOne(passableRxcuiOne);
             updateRxcuiIDTwo(passableRxcuiTwo);
+            updateRxcuiIDOneLoader(true);
+            updateRxcuiIDTwoLoader(true);
         }
 
         else if (getRxcuiIDAPIOneData.idGroup.rxnormId || getRxcuiIDAPITwoData.idGroup.rxnormId !== undefined) {
@@ -162,6 +164,7 @@ export default () => {
                     updateInteractionsList(staticInteractionsList);
                     updateInteractionDescription(interactionDesc);
                     updateInteractionResultLoader(true);
+                    updateInteractionDescLoader(true);
                     return;
                 }
 
@@ -171,6 +174,7 @@ export default () => {
                     updateInteractionsList(staticInteractionsList);
                     updateInteractionDescription(interactionDesc);
                     updateInteractionResultLoader(true);
+                    updateInteractionDescLoader(true);
                     return;
                 }
 
@@ -179,6 +183,7 @@ export default () => {
                     updateInteractionResult("No!");
                     updateInteractionDescription("None...");
                     updateInteractionResultLoader(true);
+                    updateInteractionDescLoader(true);
                 }
 
                 
@@ -280,14 +285,17 @@ export default () => {
 
                             <button type="submit" className="rxcui-find-btn">Test</button>
 
-                            <p className="rxcui-answer">ID: {rxcuiIDOne}</p>
-                            <p className="rxcui-answer">ID: {rxcuiIDTwo}</p>
-
                             <div className="card-service-large wow fadeInUp">
+
+                                <p className="rxcui-answer">Rxcui ID One: {rxcuiIDOneLoader ? rxcuiIDOne : <ReactBootStrap.Spinner animation="border" size="sm" />}</p>
+                                <p className="rxcui-answer">Rxcui ID Two: {rxcuiIDTwoLoader ? rxcuiIDTwo : <ReactBootStrap.Spinner animation="border" size="sm" />}</p>
+
+
+
                                 <input type="checkbox" className="interaction-readmore-state" id="interaction-readmore" />
                                 <ul className="interaction-readmore-wrap">
                                     <li className="interaction-answer">Interaction: {interactionResultLoader ? interactionResult : <ReactBootStrap.Spinner animation="border" size="sm" />}</li>
-                                    <li className="interaction-readmore-target">Description: {interactionDescription}</li>
+                                    <li className="interaction-readmore-target">Description: {interactionDescLoader ? interactionDescription : <ReactBootStrap.Spinner animation="border" size="sm" />}</li>
                                 </ul>
 
                                 <label for="interaction-readmore" className="interaction-readmore-trigger"></label>
