@@ -102,7 +102,7 @@ export default () => {
                         {loadingFunction()}
                     </div>
 
-                    <button className="rxcui-find-btn" onClick={onSubmit}>Load Terms</button>
+                    <button className="btn btn-primary" onClick={onSubmit}>Load Terms</button>
 
                 </div>
             </div>

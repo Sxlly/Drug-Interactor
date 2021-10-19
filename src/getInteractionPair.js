@@ -307,21 +307,21 @@ export default () => {
                                 onChange={(event) => nameChangeTwo(event.target.value)}
                             />
 
-                            <button type="submit" className="rxcui-find-btn">Test</button>
+                            <button type="submit" className="btn btn-primary">Test</button>
 
                             <div className="card-service-large wow fadeInUp">
 
                                 {alertMethod()}
 
-                                <p className="rxcui-answer">Rxcui ID One: {rxcuiIDOneLoader ? rxcuiIDOne : <ReactBootStrap.Spinner animation="border" size="sm" />}</p>
-                                <p className="rxcui-answer">Rxcui ID Two: {rxcuiIDTwoLoader ? rxcuiIDTwo : <ReactBootStrap.Spinner animation="border" size="sm" />}</p>
+                                <p className="rxcui-answer">Rxcui ID One: {rxcuiIDOneLoader ? rxcuiIDOne : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</p>
+                                <p className="rxcui-answer">Rxcui ID Two: {rxcuiIDTwoLoader ? rxcuiIDTwo : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</p>
 
 
 
                                 <input type="checkbox" className="interaction-readmore-state" id="interaction-readmore" />
                                 <ul className="interaction-readmore-wrap">
-                                    <li className="interaction-answer">Interaction: {interactionResultLoader ? interactionResult : <ReactBootStrap.Spinner animation="border" size="sm" />}</li>
-                                    <li className="interaction-readmore-target">Description: {interactionDescLoader ? interactionDescription : <ReactBootStrap.Spinner animation="border" size="sm" />}</li>
+                                    <li className="interaction-answer">Interaction: {interactionResultLoader ? interactionResult : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</li>
+                                    <li className="interaction-readmore-target">Description: {interactionDescLoader ? interactionDescription : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</li>
                                 </ul>
 
                                 <label for="interaction-readmore" className="interaction-readmore-trigger"></label>

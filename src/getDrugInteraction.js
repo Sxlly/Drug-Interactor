@@ -206,7 +206,7 @@ export default () => {
                                 onChange={(event) => nameChangeOne(event.target.value)}
                             />
 
-                            <button type="submit" className="rxcui-find-btn">Find</button>
+                            <button type="submit" className="btn btn-primary">Find</button>
 
                             {alertMethod()}
 
