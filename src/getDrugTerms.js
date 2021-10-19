@@ -30,6 +30,11 @@ export default () => {
         return;
     }
 
+    function drugTermClicked() {
+
+        alert("Item Clicked!");
+    }
+
 
     const loadingFunction = () => {
 
@@ -40,7 +45,7 @@ export default () => {
 
         else {
 
-            return drugTerms.map(Term => <li className="interaction-item" key={Term}>{Term}</li>);
+            return drugTerms.map(Term => <ReactBootStrap.ListGroup.Item action onClick={drugTermClicked} key={Term}>{Term}</ReactBootStrap.ListGroup.Item>);
         }
     }
 
@@ -77,7 +82,7 @@ export default () => {
                                 <a className="nav-link" href="/HomePage">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="">Interaction Pair Tool</a>
+                                <a className="nav-link" href="/getInteractionPair">Interaction Pair Tool</a>
                             </li>
                             <li className="nav-link">
                                 <a className="nav-link" href="/getDrugInteraction">All Interactions Tool</a>

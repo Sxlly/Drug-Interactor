@@ -262,7 +262,7 @@ export default () => {
                                 <a className="nav-link" href="/HomePage">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="">Interaction Pair Tool</a>
+                                <a className="nav-link" href="/getInteractionPair">Interaction Pair Tool</a>
                             </li>
                             <li className="nav-link">
                                 <a className="nav-link" href="/getDrugInteraction">All Interactions Tool</a>
