@@ -312,35 +312,59 @@ export default () => {
 
     const structureMethodTwo = () => {
 
-        if (imageTwoLoader == false) {
+
+
+        if (imageTwoAlert == true) {
 
             return (
 
                 <div className="card-service wow fadeInUp">
                     <div className="header">
-                        <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
+                        <ReactBootStrap.Alert variant="danger">
+                            Chemical structure image currently does not exist within structure database...
+                        </ReactBootStrap.Alert>
                     </div>
                     <div className="body">
                         <h5 className="text-secondary">{nameTwo}</h5>
                     </div>
                 </div>
             );
+
+
         }
 
-        if (imageTwoLoader == true) {
+        else {
 
-            return (
+            if (imageTwoLoader == false) {
 
-                <div className="card-service wow fadeInUp">
-                    <div className="header">
-                        <img src={imageTwo} alt="" />
+                return (
+
+                    <div className="card-service wow fadeInUp">
+                        <div className="header">
+                            <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
+                        </div>
+                        <div className="body">
+                            <h5 className="text-secondary">{nameTwo}</h5>
+                        </div>
                     </div>
-                    <div className="body">
-                        <h5 className="text-secondary">{nameTwo}</h5>
-                    </div>
-                </div>
+                );
+            }
 
-            );
+            if (imageTwoLoader == true) {
+
+                return (
+
+                    <div className="card-service wow fadeInUp">
+                        <div className="header">
+                            <img src={imageTwo} alt="" />
+                        </div>
+                        <div className="body">
+                            <h5 className="text-secondary">{nameTwo}</h5>
+                        </div>
+                    </div>
+
+                );
+            }
         }
     }
 
