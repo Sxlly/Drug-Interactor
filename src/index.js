@@ -12,17 +12,19 @@ import getRxcuiId from './getRxcui';
 import getDrugInteraction from './getDrugInteraction';
 import HomePage from './HomePage';
 import getInteractionPair from './getInteractionPair';
+import drug3dtest from './drug3dtest';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route exact path = "/" component = {HomePage} />
+      <Route exact path = "/" component = {drug3dtest} />
       <Route path = "/AllDrugTerms" component={AllDrugTerms} />
       <Route path = "/getRxcuiId" component={getRxcuiId} />
       <Route path = "/getDrugInteraction" component={getDrugInteraction} />
       <Route path = "/HomePage" component={HomePage} />
       <Route path = "/getInteractionPair" component={getInteractionPair} />
+      <Route path = "/drug3dtest" component={drug3dtest} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
