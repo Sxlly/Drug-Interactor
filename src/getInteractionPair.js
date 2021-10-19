@@ -27,6 +27,8 @@ export default () => {
     const[show, updateShow] = useState(false);
     const[imageOne, updateImageOne] = useState("");
     const[imageTwo, updateImageTwo] = useState("");
+    const[imageOneLoader, updateImageOneLoader] = useState(true);
+    const[imageTwoLoader, updateImageTwoLoader] = useState(true);
 
     //function to update nameOne state
     function nameChangeOne(enteredName) {
@@ -185,6 +187,8 @@ export default () => {
                     updateInteractionDescription(interactionDesc);
                     updateInteractionResultLoader(true);
                     updateInteractionDescLoader(true);
+                    updateImageOneLoader(true);
+                    updateImageTwoLoader(true);
                     return;
                 }
 
@@ -195,6 +199,8 @@ export default () => {
                     updateInteractionDescription(interactionDesc);
                     updateInteractionResultLoader(true);
                     updateInteractionDescLoader(true);
+                    updateImageOneLoader(true);
+                    updateImageTwoLoader(true);
                     return;
                 }
 
@@ -204,6 +210,8 @@ export default () => {
                     updateInteractionDescription("None...");
                     updateInteractionResultLoader(true);
                     updateInteractionDescLoader(true);
+                    updateImageOneLoader(true);
+                    updateImageTwoLoader(true);
                 }
 
                 
@@ -235,6 +243,74 @@ export default () => {
         }
     }
 
+    const structureMethodOne = () => {
+
+        if (imageOneLoader == false) {
+
+            return (
+
+                <div className="card-service wow fadeInUp">
+                    <div className="header">
+                        <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
+                    </div>
+                    <div className="body">
+                        <h5 className="text-secondary">{nameOne}</h5>
+                    </div>
+                </div>
+
+            );
+        }
+
+        else {
+
+            return (
+
+                <div className="card-service wow fadeInUp">
+                    <div className="header">
+                        <img src={imageOne} alt="" />
+                    </div>
+                    <div className="body">
+                        <h5 className="text-secondary">{nameOne}</h5>
+                    </div>
+                </div>
+            );
+        }
+    }
+
+    const structureMethodTwo = () => {
+
+        if (imageTwoLoader == false) {
+
+            return (
+
+                <div className="card-service wow fadeInUp">
+                    <div className="header">
+                        <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
+                    </div>
+                    <div className="body">
+                        <h5 className="text-secondary">{nameTwo}</h5>
+                    </div>
+                </div>
+            );
+        }
+
+        else {
+
+            return (
+
+                <div className="card-service wow fadeInUp">
+                    <div className="header">
+                        <img src={imageTwo} alt="" />
+                    </div>
+                    <div className="body">
+                        <h5 className="text-secondary">{nameTwo}</h5>
+                    </div>
+                </div>
+
+            );
+        }
+    }
+
 
     //constant submit method
     const onSubmit = event => {
@@ -248,6 +324,8 @@ export default () => {
             updateRxcuiIDOneLoader(false);
             updateRxcuiIDTwoLoader(false);
             updateShow(false);
+            updateImageOneLoader(false);
+            updateImageTwoLoader(false);
 
 
             await getInteractionMethod();
@@ -341,30 +419,14 @@ export default () => {
                                 </ul>
 
                                 <label for="interaction-readmore" className="interaction-readmore-trigger"></label>
-
+                                
+                                <h2 className="rxcui-header">Chemical Structures</h2>
                                 <div className="card-service-large-structures wow fadeInUp">
 
 
-                                    <div className="card-service wow fadeInUp">
-                                        <div className="header">
-                                            <img src={imageOne} alt="" />
-                                        </div>
-                                        <div className="body">
-                                            <h5 className="text-secondary">{nameOne}</h5>
-                                        </div>
-                                    </div>
-  
+                                    {structureMethodOne()}
+                                    {structureMethodTwo()}
 
-
-  
-                                    <div className="card-service wow fadeInUp">
-                                        <div className="header">
-                                            <img src={imageTwo} alt="" />
-                                        </div>
-                                        <div className="body">
-                                            <h5 className="text-secondary">{nameTwo}</h5>
-                                        </div>
-                                    </div>
   
                                 </div>
                             </div>

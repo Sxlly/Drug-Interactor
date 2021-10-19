@@ -18,7 +18,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route exact path = "/" component = {drug3dtest} />
+      <Route exact path = "/" component = {HomePage} />
       <Route path = "/AllDrugTerms" component={AllDrugTerms} />
       <Route path = "/getRxcuiId" component={getRxcuiId} />
       <Route path = "/getDrugInteraction" component={getDrugInteraction} />
