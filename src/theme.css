@@ -1482,6 +1482,18 @@ a.text-dark:hover, a.text-dark:focus {
   box-shadow: 0 3px 12px rgba(95, 92, 120, 0.12);
 }
 
+.card-service-large-structures {
+
+  display: flex;
+  margin: 16px auto;
+  padding: 32px 20px;
+  max-width: 750px;
+  text-align: center;
+  color: #898798;
+  border-radius: 8px;
+  box-shadow: 0 3px 12px rgba(95, 92, 120, 0.12);
+}
+
 .card-service-large-item {
 
   font-size: 16px;

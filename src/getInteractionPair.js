@@ -25,6 +25,8 @@ export default () => {
     const[interactionsList, updateInteractionsList] = useState([]);
     const[interactionDescription, updateInteractionDescription] = useState("");
     const[show, updateShow] = useState(false);
+    const[imageOne, updateImageOne] = useState("");
+    const[imageTwo, updateImageTwo] = useState("");
 
     //function to update nameOne state
     function nameChangeOne(enteredName) {
@@ -136,6 +138,20 @@ export default () => {
             const getInteractionsData = await getInteractionsResponse.json();
 
             console.log(getInteractionsData);
+
+            const getStructureOneAPI = `http://cactus.nci.nih.gov/chemical/structure/${drugNameOne}/image`;
+            const getStructureOneAPIResponse = await fetch(getStructureOneAPI)
+            const getStructureOneAPIData = await getStructureOneAPIResponse;
+
+            console.log(getStructureOneAPIData);
+            updateImageOne(getStructureOneAPIData.url);
+
+            const getStructureTwoAPI = `http://cactus.nci.nih.gov/chemical/structure/${drugNameTwo}/image`;
+            const getStructureTwoAPIResponse = await fetch(getStructureTwoAPI)
+            const getStructureTwoAPIData = await getStructureTwoAPIResponse;
+
+            console.log(getStructureTwoAPIData);
+            updateImageTwo(getStructureTwoAPIData.url);
 
 
             const interactionsArray = [];
@@ -325,6 +341,32 @@ export default () => {
                                 </ul>
 
                                 <label for="interaction-readmore" className="interaction-readmore-trigger"></label>
+
+                                <div className="card-service-large-structures wow fadeInUp">
+
+
+                                    <div className="card-service wow fadeInUp">
+                                        <div className="header">
+                                            <img src={imageOne} alt="" />
+                                        </div>
+                                        <div className="body">
+                                            <h5 className="text-secondary">{nameOne}</h5>
+                                        </div>
+                                    </div>
+  
+
+
+  
+                                    <div className="card-service wow fadeInUp">
+                                        <div className="header">
+                                            <img src={imageTwo} alt="" />
+                                        </div>
+                                        <div className="body">
+                                            <h5 className="text-secondary">{nameTwo}</h5>
+                                        </div>
+                                    </div>
+  
+                                </div>
                             </div>
 
                         </form>

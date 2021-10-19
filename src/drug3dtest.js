@@ -40,9 +40,9 @@ export default () => {
 
             <button onClick={onSubmit}>Test</button>
 
-            <div id="twirler" height="300" width="300">
+            <div >
 
-                <img src={url} />
+                <img src={url} height="500" width="500" />
 
             </div>
         </div>
