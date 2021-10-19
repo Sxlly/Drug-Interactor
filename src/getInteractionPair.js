@@ -25,6 +25,8 @@ export default () => {
     const[interactionsList, updateInteractionsList] = useState([]);
     const[interactionDescription, updateInteractionDescription] = useState("");
     const[show, updateShow] = useState(false);
+    const[imageOneAlert, updateImageOneAlert] = useState(false);
+    const[imageTwoAlert, updateImageTwoAlert] = useState(false);
     const[imageOne, updateImageOne] = useState("");
     const[imageTwo, updateImageTwo] = useState("");
     const[imageOneLoader, updateImageOneLoader] = useState(true);
@@ -161,6 +163,16 @@ export default () => {
 
             updateInteractionCount(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
 
+            if (getStructureOneAPIData.ok == false) {
+
+                updateImageOneAlert(true);
+            }
+
+            if (getStructureTwoAPIData.ok == false) {
+
+                updateImageTwoAlert(true);
+            }
+
 
             for (var index = 0; index < getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length-1; index++) {
 
@@ -245,35 +257,56 @@ export default () => {
 
     const structureMethodOne = () => {
 
-        if (imageOneLoader == false) {
+
+        if (imageOneAlert == true) {
 
             return (
 
                 <div className="card-service wow fadeInUp">
                     <div className="header">
-                        <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
+                        <ReactBootStrap.Alert variant="danger">
+                            Chemical structure image currently does not exist within structure database...
+                        </ReactBootStrap.Alert>
                     </div>
                     <div className="body">
                         <h5 className="text-secondary">{nameOne}</h5>
                     </div>
                 </div>
-
             );
         }
 
         else {
 
-            return (
+            if (imageOneLoader == false) {
 
-                <div className="card-service wow fadeInUp">
-                    <div className="header">
-                        <img src={imageOne} alt="" />
+                return (
+
+                    <div className="card-service wow fadeInUp">
+                        <div className="header">
+                            <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
+                        </div>
+                        <div className="body">
+                            <h5 className="text-secondary">{nameOne}</h5>
+                        </div>
                     </div>
-                    <div className="body">
-                        <h5 className="text-secondary">{nameOne}</h5>
+
+                );
+            }
+
+            if (imageOneLoader == true) {
+
+                return (
+
+                    <div className="card-service wow fadeInUp">
+                        <div className="header">
+                            <img src={imageOne} alt="" />
+                        </div>
+                        <div className="body">
+                            <h5 className="text-secondary">{nameOne}</h5>
+                        </div>
                     </div>
-                </div>
-            );
+                );
+            }
         }
     }
 
@@ -294,7 +327,7 @@ export default () => {
             );
         }
 
-        else {
+        if (imageTwoLoader == true) {
 
             return (
 
