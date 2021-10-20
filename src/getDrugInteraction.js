@@ -119,6 +119,11 @@ export default () => {
         }
     }
 
+    function interactionClicked() {
+
+        alert("Item Clicked");
+    }
+
     //constant loading all interactions of drug method
     const loadingFunction = () => {
 
@@ -129,7 +134,7 @@ export default () => {
 
         else {
 
-            return interactionsList.map(Interaction => <li className="interaction-item" key={Interaction}>{Interaction}</li>);
+            return interactionsList.map(Interaction => <ReactBootStrap.ListGroup.Item action onClick={interactionClicked} key={Interaction}>{Interaction}</ReactBootStrap.ListGroup.Item>);
 
         }
     }

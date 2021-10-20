@@ -38,6 +38,9 @@ export default () => {
                                 <li className="nav-link">
                                     <a className="nav-link" href="/getRxcuiId">Rxcui ID Tool</a>
                                 </li>
+                                <li className="nav-link">
+                                    <a className="nav-link" href="/drug3dtest">3D Structure Tool</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -114,6 +117,20 @@ export default () => {
                                     <h5 className="text-secondary">All Interactions</h5>
                                     <p>The online tool</p>
                                     <a href="/getDrugInteraction" className="btn btn-primary">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className="col-lg-4">
+                            <div className="card-service wow fadeInUp">
+                                <div className="header">
+                                    <img src="https://www.svgrepo.com/show/78185/molecular-structure.svg" alt="image" />
+                                </div>
+                                <div className="body">
+                                    <h5 className="text-secondary">3D Structure Viewer</h5>
+                                    <p>The online tool</p>
+                                    <a href="/drug3dtest" className="btn btn-primary">Explore</a>
                                 </div>
                             </div>
                         </div>
