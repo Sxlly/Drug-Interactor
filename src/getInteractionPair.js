@@ -3,13 +3,15 @@ import './bootstrap.css';
 import './theme.css';
 import * as ReactBootStrap from "react-bootstrap";
 
-
+//Material UI Icon Imports
+import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+import DescriptionIcon from '@material-ui/icons/Description';
 
 
 export default () => {
 
 
-    //variables using this.state functionality
+    //variables using React useState functionality
     const[rxcuiIDOne, updateRxcuiIDOne] = useState("");
     const[rxcuiIDTwo, updateRxcuiIDTwo] = useState("");
     const[nameOne, updateNameOne] = useState("");
@@ -31,6 +33,8 @@ export default () => {
     const[imageTwo, updateImageTwo] = useState("");
     const[imageOneLoader, updateImageOneLoader] = useState(true);
     const[imageTwoLoader, updateImageTwoLoader] = useState(true);
+    const[panelReady, updatePanelReady] = useState(false);
+    const[interactIconState, updateInteractIconState] = useState(false);
 
     //function to update nameOne state
     function nameChangeOne(enteredName) {
@@ -201,6 +205,8 @@ export default () => {
                     updateInteractionDescLoader(true);
                     updateImageOneLoader(true);
                     updateImageTwoLoader(true);
+                    updateInteractIconState(true);
+                    updatePanelReady(true);
                     return;
                 }
 
@@ -213,6 +219,8 @@ export default () => {
                     updateInteractionDescLoader(true);
                     updateImageOneLoader(true);
                     updateImageTwoLoader(true);
+                    updateInteractIconState(true);
+                    updatePanelReady(true);
                     return;
                 }
 
@@ -224,6 +232,8 @@ export default () => {
                     updateInteractionDescLoader(true);
                     updateImageOneLoader(true);
                     updateImageTwoLoader(true);
+                    updateInteractIconState(false);
+                    updatePanelReady(true);
                 }
 
                 
@@ -368,6 +378,58 @@ export default () => {
         }
     }
 
+    const interactionPanel = () => {
+
+        if (panelReady == true) {
+
+            if (interactIconState == true) {
+
+                return (
+
+                    <div className="card-service-large wow fadeInUp">
+                        <div className="interaction_result_card_div">
+                            <h3>{nameOne}</h3>
+                            <AllInclusiveIcon style={{color: "#2ecc71", fontSize: 75}} />
+                            <h3></h3>
+                            <h3>{nameTwo}</h3>
+                        </div>
+                    </div>
+
+                );
+            }
+
+            if (interactIconState == false) {
+
+                return (
+
+                    <div className="card-service-large wow fadeInUp">
+                        <div className="interaction_result_card_div">
+                            <h3>{nameOne}</h3>
+                            <AllInclusiveIcon style={{color: "#cc0000", fontSize: 75}} />
+                            <h3></h3>
+                            <h3>{nameTwo}</h3>
+                        </div>
+                    </div>
+                )
+
+
+            }
+        }
+
+        else {
+
+            return (
+
+                <div className="card-service-large wow fadeInUp">
+                    <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
+                </div>
+            );
+
+        }
+    }
+
+
+
 
     //constant submit method
     const onSubmit = event => {
@@ -436,7 +498,7 @@ export default () => {
 
                         <form onSubmit={onSubmit}>
                             <h1 className="rxcui-header">Interaction Pair</h1>
-                            <h2 className="rxcui-subheader">subheader</h2>
+                            <h2 className="rxcui-subheader">Determine if two substances react</h2>
 
                             <input
                                 className="rxcui-name-input"
@@ -464,8 +526,16 @@ export default () => {
 
                                 {alertMethod()}
 
-                                <p className="rxcui-answer">Rxcui ID One: {rxcuiIDOneLoader ? rxcuiIDOne : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</p>
-                                <p className="rxcui-answer">Rxcui ID Two: {rxcuiIDTwoLoader ? rxcuiIDTwo : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</p>
+                                <input type="checkbox" className="rxcui-readmore-state" id="rxcui-readmore" />
+                                <ul className="rxcui-readmore-wrap">
+                                    <li className="rxcui-readmore-target">Rxcui ID One: {rxcuiIDOneLoader ? rxcuiIDOne : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</li>
+                                    <li className="rxcui-readmore-target">Rxcui ID Two: {rxcuiIDTwoLoader ? rxcuiIDOne : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</li>
+                                </ul>
+
+                                <label for="rxcui-readmore" className="rxcui-readmore-trigger"></label>
+
+
+                                {interactionPanel()}
 
 
 
