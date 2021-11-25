@@ -11,6 +11,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import Alert from '@mui/material/Alert';
 import LinearProgress from '@mui/material/LinearProgress';
 import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
 
 
 export default () => {
@@ -41,6 +42,8 @@ export default () => {
     const[panelReady, updatePanelReady] = useState(false);
     const[interactIconState, updateInteractIconState] = useState(false);
     const[panelStart, updatePanelStart] = useState(false);
+    const[interactionOutcomeState, updateInteractionOutcomeState] = useState(false);
+    const[interactionOutcomeReady, updateInteractionOutcomeReady] = useState(false);
 
     //function to update nameOne state
     function nameChangeOne(enteredName) {
@@ -213,6 +216,7 @@ export default () => {
                     updateImageTwoLoader(true);
                     updateInteractIconState(true);
                     updatePanelReady(true);
+                    updateInteractionOutcomeState(true);
                     return;
                 }
 
@@ -227,6 +231,7 @@ export default () => {
                     updateImageTwoLoader(true);
                     updateInteractIconState(true);
                     updatePanelReady(true);
+                    updateInteractionOutcomeState(true);
                     return;
                 }
 
@@ -240,6 +245,7 @@ export default () => {
                     updateImageTwoLoader(true);
                     updateInteractIconState(false);
                     updatePanelReady(true);
+                    updateInteractionOutcomeState(false);
                 }
 
                 
@@ -396,10 +402,10 @@ export default () => {
 
                         <div className="card-service-large wow fadeInUp">
                             <div className="interaction_result_card_div">
-                                <h3>{nameOne}</h3>
+                                <h3 className="text-secondary">{nameOne}</h3>
                                 <AllInclusiveIcon style={{color: "#2ecc71", fontSize: 75}} />
                                 <h3></h3>
-                                <h3>{nameTwo}</h3>
+                                <h3 className="text-secondary">{nameTwo}</h3>
                             </div>
                         </div>
 
@@ -412,10 +418,10 @@ export default () => {
 
                         <div className="card-service-large wow fadeInUp">
                             <div className="interaction_result_card_div">
-                                <h3>{nameOne}</h3>
+                                <h3 className="text-secondary">{nameOne}</h3>
                                 <AllInclusiveIcon style={{color: "#cc0000", fontSize: 75}} />
                                 <h3></h3>
-                                <h3>{nameTwo}</h3>
+                                <h3 className="text-secondary">{nameTwo}</h3>
                             </div>
                         </div>
                     )
@@ -447,6 +453,42 @@ export default () => {
         }
     }
 
+    const interactionOutcomeAlert = () => {
+
+        if (interactionOutcomeReady == true) {
+
+            if (interactionOutcomeState == true) {
+
+                return (
+
+                    <Alert onClose={() => {}}>Yes! There is an Interaction</Alert>
+
+
+                );
+
+            }
+
+            if (interactionOutcomeState == false) {
+
+                return (
+
+                    <Alert severity="error" onClose={() => {}}>No! There is no Interaction</Alert>
+
+                );
+            }
+        }
+
+        else {
+
+            return (
+
+                <div></div>
+            );
+        }
+
+
+    }
+
 
 
 
@@ -465,6 +507,7 @@ export default () => {
             updateImageOneLoader(false);
             updateImageTwoLoader(false);
             updatePanelStart(true);
+            updateInteractionOutcomeReady(true);
 
 
             await getInteractionMethod();
@@ -542,12 +585,12 @@ export default () => {
 
                             <button type="submit" className="btn btn-primary">Test</button>
 
+
                             <div className="card-service-large wow fadeInUp">
 
                                 {alertMethod()}
                                 {interactionPanel()}
-
-
+                                {interactionOutcomeAlert()}
 
                                 <input type="checkbox" className="interaction-readmore-state" id="interaction-readmore" />
                                 <ul className="interaction-readmore-wrap">
