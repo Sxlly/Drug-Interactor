@@ -9,6 +9,8 @@ import DescriptionIcon from '@material-ui/icons/Description';
 
 //Material UI Imports
 import Alert from '@mui/material/Alert';
+import LinearProgress from '@mui/material/LinearProgress';
+import Divider from '@mui/material/Divider';
 
 
 export default () => {
@@ -427,7 +429,7 @@ export default () => {
                 return (
 
                     <div className="card-service-large wow fadeInUp">
-                        <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
+                        <LinearProgress color="success" />
                     </div>
                 );
 
@@ -554,8 +556,10 @@ export default () => {
                                 </ul>
 
                                 <label for="interaction-readmore" className="interaction-readmore-trigger"></label>
+
+                                <Divider style={{ fontSize: 20, padding: "20px"}}>Chemical Structures</Divider>
                                 
-                                <h2 className="rxcui-header">Chemical Structures</h2>
+
                                 <div className="card-service-large-structures wow fadeInUp">
 
                                 
