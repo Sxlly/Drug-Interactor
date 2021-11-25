@@ -1,9 +1,12 @@
 import React, { Component, useState } from "react";
 import './bootstrap.css';
 import './theme.css';
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 
 export default () => {
+
+
 
 
 
@@ -56,7 +59,7 @@ export default () => {
                             </div>
                             <div className="col-md-6 py-5 wow zoomIn">
                                 <div className="img-fluid text-center">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/LSD_Structure.svg" alt="STRUCTURE" />
+                                    <img title="LSD Molecule" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/LSD_Structure.svg" alt="STRUCTURE" />
                                 </div>
                             </div>
                         </div>
@@ -167,6 +170,12 @@ export default () => {
                             <p>Take substances safely</p>
                             <p>Medical Grade Information provided by DrugBank Official Research Records</p>
                             <p>Creator: Shae Sullivan</p>
+                        </div>
+                    </div>
+
+                    <div className="row mb-5">
+                        <div className="col-lg-3 py-3">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Drugbank_logo.svg"/>
                         </div>
                     </div>
                 </div>
