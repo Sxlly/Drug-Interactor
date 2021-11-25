@@ -35,6 +35,7 @@ export default () => {
     const[imageTwoLoader, updateImageTwoLoader] = useState(true);
     const[panelReady, updatePanelReady] = useState(false);
     const[interactIconState, updateInteractIconState] = useState(false);
+    const[panelStart, updatePanelStart] = useState(false);
 
     //function to update nameOne state
     function nameChangeOne(enteredName) {
@@ -380,38 +381,52 @@ export default () => {
 
     const interactionPanel = () => {
 
-        if (panelReady == true) {
+        if (panelStart == true) {
 
-            if (interactIconState == true) {
+            if (panelReady == true) {
 
-                return (
+                if (interactIconState == true) {
 
-                    <div className="card-service-large wow fadeInUp">
-                        <div className="interaction_result_card_div">
-                            <h3>{nameOne}</h3>
-                            <AllInclusiveIcon style={{color: "#2ecc71", fontSize: 75}} />
-                            <h3></h3>
-                            <h3>{nameTwo}</h3>
+                    return (
+
+                        <div className="card-service-large wow fadeInUp">
+                            <div className="interaction_result_card_div">
+                                <h3>{nameOne}</h3>
+                                <AllInclusiveIcon style={{color: "#2ecc71", fontSize: 75}} />
+                                <h3></h3>
+                                <h3>{nameTwo}</h3>
+                            </div>
                         </div>
-                    </div>
 
-                );
+                    );
+                }
+
+                if (interactIconState == false) {
+
+                    return (
+
+                        <div className="card-service-large wow fadeInUp">
+                            <div className="interaction_result_card_div">
+                                <h3>{nameOne}</h3>
+                                <AllInclusiveIcon style={{color: "#cc0000", fontSize: 75}} />
+                                <h3></h3>
+                                <h3>{nameTwo}</h3>
+                            </div>
+                        </div>
+                    )
+
+
+                }
             }
 
-            if (interactIconState == false) {
+            else {
 
                 return (
 
                     <div className="card-service-large wow fadeInUp">
-                        <div className="interaction_result_card_div">
-                            <h3>{nameOne}</h3>
-                            <AllInclusiveIcon style={{color: "#cc0000", fontSize: 75}} />
-                            <h3></h3>
-                            <h3>{nameTwo}</h3>
-                        </div>
+                        <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
                     </div>
-                )
-
+                );
 
             }
         }
@@ -420,9 +435,8 @@ export default () => {
 
             return (
 
-                <div className="card-service-large wow fadeInUp">
-                    <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
-                </div>
+                <div></div>
+
             );
 
         }
@@ -445,6 +459,7 @@ export default () => {
             updateShow(false);
             updateImageOneLoader(false);
             updateImageTwoLoader(false);
+            updatePanelStart(true);
 
 
             await getInteractionMethod();
@@ -525,16 +540,6 @@ export default () => {
                             <div className="card-service-large wow fadeInUp">
 
                                 {alertMethod()}
-
-                                <input type="checkbox" className="rxcui-readmore-state" id="rxcui-readmore" />
-                                <ul className="rxcui-readmore-wrap">
-                                    <li className="rxcui-readmore-target">Rxcui ID One: {rxcuiIDOneLoader ? rxcuiIDOne : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</li>
-                                    <li className="rxcui-readmore-target">Rxcui ID Two: {rxcuiIDTwoLoader ? rxcuiIDOne : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</li>
-                                </ul>
-
-                                <label for="rxcui-readmore" className="rxcui-readmore-trigger"></label>
-
-
                                 {interactionPanel()}
 
 
@@ -550,9 +555,13 @@ export default () => {
                                 <h2 className="rxcui-header">Chemical Structures</h2>
                                 <div className="card-service-large-structures wow fadeInUp">
 
+                                
 
                                     {structureMethodOne()}
                                     {structureMethodTwo()}
+
+
+
 
   
                                 </div>
@@ -572,6 +581,12 @@ export default () => {
                             <p>Take substances safely</p>
                             <p>Medical Grade Information provided by DrugBank Official Research Records</p>
                             <p>Creator: Shae Sullivan</p>
+                        </div>
+                    </div>
+
+                    <div className="row mb-5">
+                        <div className="col-lg-3 py-3">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Drugbank_logo.svg" />
                         </div>
                     </div>
                 </div>

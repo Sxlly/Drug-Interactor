@@ -1628,7 +1628,6 @@ a.text-dark:hover, a.text-dark:focus {
   display: inline-block;
   padding: 5px;
   width: 500px;
-  background-color: rgba(85, 85, 85, 0.10);
   color: #555555;
 
 
@@ -1717,7 +1716,6 @@ a.text-dark:hover, a.text-dark:focus {
   display: inline-block;
   padding: 5px;
   width: 500px;
-  background-color: rgba(85, 85, 85, 0.10);
   color: #555555;
 
 }
@@ -1750,6 +1748,9 @@ a.text-dark:hover, a.text-dark:focus {
   line-height: 2;
   border: 1px solid #ddd;
   border-radius: .25em;
+  color: #fff;
+  background-color: #2ecc71;
+  border-color: transparent;
 }
 
 .interaction_result_card_div {
