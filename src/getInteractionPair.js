@@ -7,6 +7,9 @@ import * as ReactBootStrap from "react-bootstrap";
 import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
 import DescriptionIcon from '@material-ui/icons/Description';
 
+//Material UI Imports
+import Alert from '@mui/material/Alert';
+
 
 export default () => {
 
@@ -257,9 +260,9 @@ export default () => {
 
             return (
 
-                <ReactBootStrap.Alert variant="danger">
+                <Alert variant="filled" severity="error">
                     One or more drug names do not exist within current drug terms records...
-                </ReactBootStrap.Alert>
+                </Alert>
 
             );
 
@@ -275,9 +278,9 @@ export default () => {
 
                 <div className="card-service wow fadeInUp">
                     <div className="header">
-                        <ReactBootStrap.Alert variant="danger">
+                        <Alert variant="filled" severity="error">
                             Chemical structure image currently does not exist within structure database...
-                        </ReactBootStrap.Alert>
+                        </Alert>
                     </div>
                     <div className="body">
                         <h5 className="text-secondary">{nameOne}</h5>
@@ -331,9 +334,9 @@ export default () => {
 
                 <div className="card-service wow fadeInUp">
                     <div className="header">
-                        <ReactBootStrap.Alert variant="danger">
+                        <Alert variant="filled" severity="error">
                             Chemical structure image currently does not exist within structure database...
-                        </ReactBootStrap.Alert>
+                        </Alert>
                     </div>
                     <div className="body">
                         <h5 className="text-secondary">{nameTwo}</h5>
