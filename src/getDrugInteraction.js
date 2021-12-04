@@ -5,6 +5,17 @@ import './bootstrap.css';
 import './theme.css';
 import * as ReactBootStrap from "react-bootstrap";
 
+//Material UI Icon Imports
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+
+//Material UI Imports
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+
+
 
 
 export default () => {
@@ -134,7 +145,18 @@ export default () => {
 
         else {
 
-            return interactionsList.map(Interaction => <ReactBootStrap.ListGroup.Item action onClick={interactionClicked} key={Interaction}>{Interaction}</ReactBootStrap.ListGroup.Item>);
+            //return interactionsList.map(Interaction => <ReactBootStrap.ListGroup.Item action onClick={interactionClicked} key={Interaction}>{Interaction}</ReactBootStrap.ListGroup.Item>);
+            return interactionsList.map(Interaction =>
+
+                <Accordion>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography>{Interaction}</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>Description...</Typography>
+                    </AccordionDetails>
+                </Accordion>
+            );
 
         }
     }

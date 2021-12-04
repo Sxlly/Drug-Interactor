@@ -1780,6 +1780,14 @@ a.text-dark:hover, a.text-dark:focus {
 
 }
 
+.interaction-panel-text {
+
+  justify-content: center;
+  padding: 20px;
+  text-shadow: 5px 5px rgba(100, 95, 136, 0.15);
+
+}
+
 
 
 
