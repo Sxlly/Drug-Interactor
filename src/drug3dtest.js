@@ -3,22 +3,104 @@ import './bootstrap.css';
 import './theme.css';
 import * as ReactBootStrap from "react-bootstrap";
 
+//Material UI Imports
+import Alert from '@mui/material/Alert';
+import LinearProgress from '@mui/material/LinearProgress';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
 
 
 export default () => {
 
-    const [url, updateUrl] = useState("");
+    //variables using this.state functionality
+    const[nameOne, updateNameOne] = useState("");
+    const[moleculeImage, updateMoleculeImage] = useState("");
+    const[moleculeImageAlert, updateMoleculeImageAlert] = useState(false);
+    const[moleculeImageLoader, updateMoleculeImageLoader] = useState(true);
 
 
-    async function get3dStructure() {
 
-        const getStructureAPI = "http://cactus.nci.nih.gov/chemical/structure/aspirin/image";
-        const getStructureAPIResponse = await fetch(getStructureAPI)
-        const getStructureAPIData = await getStructureAPIResponse;
 
-        console.log(getStructureAPIData);
-        updateUrl(getStructureAPIData.url);
+    //function to update nameOne state(value)
+    function nameChangeOne(enteredName) {
+
+        updateNameOne(enteredName);
+    };
+
+    //asynchronus function to get 2D Molecule Structure from API call => cactus database
+    async function getMoleculeStructure() {
+
+        const getMolecule = `http://cactus.nci.nih.gov/chemical/structure/${nameOne.toLowerCase()}/image`;
+        const getMoleculeResponse = await fetch(getMolecule);
+        const getMoleculeData = await getMoleculeResponse;
+
+        updateMoleculeImage(getMoleculeData.url);
+
+        if (getMoleculeData.ok == false) {
+
+            updateMoleculeImageAlert(true);
+        }
+
+        updateMoleculeImageLoader(true);
+
+        return;
     }
+
+    const showMoleculeMethod = () => {
+
+
+        if (moleculeImageAlert == true) {
+
+            return (
+
+                <div className="card-service wow fadeInUp">
+                    <div className="header">
+                        <Alert variant="filled" severity="error">
+                            The molecule structure for {nameOne} can't be found...
+                        </Alert>
+                    </div>
+                    <div className="body">
+                        <h5 className="text-secondary">{nameOne}</h5>
+                    </div>
+                </div>
+            );
+        }
+
+        else {
+
+            if (moleculeImageLoader == true) {
+
+                return (
+
+                    <div className="card-service wow fadeInUp">
+                        <div className="header">
+                            <img className="molecule-image" src={moleculeImage} alt="" />
+                        </div>
+                        <div className="body">
+                            <h5 className="text-secondary">{nameOne}</h5>
+                        </div>
+                    </div>
+                );
+            }
+
+            if (moleculeImageLoader == false) {
+
+                return (
+
+                    <div className="card-service wow fadeInUp">
+                        <div className="header">
+                            <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
+                        </div>
+                        <div className="body">
+                            <h5 className="text-secondary">{nameOne}</h5>
+                        </div>
+                    </div>
+                );
+            }
+        }
+    }
+
+
 
     const onSubmit = event => {
 
@@ -26,14 +108,16 @@ export default () => {
 
         (async () => {
 
-            await get3dStructure();
+            updateMoleculeImageLoader(false);
+
+            await getMoleculeStructure();
             console.log("Waited!");
 
         })();
     }
 
 
-
+    //main return method
     return (
         
         <div>
@@ -66,20 +150,54 @@ export default () => {
                                     <a className="nav-link" href="/getRxcuiId">Rxcui ID Tool</a>
                                 </li>
                                 <li className="nav-link">
-                                    <a className="nav-link" href="/drug3dtest">3D Structure Tool</a>
+                                    <a className="nav-link" href="/drug3dtest">Molecule View Tool</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
 
-            <button onClick={onSubmit}>Test</button>
+                <div className="page-section">
+                    <div className="container">
+                        <div className="card-service-large wow fadeInUp">
+                            <form onSubmit={onSubmit}>
+                                <h1 className="rxcui-header">Molecule View Tool</h1>
+                                <h2 className="rxcui-subheader">Enter the name of the molecule you'd like to see the structure for below</h2>
 
-            <div >
+                                <input
+                                    className="rxcui-name-input"
+                                    id="nameOne"
+                                    name="name"
+                                    type="text"
+                                    placeholder="Enter Molecule Name..."
+                                    value={nameOne}
+                                    onChange={(event) => nameChangeOne(event.target.value)}
+                                />
 
-                <img src={url} height="500" width="500" />
+                                <button type="submit" className="btn btn-primary">View Structure</button>
 
-            </div>
+                                <div className="card-service-large-structures wow fadeInUp">
+                                    {showMoleculeMethod()}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <footer className="page-footer bg-image">
+                    <div className="container">
+                        <div className="row mb-5">
+                            <div className="col-lg-3 py-3">
+                                <h3>Drug Interactor</h3>
+                                <p>Take substancees safely</p>
+                                <p>Medical Grade Information provided by DrugBank Official Research Records</p>
+                                <p>Creator: Shae Sullivan</p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+
+            
         </div>
 
     );

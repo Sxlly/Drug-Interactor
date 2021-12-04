@@ -42,7 +42,7 @@ export default () => {
                                     <a className="nav-link" href="/getRxcuiId">Rxcui ID Tool</a>
                                 </li>
                                 <li className="nav-link">
-                                    <a className="nav-link" href="/drug3dtest">3D Structure Tool</a>
+                                    <a className="nav-link" href="/drug3dtest">Molecule View Tool</a>
                                 </li>
                             </ul>
                         </div>
@@ -131,7 +131,7 @@ export default () => {
                                     <img src="https://www.svgrepo.com/show/78185/molecular-structure.svg" alt="image" />
                                 </div>
                                 <div className="body">
-                                    <h5 className="text-secondary">3D Structure Viewer</h5>
+                                    <h5 className="text-secondary">Molecule View Tool</h5>
                                     <p>The online tool</p>
                                     <a href="/drug3dtest" className="btn btn-primary">Explore</a>
                                 </div>
