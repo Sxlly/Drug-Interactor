@@ -16,7 +16,7 @@ export default () => {
     const[nameOne, updateNameOne] = useState("");
     const[moleculeImage, updateMoleculeImage] = useState("");
     const[moleculeImageAlert, updateMoleculeImageAlert] = useState(false);
-    const[moleculeImageLoader, updateMoleculeImageLoader] = useState(true);
+    const[moleculeImageLoader, updateMoleculeImageLoader] = useState(false);
 
 
 
@@ -108,6 +108,7 @@ export default () => {
 
         (async () => {
 
+            updateMoleculeImageAlert(false);
             updateMoleculeImageLoader(false);
 
             await getMoleculeStructure();
