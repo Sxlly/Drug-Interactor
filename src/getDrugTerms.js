@@ -91,7 +91,10 @@ export default () => {
                                 <a className="nav-link" href="/AllDrugTerms">All Drugs Tool</a>
                             </li>
                             <li className="nav-link">
-                                <a className="nav-link" href="getRxcuiId">Rxcui ID Tool</a>
+                                <a className="nav-link" href="/getRxcuiId">Rxcui ID Tool</a>
+                            </li>
+                            <li className="nav-link">
+                                <a className="nav-link" href="/drug3dtest">Molecule View Tool</a>
                             </li>
                         </ul>
                     </div>
