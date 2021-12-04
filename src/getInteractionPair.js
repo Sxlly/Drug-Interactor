@@ -6,14 +6,47 @@ import * as ReactBootStrap from "react-bootstrap";
 //Material UI Icon Imports
 import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
 import DescriptionIcon from '@material-ui/icons/Description';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 //Material UI Imports
 import Alert from '@mui/material/Alert';
 import LinearProgress from '@mui/material/LinearProgress';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { red } from '@mui/material/colors';
 
 
+
+const ExpandMore = styled((props) => {
+
+    const { expand, ...other } = props;
+    return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+
+    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+    }),
+}));
+
+
+
+
+//default exporting method => to web screen **renders**
 export default () => {
 
 
@@ -44,6 +77,7 @@ export default () => {
     const[panelStart, updatePanelStart] = useState(false);
     const[interactionOutcomeState, updateInteractionOutcomeState] = useState(false);
     const[interactionOutcomeReady, updateInteractionOutcomeReady] = useState(false);
+    const[expanded, updateExpanded] = useState(false);
 
     //function to update nameOne state
     function nameChangeOne(enteredName) {
@@ -260,6 +294,11 @@ export default () => {
             return;
         }     
     }
+
+    const handleExpandClick = () => {
+
+        updateExpanded(!expanded);
+    };
 
 
     const alertMethod = () => {
@@ -595,13 +634,43 @@ export default () => {
                                 {interactionPanel()}
                                 {interactionOutcomeAlert()}
 
-                                <input type="checkbox" className="interaction-readmore-state" id="interaction-readmore" />
-                                <ul className="interaction-readmore-wrap">
-                                    <li className="interaction-answer">Interaction: {interactionResultLoader ? interactionResult : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</li>
-                                    <li className="interaction-readmore-target">Description: {interactionDescLoader ? interactionDescription : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}</li>
-                                </ul>
 
-                                <label for="interaction-readmore" className="interaction-readmore-trigger"></label>
+                                <Card sx={{ maxWidth: 700 }}>
+                                    <CardContent>
+                                        <Typography variant="body2" color="text.secondary">
+                                            <Typography>
+                                                Interaction: {interactionResultLoader ? interactionResult : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}
+                                            </Typography>
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions disableSpacing>
+                                        <IconButton aria-label="add to favorites">
+                                            <FavoriteIcon />
+                                        </IconButton>
+                                        <IconButton aria-label="share">
+                                            <ShareIcon />
+                                        </IconButton>
+                                        <ExpandMore
+                                            expand={expanded}
+                                            onClick={handleExpandClick}
+                                            aria-expanded={expanded}
+                                            aria-label="show more"
+                                        >
+                                            <ExpandMoreIcon />
+                                        </ExpandMore>
+                                    </CardActions>
+                                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                                        <CardContent>
+                                            <Typography paragraph>
+                                                Description: {interactionDescLoader ? interactionDescription : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}
+                                            </Typography>
+                                            <Button size="small">Learn More</Button>
+                                            <Typography paragraph>
+                                                Please consult a health professional before taking any two substances at once
+                                            </Typography>
+                                        </CardContent>
+                                    </Collapse>
+                                </Card>
 
                                 <Divider style={{ fontSize: 20, padding: "20px"}}>Chemical Structures</Divider>
                                 
@@ -619,6 +688,8 @@ export default () => {
   
                                 </div>
                             </div>
+
+
 
                         </form>
                     </div>
