@@ -10,9 +10,11 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import SwapCallsIcon from '@material-ui/icons/SwapCalls';
 
 //Material UI Imports
 import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 import LinearProgress from '@mui/material/LinearProgress';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
@@ -251,6 +253,7 @@ export default () => {
                     updateInteractIconState(true);
                     updatePanelReady(true);
                     updateInteractionOutcomeState(true);
+                    updateInteractionOutcomeReady(true);
                     return;
                 }
 
@@ -266,6 +269,7 @@ export default () => {
                     updateInteractIconState(true);
                     updatePanelReady(true);
                     updateInteractionOutcomeState(true);
+                    updateInteractionOutcomeReady(true);
                     return;
                 }
 
@@ -280,6 +284,7 @@ export default () => {
                     updateInteractIconState(false);
                     updatePanelReady(true);
                     updateInteractionOutcomeState(false);
+                    updateInteractionOutcomeReady(true);
                 }
 
                 
@@ -441,10 +446,10 @@ export default () => {
 
                         <div className="card-service-large wow fadeInUp">
                             <div className="interaction_result_card_div">
-                                <h3 className="text-secondary">{nameOne}</h3>
-                                <AllInclusiveIcon style={{color: "#2ecc71", fontSize: 75}} />
+                                <h3 className="interaction-panel-text">{nameOne}</h3>
+                                <SwapCallsIcon style={{color: "#2ecc71", fontSize: 75}} />
                                 <h3></h3>
-                                <h3 className="text-secondary">{nameTwo}</h3>
+                                <h3 className="interaction-panel-text">{nameTwo}</h3>
                             </div>
                         </div>
 
@@ -458,7 +463,7 @@ export default () => {
                         <div className="card-service-large wow fadeInUp">
                             <div className="interaction_result_card_div">
                                 <h3 className="text-secondary">{nameOne}</h3>
-                                <AllInclusiveIcon style={{color: "#cc0000", fontSize: 75}} />
+                                <SwapCallsIcon style={{color: "#cc0000", fontSize: 75}} />
                                 <h3></h3>
                                 <h3 className="text-secondary">{nameTwo}</h3>
                             </div>
@@ -546,7 +551,8 @@ export default () => {
             updateImageOneLoader(false);
             updateImageTwoLoader(false);
             updatePanelStart(true);
-            updateInteractionOutcomeReady(true);
+            updatePanelReady(false);
+            updateInteractionOutcomeReady(false);
 
 
             await getInteractionMethod();
@@ -634,6 +640,7 @@ export default () => {
                                 {interactionPanel()}
                                 {interactionOutcomeAlert()}
 
+                                <Divider style={{ fontSize: 20, padding: "20px"}}></Divider>
 
                                 <Card sx={{ maxWidth: 700 }}>
                                     <CardContent>
@@ -665,9 +672,11 @@ export default () => {
                                                 Description: {interactionDescLoader ? interactionDescription : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color: "#2ecc71" }} />}
                                             </Typography>
                                             <Button size="small">Learn More</Button>
-                                            <Typography paragraph>
-                                                Please consult a health professional before taking any two substances at once
-                                            </Typography>
+                                            <Divider style={{ fontSize: 20, padding: "20px" }}></Divider>
+                                            <Alert severity="warning" variant="outlined">
+                                                <AlertTitle>Warning</AlertTitle>
+                                                Please consult a <strong>health professional</strong> before taking any two substances at once
+                                            </Alert>
                                         </CardContent>
                                     </Collapse>
                                 </Card>
