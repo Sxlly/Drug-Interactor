@@ -121,11 +121,17 @@ const useStyles = makeStyles({
     drawerListIcon: {
 
         color: "#2ecc71",
+        "&:hover,&:focus": {
+
+            color: "#555555",
+            transition: "ease-in-out 0.25s ",
+        },
     },
 
     drawerListIconText: {
 
         color: "#555555",
+        textShadow: "2px 2px rgba(85,85,85,0.15)",
     },
 
     toolCard: {
@@ -151,6 +157,13 @@ const useStyles = makeStyles({
         color: "#fff",
         backgroundColor: "#2ecc71",
         width: "100px",
+        textShadow: "2px 2px rgba(0,0,0,0.10)",
+        "&:hover,&:focus": {
+
+            backgroundColor: "#555555",
+            transition: "ease-in-out 0.25s ",
+            textShadow: "5px 5px rgba(0,0,0,0.25)",
+        },
     },
 
     profileMenuItem: {
