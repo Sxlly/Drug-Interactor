@@ -208,20 +208,6 @@ const useStyles = makeStyles({
 
     }
 
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
 });
 
 
@@ -240,6 +226,12 @@ const cards = [
         description: "The Online Tool",
         img: "https://www.svgrepo.com/show/106499/chemistry.svg",
         path: "/getInteractionPair",
+    },
+    {
+        name: "All Interactions Tool",
+        description: "The Online Tool",
+        img: "https://www.svgrepo.com/show/126805/chemistry.svg",
+        path: "/getDrugInteraction",
     },
     {
         name: "All Substances",
