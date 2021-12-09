@@ -132,6 +132,11 @@ const useStyles = makeStyles({
 
         color: "#555555",
         textShadow: "2px 2px rgba(85,85,85,0.15)",
+        "&:hover,&:focus": {
+
+            textShadow: "5px 5px rgba(85,85,85,0.20)",
+            transition: "ease-in-out 0.25s ",
+        },
     },
 
     toolCard: {
