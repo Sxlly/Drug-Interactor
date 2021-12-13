@@ -16,7 +16,6 @@ import Typography from '@mui/material/Typography';
 import "@fontsource/public-sans/600.css";
 
 
-
 //material ui CSS classes
 const useStyles = makeStyles({
 
@@ -25,6 +24,14 @@ const useStyles = makeStyles({
         alignSelf: "center",
         color: "rgba(37,115,70,1)",
         fontFamily: "Public Sans",
+        "&:hover,&:focus": {
+
+            color: "#555555",
+            transition: "ease-in-out 0.25s",
+            cursor: "pointer",
+            textShadow: "5px 5px rgba(85,85,85,0.25)",
+        },
+
 
     },
 
@@ -33,9 +40,26 @@ const useStyles = makeStyles({
         alignSelf: "center",
         color: "rgba(37,115,70,1)",
         fontFamily: "Public Sans",
+        "&:hover,&:focus": {
+
+            color: "#555555",
+            transition: "ease-in-out 0.25s",
+            cursor: "pointer",
+        },
+    },
+
+    cardImg: {
+
+        "&:hover,&:focus": {
+
+            fontSize: "75px",
+            transition: "ease-in-out 0.25s",
+            cursor: "pointer",
+        },
     },
 
 });
+
 
 
 const RootStyle = styled(Card)(({ theme }) => ({
@@ -74,7 +98,7 @@ export default function TotalDrugsCard() {
     return (
         <RootStyle>
             <IconWrapperStyle>
-                <Icon icon="eos-icons:counting" fontSize="50px" />
+                <Icon icon="eos-icons:counting" fontSize="50px" className={classes.cardImg} />
             </IconWrapperStyle>
             <Typography variant='h3' className={classes.cardValue}>
                 10000

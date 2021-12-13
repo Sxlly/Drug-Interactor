@@ -238,7 +238,13 @@ const useStyles = makeStyles({
 
         fontFamily: "Public Sans",
 
-    }
+    },
+
+    greetingsText: {
+
+        fontFamily: "Public Sans",
+        color: "#555555",
+    },
 
 });
 
@@ -468,7 +474,7 @@ function Dashboard () {
                 >
                     <Container maxWidth="xl">
                         <Box sx={{ pb: 5 }}>
-                            <Typography variant='h4'>Greetings, Welcome back</Typography>
+                            <Typography variant='h4' className={classes.greetingsText}>Greetings, Welcome back</Typography>
                         </Box>
 
                         <Grid container spacing={3}>
