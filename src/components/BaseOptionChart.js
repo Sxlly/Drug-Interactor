@@ -82,9 +82,9 @@ export default function BaseOptionChart() {
       "#2ecc71",
       "#eeff6b",
       "#1c14ff",
-      "#2ecc71" /*"#9b11f7"*/,
+      "#9b11f7",
       "#2ecc71",
-      "#2ecc71" /*#f70c0c"*/,
+      "#f70c0c",
     ],
 
     // Chart

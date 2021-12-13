@@ -10,6 +10,7 @@ import YourInteractionsCard from './components/YourInteractionsCard.js';
 import HomeCard from './components/HomeCard.js';
 import WebsiteVisitsGraph from './components/WebsiteVisitsGraph.js';
 import MostUsedDrugsGraph from './components/MostUsedDrugsGraph.js';
+import UserActivityTimeline from './components/UserActivityTimeline.js';
 
 
 //material ui imports
@@ -498,6 +499,9 @@ function Dashboard () {
                             </Grid>
                             <Grid item xs={12} md={6} lg={8}>
                                 <MostUsedDrugsGraph />
+                            </Grid>
+                            <Grid item xs={12} md={6} lg={8}>
+                                <UserActivityTimeline />
                             </Grid>
 
 
