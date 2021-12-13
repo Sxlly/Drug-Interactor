@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
+import { Icon } from '@iconify/react';
 
 
 //material ui imports
@@ -20,12 +21,18 @@ import Button from '@mui/material/Button';
 import { StyledEngineProvider } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Card, CardActions, CardContent, CardMedia, Grid, IconButton, Menu, MenuItem, Tooltip } from '@mui/material';
+import { styled } from "@mui/styles";
+import { alpha } from "@mui/material";
 
 
 //material ui icon imports
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+
+//google font imports
+import "@fontsource/advent-pro/600.css";
+import "@fontsource/public-sans/600.css";
 
 //herocons ui icon imports
 
@@ -46,7 +53,7 @@ const useStyles = makeStyles({
     
     header: {
 
-        position: "absolute",
+        position: "sticky",
         backgroundColor: "transparent",
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
@@ -130,12 +137,16 @@ const useStyles = makeStyles({
 
     drawerListIconText: {
 
-        color: "#555555",
-        textShadow: "2px 2px rgba(85,85,85,0.15)",
-        "&:hover,&:focus": {
+        "& span": {
 
-            textShadow: "5px 5px rgba(85,85,85,0.20)",
-            transition: "ease-in-out 0.25s ",
+            fontFamily: "Public Sans",
+            color: "#555555",
+            textShadow: "2px 2px rgba(85,85,85,0.10)",
+            "&:hover,&:focus": {
+
+                textShadow: "5px 5px rgba(85,85,85,0.20)",
+                transition: "ease-in-out 0.25s ",
+            },
         },
     },
 
@@ -163,6 +174,7 @@ const useStyles = makeStyles({
         backgroundColor: "#2ecc71",
         width: "100px",
         textShadow: "2px 2px rgba(0,0,0,0.10)",
+        fontFamily: "Public Sans",
         "&:hover,&:focus": {
 
             backgroundColor: "#555555",
@@ -173,6 +185,7 @@ const useStyles = makeStyles({
 
     profileMenuItem: {
 
+        fontFamily: "Public Sans",
         "&:hover": {
 
             backgroundColor: "rgba(85,85,85,0.15)",
@@ -206,11 +219,53 @@ const useStyles = makeStyles({
         },
 
 
+    },
+
+    mainTitle: {
+
+        fontFamily: "Public Sans",
+        marginBottom: "1.5rem",
+
+    },
+
+    cardText: {
+
+        fontFamily: "Public Sans",
+
     }
 
 });
 
 
+const RootStyle = styled(Card)(({ theme }) => ({
+
+    boxShadow: "none",
+    textAlign: "center",
+    padding: "20px, 0px",
+    color: "#2ecc71",
+    backgroundColor: "rgba(46,204,112,0.2)",
+    width: "250px",
+    height: "300px"
+
+}));
+
+const IconWrapperStyle = styled('div')(({ theme }) => ({
+
+    margin: "auto",
+    display: "flex",
+    borderRadius: "50%",
+    alignItems: "center",
+    width: "50px",
+    height: "50px",
+    justifyContent: "center",
+    marginBottom: "10px",
+    color: "#fff",
+    backgroundImage: `linear-gradient(135deg, ${alpha("rgba(85,85,85,0.2)", 0)} 0%, ${alpha("rgba(85,85,85,0.2)", 0.24)} 100%)`
+
+}));
+
+
+const totalSubstances = 0;
 
 
 //card constants to render to home page
@@ -275,11 +330,20 @@ function NewHomePage () {
     return (
 
         <StyledEngineProvider injectFirst>
+
             <React.Fragment>
             <div sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                height: "64px",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                position: "absolute",
+                top: "0px",
+                width: "100%",
+                zIndex: -2,
+
                 
             }}>
                 
@@ -367,6 +431,7 @@ function NewHomePage () {
 
                     </Toolbar>
                 </AppBar>
+
                 <Drawer
                     variant="permanent"
                     className={classes.sideDrawer}
@@ -440,6 +505,12 @@ function NewHomePage () {
                         marginLeft: 35,
                     }}
                 >
+                    <RootStyle>
+                        <IconWrapperStyle>
+                            <Icon icon="mdi:chemical-weapon" width={24} height={24} />
+                        </IconWrapperStyle>
+                    </RootStyle>
+
                     <Toolbar />
                     <Container maxWidth="lg" sx={{ 
                         paddingTop: (theme) => theme.spacing(4),
@@ -448,7 +519,7 @@ function NewHomePage () {
                         <div className="page-banner home-banner">
                             <div className="row align-items-center flex-wrap-reverse h-100">
                                 <div className="col-md-6 py-5 wow fadeInLeft">
-                                    <h1 className="mb-4">Welcome to Drug Interactor</h1>
+                                    <h1 className={classes.mainTitle} >Welcome to Drug Interactor</h1>
                                     <p className="text-lg text-grey mb-5">Take Substances Safely</p>
                                     <a href="/InteractionPairPage" className="btn btn-primary">Dive In</a>
                                 </div>
@@ -486,7 +557,7 @@ function NewHomePage () {
                                         square
                                     />
                                     <CardContent sx={{ flexGrow: 1 }}>
-                                        <Typography gutterBottom variant="h5" component="h2">
+                                        <Typography gutterBottom variant="h5" component="h2" className={classes.cardText}>
                                             {card.name}
                                         </Typography>
                                         <Typography>{card.description}</Typography>
@@ -502,10 +573,38 @@ function NewHomePage () {
                             </Grid>
                         ))}
                     </Grid>
-                    
 
-                    
                 </Box>
+
+                <Divider sx={{ padding: "100px" }}/>
+
+
+                
+                <footer>
+                    <Box 
+                        px={{ xs: 3, sm: 10}} 
+                        py={{ xs: 5, sm: 10}}
+                    >
+                        <Container maxWidth="lg">
+                            <Grid container spacing={5}>
+                                <Grid item xs={12} sm={4}>
+                                    <Box borderBottom={1}>Help</Box>
+                                    <Box>
+                                        <Link href="/" color='inherit'>
+                                            Contact
+                                        </Link>
+                                    </Box>
+                                    <Box>
+                                        <Link href="/" color='inherit'>
+                                            Support
+                                        </Link>
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        </Container>
+
+                    </Box>
+                </footer>
                 
 
 
