@@ -53,6 +53,7 @@ const useStyles = makeStyles({
         "&:hover,&:focus": {
 
             fontSize: "75px",
+            boxShadow: "0px 10px 0px 0px rgba(85,85,85,0.10)",
             transition: "ease-in-out 0.25s",
             cursor: "pointer",
         },

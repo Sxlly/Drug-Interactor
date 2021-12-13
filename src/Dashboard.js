@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactApexChart from 'react-apexcharts';
 import { Link } from "react-router-dom";
 import { Icon } from '@iconify/react';
 
@@ -7,6 +8,8 @@ import TotalDrugsCard from '../src/components/TotalDrugsCard.js';
 import YourDrugsCard from './components/YourDrugsCard.js';
 import YourInteractionsCard from './components/YourInteractionsCard.js';
 import HomeCard from './components/HomeCard.js';
+import WebsiteVisitsGraph from './components/WebsiteVisitsGraph.js';
+import MostUsedDrugsGraph from './components/MostUsedDrugsGraph.js';
 
 
 //material ui imports
@@ -489,6 +492,12 @@ function Dashboard () {
                             </Grid>
                             <Grid item xs={12} sm={6} md={3}>
                                 <HomeCard />
+                            </Grid>
+                            <Grid item xs={12} md={6} lg={8}>
+                                <WebsiteVisitsGraph />
+                            </Grid>
+                            <Grid item xs={12} md={6} lg={8}>
+                                <MostUsedDrugsGraph />
                             </Grid>
 
 
