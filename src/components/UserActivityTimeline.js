@@ -13,31 +13,35 @@ import {
 
 import { fDateTime } from "./formatTime.js";
 
+//google font imports
+import "@fontsource/advent-pro/600.css";
+import "@fontsource/public-sans/600.css";
+
 
 
 const timelines = [
     {
-        title: '1983, orders, $4220',
+        title: 'You Started Taking Paracetamol 500mg',
         time: faker.date.past(),
         type: 'order1'
     },
     {
-        title: '12 Invoices have been paid',
+        title: 'A New Interaction Between Your Substances',
         time: faker.date.past(),
         type: 'order2'
     },
     {
-        title: 'Order #37745 from September',
+        title: 'You Checked All Interactions Of Zoloft',
         time: faker.date.past(),
         type: 'order3'
     },
     {
-        title: 'New order placed #XF-2356',
+        title: 'You Sourced Rxcui ID For Ibuprofen',
         time: faker.date.past(),
         type: 'order4'
     },
     {
-        title: 'New order placed #XF-2346',
+        title: 'You Stopped Taking Marijuana',
         time: faker.date.past(),
         type: 'order5'
     }
@@ -69,8 +73,8 @@ function OrderItem({ item, isLast }) {
           {isLast ? null : <TimelineConnector />}
         </TimelineSeparator>
         <TimelineContent>
-          <Typography variant="subtitle2">{title}</Typography>
-          <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+          <Typography variant="subtitle2" sx={{ fontFamily: "Public Sans" }}>{title}</Typography>
+          <Typography variant="caption" sx={{ color: 'text.secondary', fontFamily: "Public Sans" }}>
             {fDateTime(time)}
           </Typography>
         </TimelineContent>

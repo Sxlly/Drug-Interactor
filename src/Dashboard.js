@@ -402,12 +402,13 @@ function Dashboard () {
                             <Grid item xs={12} md={6} lg={8}>
                                 <WebsiteVisitsGraph />
                             </Grid>
+                            <Grid item xs={12} md={6} lg={4}>
+                                <UserActivityTimeline />
+                            </Grid>
                             <Grid item xs={12} md={6} lg={8}>
                                 <MostUsedDrugsGraph />
                             </Grid>
-                            <Grid item xs={12} md={6} lg={8}>
-                                <UserActivityTimeline />
-                            </Grid>
+
 
 
 
