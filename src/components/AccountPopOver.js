@@ -32,6 +32,11 @@ const useStyles = makeStyles({
         backgroundColor: "#2ecc71",
         width: "100px",
         fontFamily: "Public Sans",
+        "&:hover,&:focus": {
+
+            backgroundColor: "#555555",
+            transition: "ease-in-out 0.25s",
+        },
     },
 
     menuItem: {
