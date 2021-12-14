@@ -5,7 +5,23 @@ import { NavLink as RouterLink, matchPath, useLocation } from 'react-router-dom'
 
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
+//google font imports
+import "@fontsource/advent-pro/600.css";
+import "@fontsource/public-sans/600.css";
+
+
+//material ui CSS classes
+const useStyles = makeStyles({
+
+    sidebarItem: {
+
+        fontFamily: "Public Sans",
+
+    },
+
+});
 
 const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(
     ({ theme }) => ({
@@ -13,8 +29,8 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
       height: 48,
       position: 'relative',
       textTransform: 'capitalize',
-      paddingLeft: "5px",
-      paddingRight: "2.5px",
+      paddingLeft: "20px",
+      paddingRight: "30px",
       color: "#555555",
       '&:before': {
         top: 0,
@@ -24,20 +40,20 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
         content: "''",
         display: 'none',
         position: 'absolute',
-        borderTopLeftRadius: 4,
-        borderBottomLeftRadius: 4,
+        borderTopLeftRadius: "4px",
+        borderBottomLeftRadius: "4px",
         backgroundColor: "#fff"
       },
     })
   );
   
-  const ListItemIconStyle = styled(ListItemIcon)({
-    width: 22,
-    height: 22,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  });
+const ListItemIconStyle = styled(ListItemIcon)({
+width: 22,
+height: 22,
+display: 'flex',
+alignItems: 'center',
+justifyContent: 'center'
+});
 
 
 DrawerItem.propTypes = {
@@ -48,6 +64,7 @@ DrawerItem.propTypes = {
 function DrawerItem({ item, active}) {
 
     const theme = useTheme();
+    const classes = useStyles();
     const isActiveRoot = active(item.path);
     const { title, path, icon, info, children } = item;
     const [open, setOpen] = useState(isActiveRoot);
@@ -57,14 +74,14 @@ function DrawerItem({ item, active}) {
       };
     
     const activeRootStyle = {
-        color: 'primary.main',
+        color: '#555555',
         fontWeight: 'fontWeightMedium',
-        bgcolor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+        bgcolor: alpha("#2ecc71", "#2ecc71"),
         '&:before': { display: 'block' }
     };
 
     const activeSubStyle = {
-        color: 'text.primary',
+        color: '#555555',
         fontWeight: 'fontWeightMedium'
     };
 
@@ -121,7 +138,7 @@ function DrawerItem({ item, active}) {
                           }}
                         />
                       </ListItemIconStyle>
-                      <ListItemText disableTypography primary={title} />
+                      <ListItemText disableTypography primary={title} className={classes.sidebarItem} />
                     </ListItemStyle>
                   );
                 })}
@@ -140,7 +157,7 @@ function DrawerItem({ item, active}) {
           }}
         >
           <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
-          <ListItemText disableTypography primary={title} />
+          <ListItemText disableTypography primary={title} className={classes.sidebarItem} />
           {info && info}
         </ListItemStyle>
     );

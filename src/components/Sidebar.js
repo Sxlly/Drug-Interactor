@@ -91,9 +91,9 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
                 }}
             >
                 <Box sx={{ px: 2.5, py: 3 }}>
-                <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
-                    <h1>DI</h1>
-                </Box>
+                    <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
+                        <img src="https://www.svgrepo.com/show/65713/pills.svg" width="60px" height="60px" alt="DI" />
+                    </Box>
                 </Box>
         
                 <Box sx={{ mb: 5, mx: 2.5 }}>
