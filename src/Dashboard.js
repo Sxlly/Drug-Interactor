@@ -264,18 +264,6 @@ function Dashboard () {
 
     const[anchorEl, setAnchorEl] = React.useState(null);
 
-    const open = Boolean(anchorEl);
-
-    const handleProfileClick = (event) => {
-
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleProfileClose = () => {
-
-        setAnchorEl(null);
-    };
-
 
     return (
 
