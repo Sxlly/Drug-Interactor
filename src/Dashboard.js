@@ -11,6 +11,8 @@ import HomeCard from './components/HomeCard.js';
 import WebsiteVisitsGraph from './components/WebsiteVisitsGraph.js';
 import MostUsedDrugsGraph from './components/MostUsedDrugsGraph.js';
 import UserActivityTimeline from './components/UserActivityTimeline.js';
+import AppBarSearch from './components/appBarSearch.js';
+import AccountPopover from './components/AccountPopOver.js';
 
 
 //material ui imports
@@ -28,7 +30,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import { StyledEngineProvider } from '@mui/material';
+import { Stack, StyledEngineProvider } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Card, CardActions, CardContent, CardMedia, Grid, IconButton, Menu, MenuItem, Tooltip } from '@mui/material';
 import { styled } from "@mui/styles";
@@ -67,7 +69,8 @@ const useStyles = makeStyles({
         backgroundColor: "transparent",
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
-        boxShadow: "0px 0px 0px 0px"
+        boxShadow: "none",
+        backdropFilter: "blur(6px)",
     },
 
     headerToolBar: {
@@ -252,35 +255,6 @@ const useStyles = makeStyles({
 
 });
 
-const RootStyle = styled(Card)(({ theme }) => ({
-
-    boxShadow: "none",
-    textAlign: "center",
-    padding: "50px",
-    color: "#2ecc71",
-    backgroundColor: "rgba(46,204,112,0.5)",
-    width: "250px",
-    height: "300px"
-
-}));
-
-const IconWrapperStyle = styled('div')(({ theme }) => ({
-
-    margin: "auto",
-    display: "flex",
-    borderRadius: "50%",
-    alignItems: "center",
-    width: "100px",
-    height: "100px",
-    justifyContent: "center",
-    marginBottom: "10px",
-    color: "rgba(37,115,70,1)",
-    backgroundImage: `linear-gradient(135deg, ${alpha("rgba(37,115,70,0.5)", 0)} 0%, ${alpha("rgba(46,204,112,0.5)", 0.24)} 100%)`
-
-}));
-
-
-const totalSubstances = 0;
 
 
 function Dashboard () {
@@ -321,85 +295,16 @@ function Dashboard () {
 
                 <AppBar className={classes.header}>
                     <Toolbar className={classes.headerToolBar}>
-                        <IconButton 
-                            onClick={handleProfileClick} 
-                            size="large" 
-                            edge="start"
-                            className={classes.iconButtonProfile}
-                        >
-                            <Avatar className={classes.avatarIcon}>S</Avatar>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            className={classes.iconButtonNotification}
-                        >
-                            <svg width="30px" height="30px" fill="none" stroke="#555555" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                        </IconButton>
+
                         <a href="/newHomePage" className="navbar-brand">Drug<span className="text-primary">Interactor</span></a>
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleProfileClose}
-                            onClick={handleProfileClose}
-                            PaperProps={{
-                                elevation: 0,
-                                sx: {
 
-                                    overflow: 'visible',
-                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0.32))',
-                                    mt: 1.5,
-                                    '& .MuiAvatar-root': {
+                        <AppBarSearch />
+                        <Box sx={{ flexGrow: 1 }} />
 
-                                        width: 32,
-                                        height: 32,
-                                        ml: -0.5,
-                                        mr: 1,
+                        <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+                            <AccountPopover />
+                        </Stack>
 
-                                    },
-                                    '&:before': {
-
-                                        content: '""',
-                                        display: 'block',
-                                        position: 'absolute',
-                                        top: 0,
-                                        right: 14,
-                                        width: 10,
-                                        height: 10,
-                                        bgcolor: 'background.paper',
-                                        transform: 'translateY(-50%) rotate(45deg)',
-                                        zIndex: 0,
-                                    },
-                                },
-                            }}
-                            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                        >
-                            <MenuItem className={classes.profileMenuItem}>
-                                <Avatar className={classes.profileMenuTopIcons} /> Profile
-                            </MenuItem>
-                            <MenuItem className={classes.profileMenuItem}>
-                                <Avatar className={classes.profileMenuTopIcons}/> My Account
-                            </MenuItem>
-                            <Divider />
-                            <MenuItem className={classes.profileMenuItem}>
-                                <ListItemIcon>
-                                    <PersonAdd fontSize="small" className={classes.profileMenuBottomIcons}/>
-                                </ListItemIcon>
-                                Add another account
-                            </MenuItem>
-                            <MenuItem className={classes.profileMenuItem}>
-                                <ListItemIcon>
-                                    <Settings fontSize="small" className={classes.profileMenuBottomIcons} />
-                                </ListItemIcon>
-                                Settings
-                            </MenuItem>
-                            <MenuItem className={classes.profileMenuItem}>
-                                <ListItemIcon>
-                                    <Logout fontSize="small" className={classes.profileMenuBottomIcons}/>
-                                </ListItemIcon>
-                                Logout
-                            </MenuItem>
-                        </Menu>
 
                     </Toolbar>
                 </AppBar>
