@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(
     ({ theme }) => ({
       ...theme.typography.body2,
-      height: 48,
+      height: "48px",
       position: 'relative',
       textTransform: 'capitalize',
       paddingLeft: "20px",

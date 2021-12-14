@@ -1,20 +1,23 @@
 import React from "react";
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { ThemeProvider } from '@mui/styles';
+//importing pages
+import InteractionPairPage from "./getInteractionPair";
+import NewHomePage from "./newHomePage";
 
-function App() {
-  return (
+
+
+
+
+
+const App = () => (
+
+  <ThemeProvider theme={theme}>
     <div className="App">
-      <Router>
-        <Switch>
 
-
-
-
-        </Switch>
-      </Router>
     </div>
-  );
-}
+  </ThemeProvider>
+)
 
 export default App;

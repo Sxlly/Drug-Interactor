@@ -297,8 +297,6 @@ function Dashboard () {
                 <AppBar className={classes.header}>
                     <Toolbar className={classes.headerToolBar}>
 
-                        <a href="/newHomePage" className="navbar-brand">Drug<span className="text-primary">Interactor</span></a>
-
                         <AppBarSearch />
                         <Box sx={{ flexGrow: 1 }} />
 
