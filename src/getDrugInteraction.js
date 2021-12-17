@@ -6,6 +6,11 @@ import './bootstrap.css';
 import './theme.css';
 import * as ReactBootStrap from "react-bootstrap";
 
+//importing self made components
+import AppBarSearch from './components/appBarSearch';
+import AccountPopover from './components/AccountPopOver';
+import DashboardSidebar from './components/Sidebar';
+
 //Material UI Icon Imports
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PersonAdd from '@mui/icons-material/PersonAdd';
@@ -34,12 +39,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import { StyledEngineProvider } from '@mui/material';
+import { Stack, StyledEngineProvider } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Card, CardActions, CardContent, CardMedia, Grid } from '@mui/material';
 
 
-
+//google font imports
+import "@fontsource/advent-pro/600.css";
+import "@fontsource/public-sans/600.css";
 
 
 
@@ -221,6 +228,70 @@ const useStyles = makeStyles({
         },
 
 
+    },
+
+    drugInteractionTitle: {
+
+        color: "#555555",
+        fontSize: "32px",
+        fontFamily: "Public Sans",
+
+
+    },
+
+    drugInteractionSubTitle: {
+
+        color: "#555555",
+        fontSize: "20px",
+        fontFamily: "Public Sans",
+    },
+
+    drugInteractionNameInput: {
+
+        border: "0",
+        background: "none",
+        display: "block",
+        margin: "20px auto",
+        textAlign: "center",
+        border: "2px solid #555555",
+        padding: "14px 10px",
+        width: "200px",
+        outline: "none",
+        color: "#555555",
+        borderRadius: "24px",
+        transition: "ease-in-out 0.25s",
+
+        "&:focus": {
+
+            width: "280px",
+            borderColor: "#2ecc71",
+        },
+    },
+
+    rxcuiAnswer: {
+
+        fontSize: "12px",
+        fontFamily: "Public Sans",
+        color: "#555555",
+        cursor: "pointer",
+        borderRadius: "24px",
+        margin: "10px",
+        padding: "10px",
+    },
+
+    listParagraphs: {
+
+        fontFamily: "Public Sans",
+        color: "#555555",
+
+
+    },
+
+    listDrugName: {
+
+        fontFamily: "Public Sans",
+        color: "#555555",
+
     }
 
 });
@@ -336,7 +407,7 @@ function AllInteractions () {
             for (var index = 0; index < getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length-1; index++) {
 
                 interactionsArray[index] = getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair[index];
-                staticInteractionsList[index] = interactionsArray[index].interactionConcept[1].minConceptItem.name;
+                staticInteractionsList[index] = [interactionsArray[index].interactionConcept[1].minConceptItem.name, interactionsArray[index].description];
                 
             }
 
@@ -377,10 +448,10 @@ function AllInteractions () {
 
                 <Accordion>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>{Interaction}</Typography>
+                        <Typography className={classes.listDrugName}>{Interaction[0]}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>Description...</Typography>
+                        <Typography>Description: {Interaction[1]}</Typography>
                     </AccordionDetails>
                 </Accordion>
             );
@@ -492,153 +563,17 @@ function AllInteractions () {
                 
                 <AppBar className={classes.header}>
                     <Toolbar className={classes.headerToolBar}>
-                        <IconButton 
-                            onClick={handleProfileClick} 
-                            size="large" 
-                            edge="start"
-                            className={classes.iconButtonProfile}
-                        >
-                            <Avatar className={classes.avatarIcon}>S</Avatar>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            className={classes.iconButtonNotification}
-                        >
-                            <svg width="30px" height="30px" fill="none" stroke="#555555" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                        </IconButton>
-                        <a href="/newHomePage" className="navbar-brand">Drug<span className="text-primary">Interactor</span></a>
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleProfileClose}
-                            onClick={handleProfileClose}
-                            PaperProps={{
-                                elevation: 0,
-                                sx: {
+                        <AppBarSearch />
+                        <Box sx={{ flexGrow: 1 }} />
 
-                                    overflow: 'visible',
-                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0.32))',
-                                    mt: 1.5,
-                                    '& .MuiAvatar-root': {
-
-                                        width: 32,
-                                        height: 32,
-                                        ml: -0.5,
-                                        mr: 1,
-
-                                    },
-                                    '&:before': {
-
-                                        content: '""',
-                                        display: 'block',
-                                        position: 'absolute',
-                                        top: 0,
-                                        right: 14,
-                                        width: 10,
-                                        height: 10,
-                                        bgcolor: 'background.paper',
-                                        transform: 'translateY(-50%) rotate(45deg)',
-                                        zIndex: 0,
-                                    },
-                                },
-                            }}
-                            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                        >
-                            <MenuItem className={classes.profileMenuItem}>
-                                <Avatar className={classes.profileMenuTopIcons} /> Profile
-                            </MenuItem>
-                            <MenuItem className={classes.profileMenuItem}>
-                                <Avatar className={classes.profileMenuTopIcons}/> My Account
-                            </MenuItem>
-                            <Divider />
-                            <MenuItem className={classes.profileMenuItem}>
-                                <ListItemIcon>
-                                    <PersonAdd fontSize="small" className={classes.profileMenuBottomIcons}/>
-                                </ListItemIcon>
-                                Add another account
-                            </MenuItem>
-                            <MenuItem className={classes.profileMenuItem}>
-                                <ListItemIcon>
-                                    <Settings fontSize="small" className={classes.profileMenuBottomIcons} />
-                                </ListItemIcon>
-                                Settings
-                            </MenuItem>
-                            <MenuItem className={classes.profileMenuItem}>
-                                <ListItemIcon>
-                                    <Logout fontSize="small" className={classes.profileMenuBottomIcons}/>
-                                </ListItemIcon>
-                                Logout
-                            </MenuItem>
-                        </Menu>
-
+                        <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+                            <AccountPopover />
+                        </Stack>
                     </Toolbar>
                 </AppBar>
-                <Drawer
-                    variant="permanent"
-                    className={classes.sideDrawer}
-                >
-                    <Toolbar />
-                    <Box className={classes.sideDrawerBox}>    
-                        <List>
 
-                            <Link to={"/newHomePage"} className={classes.pageLink}>
-                                <ListItem button key={'Home'} className={classes.drawerListItem}>
-                                    <ListItemIcon className={classes.drawerListIcon}>
-                                        <svg width="30px" height="30px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-                                    </ListItemIcon>
-                                    <ListItemText primary={'Home'}  className={classes.drawerListIconText} />
-                                </ListItem>
-                            </Link>
+                <DashboardSidebar />
 
-                            <Link to={"/getInteractionPair"} className={classes.pageLink}>
-                                <ListItem button key={'Interaction Pair Tool'} className={classes.drawerListItem}>
-                                    <ListItemIcon className={classes.drawerListIcon}>
-                                        <svg width="30px" height="30px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
-                                    </ListItemIcon>
-                                    <ListItemText primary={'Interaction Pair Tool'} className={classes.drawerListIconText} />
-                                </ListItem>
-                            </Link>
-
-                            <Link to={"/getDrugInteraction"} className={classes.pageLink}>
-                                <ListItem button key={'All Interactions Tool'} className={classes.drawerListItem}>
-                                    <ListItemIcon className={classes.drawerListIcon}>
-                                        <svg width="30px" height="30px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                                    </ListItemIcon>
-                                    <ListItemText primary={'All Interactions Tool'} className={classes.drawerListIconText}/>
-                                </ListItem>
-                            </Link>
-
-                            <Link to={"/AllDrugTerms"} className={classes.pageLink}>
-                                <ListItem button key={'All Substances'} className={classes.drawerListItem}>
-                                    <ListItemIcon className={classes.drawerListIcon}>
-                                        <svg width="30px" height="30px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
-                                    </ListItemIcon>
-                                    <ListItemText primary={'All Substances'} className={classes.drawerListIconText} />
-                                </ListItem>
-                            </Link>
-
-                            <Link to={"/getRxcuiId"} className={classes.pageLink}>
-                                <ListItem button key={'Rxcui ID Finder Tool'} className={classes.drawerListItem}>
-                                    <ListItemIcon className={classes.drawerListIcon}>
-                                        <svg width="30px" height="30px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" /></svg>
-                                    </ListItemIcon>
-                                    <ListItemText primary={'Rxcui ID Finder Tool'} className={classes.drawerListIconText} />
-                                </ListItem>
-                            </Link>
-
-                            <Link to={"/drug3dtest"} className={classes.pageLink}>
-                                <ListItem button key={'Molecule View Tool'} className={classes.drawerListItem}>
-                                    <ListItemIcon className={classes.drawerListIcon}>
-                                        <svg width="30px" height="30px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                                    </ListItemIcon>
-                                    <ListItemText primary={'Molecule View Tool'} className={classes.drawerListIconText}/>
-                                </ListItem>
-                            </Link>
-                        </List>
-                        <Divider />
-                    </Box>
-                </Drawer>
                 <Box
                     component="main"
                     sx={{
@@ -653,11 +588,11 @@ function AllInteractions () {
                         <div className="container">
                             <div className="card-service-large wow fadeInUp">
                                 <form  onSubmit={onSubmit}>
-                                    <h1 className="rxcui-header">Drug Interactions</h1>
-                                    <h2 className="rxcui-subheader">subheader</h2>
+                                    <h1 className={classes.drugInteractionTitle}>Drug Interactions</h1>
+                                    <h2 className={classes.drugInteractionSubTitle}>subheader</h2>
 
                                     <input
-                                        className="rxcui-name-input"
+                                        className={classes.drugInteractionNameInput}
                                         id="nameOne"
                                         name="name"
                                         type="text"
@@ -666,11 +601,11 @@ function AllInteractions () {
                                         onChange={(event) => nameChangeOne(event.target.value)}
                                     />
 
-                                    <button type="submit" className="btn btn-primary">Find</button>
+                                    <button type="submit" className={classes.toolCardBtn}>Find</button>
 
                                     {alertMethod()}
 
-                                    <p className="rxcui-answer">Rxcui ID: { rxcuiIDLoader ? rxcuiID : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color:"#2ecc71" }}/> }</p>
+                                    <p className={classes.rxcuiAnswer}>Rxcui ID: { rxcuiIDLoader ? rxcuiID : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color:"#2ecc71" }}/> }</p>
 
                                     <div className="card-service-large-structures wow fadeInUp">
                                         {structureMethod()}
@@ -679,8 +614,8 @@ function AllInteractions () {
 
 
 
-                                    <p className="">{nameOne} Interacts With The Following</p>
-                                    <p className="">Total Number of Drugs {nameOne} Interacts With: { interactionCountLoader ? interactionCount : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color:"#2ecc71"}}/> }</p>
+                                    <p className={classes.listParagraphs}>{nameOne} Interacts With The Following</p>
+                                    <p className={classes.listParagraphs}>Total Number of Drugs {nameOne} Interacts With: { interactionCountLoader ? interactionCount : <ReactBootStrap.Spinner animation="border" size="sm" style={{ color:"#2ecc71"}}/> }</p>
 
                                     {loadingFunction()}
 
