@@ -39,6 +39,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import { TextField } from "@mui/material";
 import { Stack, StyledEngineProvider } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Card, CardActions, CardContent, CardMedia, Grid } from '@mui/material';
@@ -248,24 +249,12 @@ const useStyles = makeStyles({
 
     drugInteractionNameInput: {
 
-        border: "0",
-        background: "none",
         display: "block",
         margin: "20px auto",
         textAlign: "center",
-        border: "2px solid #555555",
         padding: "14px 10px",
-        width: "200px",
-        outline: "none",
-        color: "#555555",
-        borderRadius: "24px",
-        transition: "ease-in-out 0.25s",
-
-        "&:focus": {
-
-            width: "280px",
-            borderColor: "#2ecc71",
-        },
+        width: "250px",
+        
     },
 
     rxcuiAnswer: {
@@ -291,8 +280,26 @@ const useStyles = makeStyles({
 
         fontFamily: "Public Sans",
         color: "#555555",
+        "&:hover,&:focus": {
 
-    }
+            color: "#2ecc71",
+            transition: "ease-in-out 0.25s",
+            textShadow: "5px 5px 2px rgba(85,85,85,0.45)",
+        },
+
+    },
+
+    listDrugDescription: {
+
+        color: "#555555",
+        fontFamily: "Public Sans",
+    },
+
+    moleculeStructureText: {
+
+        fontFamily: "Public Sans",
+        color: "#555555",
+    },
 
 });
 
@@ -317,25 +324,12 @@ function AllInteractions () {
     const [imageLoader, updateImageLoader] = useState(true);
     const [imageAlert, updateImageAlert] = useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [officialChemicalName, updateOfficialChemicalName] = useState("");
 
-    //profile menu status constant
-    const open = Boolean(anchorEl);
 
-    //constant method to handle profile menu onClick
-    const handleProfileClick = (event) => {
-
-        setAnchorEl(event.currentTarget);
-    };
-
-    //constant method to handle profile menu close
-    const handleProfileClose = () => {
-
-        setAnchorEl(null);
-    };
-
-    //function to update nameOne state 
-    function nameChangeOne(enteredName) {
-        updateNameOne(enteredName);
+    //constant method to update value of nameOne => onChange()
+    const nameChangeOne = event => {
+        updateNameOne(event.target.value);
     };
 
 
@@ -356,6 +350,8 @@ function AllInteractions () {
             updateRxcuiIDLoader(true);
 
             var passableRxcui = getRxcuiIDData.idGroup.rxnormId[0];
+            var altPassableRxcui = getRxcuiIDData.idGroup.rxnormId[1];
+            var NameOnePassable = getRxcuiIDData.idGroup.name.toLowerCase();
             
         }
 
@@ -365,42 +361,53 @@ function AllInteractions () {
             updateRxcuiID("No Match...");
             updateRxcuiIDLoader(true);
             updateShow(true);
-            return;
+            var passableRxcui = null;
+            var altPassableRxcui = null;
+            var NameOnePassable = null;
+            
+            
             
         }
 
-        return passableRxcui;
+        return {
+
+            passableRxcuiMain: passableRxcui,
+            passableRxcuiAlt: altPassableRxcui,
+            passableNameOne: NameOnePassable,
+
+        };
     }
 
     //asynchronus method to get all interactions of drug in search bar
     async function getInteractionsMethod() {
 
         var rxcui = await getRxcuiIDMethod();
+        var mainRxcui = rxcui.passableRxcuiMain;
+        var altRxcui = rxcui.passableRxcuiAlt;
+        var drugName = rxcui.passableNameOne;
 
-        if (rxcui !== undefined) {
+        if (mainRxcui && drugName !== undefined) {
 
-            const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcui}&sources=${source}`;
+            const getInteractionsAPI = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${mainRxcui}&sources=${source}`;
             const getInteractionsResponse = await fetch(getInteractionsAPI)
-            const getInteractionsData = await getInteractionsResponse.json();
-
-            const getStructureAPI = `https://cactus.nci.nih.gov/chemical/structure/${nameOne.toLowerCase()}/image`;
+            var getInteractionsData = await getInteractionsResponse.json();
+            
+            const getStructureAPI = `https://cactus.nci.nih.gov/chemical/structure/${drugName}/image`;
             const getStructureAPIResponse = await fetch(getStructureAPI)
             const getStructureAPIData = await getStructureAPIResponse;
+
+            console.log(getStructureAPIData);
+            updateImage(getStructureAPIData.url);
             
             const interactionsArray = [];
             const staticInteractionsList = [];
 
-            console.log(interactionsArray);
-            console.log(getInteractionsData);
-            console.log(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
-            console.log(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair);
-
             updateInteractionCount(getInteractionsData.interactionTypeGroup[0].interactionType[0].interactionPair.length);
             updateInteractionCountLoader(true);
-            updateImage(getStructureAPIData.url);
 
             if (getStructureAPIData.ok == false) {
 
+                console.log("Molecule Structure Not Found...");
                 updateImageAlert(true);
             }
 
@@ -412,13 +419,11 @@ function AllInteractions () {
             }
 
             updateInteractionsList(staticInteractionsList);
+            updateOfficialChemicalName(interactionsArray[0].interactionConcept[0].minConceptItem.name);
             updateInteractionLoader(true);
             updateImageLoader(true);
-
-
             return;
         }
-
         else {
 
             console.log("Did not progress!");
@@ -426,12 +431,11 @@ function AllInteractions () {
             updateImageLoader(true);
             return;
         }
+            
+
+        
     }
 
-    function interactionClicked() {
-
-        alert("Item Clicked");
-    }
 
     //constant loading all interactions of drug method
     const loadingFunction = () => {
@@ -451,7 +455,7 @@ function AllInteractions () {
                         <Typography className={classes.listDrugName}>{Interaction[0]}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>Description: {Interaction[1]}</Typography>
+                        <Typography className={classes.listDrugDescription}>Description: {Interaction[1]}</Typography>
                     </AccordionDetails>
                 </Accordion>
             );
@@ -486,7 +490,7 @@ function AllInteractions () {
                         </ReactBootStrap.Alert>
                     </div>
                     <div className="body">
-                        <h5 className="text-secondary">{nameOne}</h5>
+                        <h5 className={classes.moleculeStructureText}>{nameOne}</h5>
                     </div>
                 </div>
             );
@@ -503,7 +507,7 @@ function AllInteractions () {
                             <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
                         </div>
                         <div className="body">
-                            <h5 className="text-secondary">{nameOne}</h5>
+                            <h5 className={classes.moleculeStructureText}>{nameOne}</h5>
                         </div>
                     </div>
                 );
@@ -518,7 +522,8 @@ function AllInteractions () {
                             <img src={image} alt="" />
                         </div>
                         <div className="body">
-                            <h5 className="text-secondary">{nameOne}</h5>
+                            <h5 className={classes.moleculeStructureText}>{nameOne}</h5>
+                            <Typography>{officialChemicalName}</Typography>
                         </div>
                     </div>
 
@@ -535,11 +540,14 @@ function AllInteractions () {
 
         (async () => {
 
+            updateOfficialChemicalName("");
             updateInteractionLoader(false);
             updateInteractionCountLoader(false);
             updateRxcuiIDLoader(false);
             updateImageLoader(false);
             updateShow(false);
+
+            console.log(nameOne);
 
             await getInteractionsMethod();
             console.log("Waited!");
@@ -589,19 +597,16 @@ function AllInteractions () {
                             <div className="card-service-large wow fadeInUp">
                                 <form  onSubmit={onSubmit}>
                                     <h1 className={classes.drugInteractionTitle}>Drug Interactions</h1>
-                                    <h2 className={classes.drugInteractionSubTitle}>subheader</h2>
+                                    <h2 className={classes.drugInteractionSubTitle}>Find all substances the entered substance name interacts with</h2>
 
-                                    <input
+                                    <TextField
                                         className={classes.drugInteractionNameInput}
-                                        id="nameOne"
-                                        name="name"
-                                        type="text"
-                                        placeholder="Enter Drug Name..."
+                                        label="Enter Drug Name..."
                                         value={nameOne}
-                                        onChange={(event) => nameChangeOne(event.target.value)}
+                                        onChange={nameChangeOne}
                                     />
 
-                                    <button type="submit" className={classes.toolCardBtn}>Find</button>
+                                    <Button type="submit" className={classes.toolCardBtn}>Find</Button>
 
                                     {alertMethod()}
 

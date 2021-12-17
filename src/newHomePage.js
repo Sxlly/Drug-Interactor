@@ -242,32 +242,7 @@ const useStyles = makeStyles({
 });
 
 
-const RootStyle = styled(Card)(({ theme }) => ({
 
-    boxShadow: "none",
-    textAlign: "center",
-    padding: "20px, 0px",
-    color: "#2ecc71",
-    backgroundColor: "rgba(46,204,112,0.2)",
-    width: "250px",
-    height: "300px"
-
-}));
-
-const IconWrapperStyle = styled('div')(({ theme }) => ({
-
-    margin: "auto",
-    display: "flex",
-    borderRadius: "50%",
-    alignItems: "center",
-    width: "50px",
-    height: "50px",
-    justifyContent: "center",
-    marginBottom: "10px",
-    color: "#fff",
-    backgroundImage: `linear-gradient(135deg, ${alpha("rgba(85,85,85,0.2)", 0)} 0%, ${alpha("rgba(85,85,85,0.2)", 0.24)} 100%)`
-
-}));
 
 
 
