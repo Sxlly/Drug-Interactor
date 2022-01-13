@@ -18,6 +18,13 @@ const useStyles = makeStyles({
     sidebarItem: {
 
         fontFamily: "Public Sans",
+        color: "#555555",
+        "&:hover,&:focus": {
+
+          color: "#2ecc71",
+          transition: "ease-in-out 0.25s",
+          cursor: "pointer",
+        },
 
     },
 
@@ -52,7 +59,15 @@ width: 22,
 height: 22,
 display: 'flex',
 alignItems: 'center',
-justifyContent: 'center'
+justifyContent: 'center',
+color: "#555555",
+"&:hover,&:focus": {
+
+  color: "#2ecc71",
+  transition: "ease-in-out 0.25s",
+  cursor: "pointer",
+},
+
 });
 
 
