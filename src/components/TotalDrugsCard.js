@@ -14,6 +14,8 @@ import Typography from '@mui/material/Typography';
 
 //fontsource google font imports
 import "@fontsource/public-sans/600.css";
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 
 //material ui CSS classes
@@ -90,11 +92,28 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 }));
 
-const totalSubstances = 0;
-
 export default function TotalDrugsCard() {
 
     const classes = useStyles();
+
+    const [drugCount, updateDrugCount] = useState("0");
+
+    useEffect(() => {
+
+        fetch(`https://rxnav.nlm.nih.gov/REST/displaynames.json`)
+            .then(results => results.json())
+            .then(data => {
+
+                updateDrugCount(data.displayTermsList.term.length);
+            });
+
+
+        return;
+    });
+
+    
+
+
 
     return (
         <RootStyle>
@@ -102,7 +121,7 @@ export default function TotalDrugsCard() {
                 <Icon icon="eos-icons:counting" fontSize="50px" className={classes.cardImg} />
             </IconWrapperStyle>
             <Typography variant='h3' className={classes.cardValue}>
-                10000
+                {drugCount}
             </Typography>
             <Typography variant="subtitle2" className={classes.cardText}>
                 Total Substances
