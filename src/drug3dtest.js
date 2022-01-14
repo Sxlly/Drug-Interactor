@@ -1,16 +1,319 @@
 import React, { Component, useState } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import './getDrugInteractionCSS.css';
 import './bootstrap.css';
 import './theme.css';
 import * as ReactBootStrap from "react-bootstrap";
 
-//Material UI Imports
+//importing self made components
+import AppBarSearch from './components/appBarSearch';
+import AccountPopover from './components/AccountPopOver';
+import DashboardSidebar from './components/Sidebar';
+
+
+//Material UI Imports\
 import Alert from '@mui/material/Alert';
-import LinearProgress from '@mui/material/LinearProgress';
-import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
+import { TextField } from "@mui/material";
+import { Stack, StyledEngineProvider } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { Card, CardActions, CardContent, CardMedia, Grid } from '@mui/material';
 
 
-export default () => {
+//google font imports
+import "@fontsource/advent-pro/600.css";
+import "@fontsource/public-sans/600.css";
+import { fontFamily } from "@mui/system";
+
+//sidebar width constant
+const drawerWidth = 240;
+
+
+//material ui CSS classes
+const useStyles = makeStyles({
+
+    root: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+
+    },
+    
+    header: {
+
+        position: "absolute",
+        backgroundColor: "transparent",
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+        boxShadow: "0px 0px 0px 0px"
+    },
+
+    headerToolBar: {
+
+        width: "80%",
+        margin: "0 auto",
+    },
+
+    iconButtonProfile : {
+
+        ml: "2",
+        position: "absolute",
+        right: "-100px",
+    },
+
+    avatarIcon: {
+
+        width: "35px",
+        height: "35px",
+        backgroundColor: "#2ecc71",
+        "&:hover,&:focus": {
+
+            backgroundColor: "#555555",
+            transition: "ease-in-out 0.25s ",
+        },
+
+    },
+
+    iconButtonNotification: {
+
+        ml: "2",
+        position: "absolute",
+        right: "-50px",
+        "&:hover,&:focus": {
+
+            color: "#2ecc71",
+            transition: "ease-in-out 0.25s ",
+        },
+
+    },
+
+    sideDrawer: {
+
+        width: drawerWidth,
+        flexShrink: "0",
+        [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+    },
+
+    sideDrawerBox: {
+
+        overflow: "auto",
+    },
+
+    pageLink: {
+
+        textDecoration: "none",
+        "&:focus,&:hover": {
+
+            textDecoration: "none",
+        },
+    },
+
+    drawerListItem: {
+
+        padding: "20px",
+    },
+
+    drawerListIcon: {
+
+        color: "#2ecc71",
+        "&:hover,&:focus": {
+
+            color: "#555555",
+            transition: "ease-in-out 0.25s ",
+        },
+    },
+
+    drawerListIconText: {
+
+        color: "#555555",
+        textShadow: "2px 2px rgba(85,85,85,0.15)",
+        "&:hover,&:focus": {
+
+            textShadow: "5px 5px rgba(85,85,85,0.20)",
+            transition: "ease-in-out 0.25s ",
+        },
+    },
+
+    toolCard: {
+
+        display: "flex",
+        flexDirection: "column",
+        borderRadius: "20px",
+        boxShadow: "2px 2px 2px 2px rgba(0,0,0,0.025)",
+        backgroundColor: "rgba(0,0,0,0.05)",
+        alignItems: "center",
+        width: "250px",
+        height: "350px",
+    },
+
+    toolCardMedia: {
+
+        paddingTop: "10%",
+        width: "125px",
+    },
+
+    toolCardBtn: {
+
+        color: "#fff",
+        backgroundColor: "#2ecc71",
+        width: "100px",
+        textShadow: "2px 2px rgba(0,0,0,0.10)",
+        "&:hover,&:focus": {
+
+            backgroundColor: "#555555",
+            transition: "ease-in-out 0.25s ",
+            textShadow: "5px 5px rgba(0,0,0,0.25)",
+        },
+    },
+
+    profileMenuItem: {
+
+        "&:hover": {
+
+            backgroundColor: "rgba(85,85,85,0.15)",
+        },
+
+
+    },
+
+    profileMenuTopIcons: {
+
+        color: "#fff",
+        backgroundColor: "#2ecc71",
+        "&:hover,&:focus": {
+
+            backgroundColor: "#555555",
+            transition: "ease-in-out 0.25s ",
+        },
+
+
+
+    },
+
+
+    profileMenuBottomIcons: {
+
+        color: "#555555",
+        "&:hover,&:focus": {
+
+            color: "#2ecc71",
+            transition: "ease-in-out 0.25s ",
+        },
+
+
+    },
+
+    drugInteractionTitle: {
+
+        color: "#555555",
+        fontSize: "32px",
+        fontFamily: "Public Sans",
+
+
+    },
+
+    drugInteractionSubTitle: {
+
+        color: "#555555",
+        fontSize: "20px",
+        fontFamily: "Public Sans",
+    },
+
+    drugInteractionNameInput: {
+
+        display: "block",
+        margin: "20px auto",
+        textAlign: "center",
+        padding: "14px 10px",
+        width: "250px",
+        
+    },
+
+    rxcuiAnswer: {
+
+        fontSize: "12px",
+        fontFamily: "Public Sans",
+        color: "#555555",
+        cursor: "pointer",
+        borderRadius: "24px",
+        margin: "10px",
+        padding: "10px",
+    },
+
+    listParagraphs: {
+
+        fontFamily: "Public Sans",
+        color: "#555555",
+
+
+    },
+
+    listDrugName: {
+
+        fontFamily: "Public Sans",
+        color: "#555555",
+        "&:hover,&:focus": {
+
+            color: "#2ecc71",
+            transition: "ease-in-out 0.25s",
+            textShadow: "5px 5px 2px rgba(85,85,85,0.45)",
+        },
+
+    },
+
+    listDrugDescription: {
+
+        color: "#555555",
+        fontFamily: "Public Sans",
+    },
+
+    moleculeStructureText: {
+
+        fontFamily: "Public Sans",
+        color: "#555555",
+    },
+
+
+    inputFieldStyle: {
+
+        display: "block",
+        margin: "20px auto",
+        textAlign: "center",
+        padding: "14px 10px",
+        width: "250px",
+
+        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#555555"
+        },
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "rgba(46, 204, 112, 0.5)"
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "rgba(46, 204, 112, 1)"
+        },
+        "& .MuiFormLabel-root.Mui-root": {
+            color: "#555555"
+        },
+        "&:hover .MuiFormLabel-root.Mui-root": {
+            color: "#2eec71"
+
+        },
+        "& .MuiFormLabel-root.Mui-focused": {
+            color: "#2ecc71"
+        },
+
+    },
+
+});
+
+function GetMoleculeStructure () {
+
+    const classes = useStyles();
 
     //variables using this.state functionality
     const[nameOne, updateNameOne] = useState("");
@@ -18,20 +321,15 @@ export default () => {
     const[moleculeImageAlert, updateMoleculeImageAlert] = useState(false);
     const[moleculeImageLoader, updateMoleculeImageLoader] = useState(false);
 
-
-
-
-    //function to update nameOne state(value)
-    function nameChangeOne(enteredName) {
-
-        updateNameOne(enteredName);
+    const nameChangeOne = event => {
+        updateNameOne(event.target.value);
     };
 
-    //asynchronus function to get 2D Molecule Structure from API call => cactus database
-    async function getMoleculeStructure() {
+    async function getMoleculeStructureAPI() {
 
+        
         const getMolecule = `http://cactus.nci.nih.gov/chemical/structure/${nameOne.toLowerCase()}/image`;
-        const getMoleculeResponse = await fetch(getMolecule);
+        const getMoleculeResponse = await fetch(getMolecule)
         const getMoleculeData = await getMoleculeResponse;
 
         updateMoleculeImage(getMoleculeData.url);
@@ -42,12 +340,10 @@ export default () => {
         }
 
         updateMoleculeImageLoader(true);
-
         return;
     }
 
     const showMoleculeMethod = () => {
-
 
         if (moleculeImageAlert == true) {
 
@@ -68,6 +364,7 @@ export default () => {
 
         else {
 
+            
             if (moleculeImageLoader == true) {
 
                 return (
@@ -97,109 +394,94 @@ export default () => {
                     </div>
                 );
             }
+
+
         }
     }
-
-
 
     const onSubmit = event => {
 
         event.preventDefault();
+        updateMoleculeImageAlert(false);
+        updateMoleculeImageLoader(false);
 
         (async () => {
 
-            updateMoleculeImageAlert(false);
-            updateMoleculeImageLoader(false);
-
-            await getMoleculeStructure();
+            await getMoleculeStructureAPI();
             console.log("Waited!");
-
         })();
     }
 
 
-    //main return method
     return (
+
         
-        <div>
+        <StyledEngineProvider injectFirst>
+            <div sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
 
-            
-                <nav className="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
-                    <div className="container">
-                        <a href="/HomePage" className="navbar-brand">Drug<span className="text-primary">Interactor</span></a>
+                <AppBar className={classes.header}>
+                    <Toolbar className={classes.headerToolBar}>
+                        <AppBarSearch />
+                        <Box sx={{ flexGrow: 1 }} />
 
-                        <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
+                        <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+                            <AccountPopover />
+                        </Stack>
+                    </Toolbar>
+                </AppBar>
+
+                
+                <DashboardSidebar />
+
+                <Box 
+                    component="main"
+                    sx={{
+                        flexGrow: 1,
+                        width: `calc(100% - ${drawerWidth}px)`,
+                        marginLeft: 35,
+                    }}
+                >
+                    <Toolbar />
+
+                    <div className="page-section">
+                        <div className="container">
+                            <div className="card-service-large wow fadeInUp">
+                                <form onSubmit={onSubmit}>
+                                    <h1 className="rxcui-header">Molecule View Tool</h1>
+                                    <h2 className="rxcui-subheader">Enter the name of the molecule you'd like to see the structure for below</h2>
 
 
-                        <div className="navbar-collapse collapse" id="navbarContent">
-                            <ul className="navbar-nav ml-auto">
-                                <li className="nav-item active">
-                                    <a className="nav-link" href="/HomePage">Home</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="/getInteractionPair">Interaction Pair Tool</a>
-                                </li>
-                                <li className="nav-link">
-                                    <a className="nav-link" href="/getDrugInteraction">All Interactions Tool</a>
-                                </li>
-                                <li className="nav-link">
-                                    <a className="nav-link" href="/AllDrugTerms">All Drugs Tool</a>
-                                </li>
-                                <li className="nav-link">
-                                    <a className="nav-link" href="/getRxcuiId">Rxcui ID Tool</a>
-                                </li>
-                                <li className="nav-link">
-                                    <a className="nav-link" href="/drug3dtest">Molecule View Tool</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                                    <TextField
+                                        label="Enter Molecule Name..."
+                                        variant="outlined"
+                                        name="name"
+                                        value={nameOne}
+                                        onChange={nameChangeOne}
+                                        className={classes.inputFieldStyle}
 
-                <div className="page-section">
-                    <div className="container">
-                        <div className="card-service-large wow fadeInUp">
-                            <form onSubmit={onSubmit}>
-                                <h1 className="rxcui-header">Molecule View Tool</h1>
-                                <h2 className="rxcui-subheader">Enter the name of the molecule you'd like to see the structure for below</h2>
+                                    />
 
-                                <input
-                                    className="rxcui-name-input"
-                                    id="nameOne"
-                                    name="name"
-                                    type="text"
-                                    placeholder="Enter Molecule Name..."
-                                    value={nameOne}
-                                    onChange={(event) => nameChangeOne(event.target.value)}
-                                />
+                                    <Button type="submit" className={classes.toolCardBtn}>View</Button>
 
-                                <button type="submit" className="btn btn-primary">View Structure</button>
-
-                                <div className="card-service-large-structures wow fadeInUp">
-                                    {showMoleculeMethod()}
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <footer className="page-footer bg-image">
-                    <div className="container">
-                        <div className="row mb-5">
-                            <div className="col-lg-3 py-3">
-                                <h3>Drug Interactor</h3>
-                                <p>Take substancees safely</p>
-                                <p>Medical Grade Information provided by DrugBank Official Research Records</p>
-                                <p>Creator: Shae Sullivan</p>
+                                    <div className="card-service-large-structures wow fadeInUp">
+                                        {showMoleculeMethod()}
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </footer>
 
-            
-        </div>
+                </Box>
+            </div>
+        </StyledEngineProvider>
 
-    );
+
+    )
 }
+
+
+export default GetMoleculeStructure;

@@ -12,46 +12,12 @@ import AppBarSearch from './components/appBarSearch';
 import AccountPopover from './components/AccountPopOver';
 import DashboardSidebar from './components/Sidebar';
 
-//Material UI Icon Imports
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
 
 //Material UI Imports
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
-import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
 import { TextField } from "@mui/material";
 import { Stack, StyledEngineProvider } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -256,14 +222,34 @@ const useStyles = makeStyles({
         fontFamily: "Public Sans",
     },
 
-    drugInteractionNameInput: {
+    inputFieldStyle: {
 
         display: "block",
         margin: "20px auto",
         textAlign: "center",
         padding: "14px 10px",
         width: "250px",
-        
+
+        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#555555"
+        },
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "rgba(46, 204, 112, 0.5)"
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "rgba(46, 204, 112, 1)"
+        },
+        "& .MuiFormLabel-root.Mui-root": {
+            color: "#555555"
+        },
+        "&:hover .MuiFormLabel-root.Mui-root": {
+            color: "#2eec71"
+
+        },
+        "& .MuiFormLabel-root.Mui-focused": {
+            color: "#2ecc71"
+        },
+
     },
 
     rxcuiAnswer: {
@@ -421,6 +407,7 @@ function GetRxcuiID () {
                                     <h2 className="rxcui-subheader">Enter drug name below</h2>
 
                                     <TextField
+                                        className={classes.inputFieldStyle}
                                         label="Enter Drug Name..."
                                         value={name}
                                         onChange={nameChange}

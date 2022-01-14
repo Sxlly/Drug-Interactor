@@ -194,8 +194,9 @@ const useStyles = makeStyles({
 
         color: "#fff",
         backgroundColor: "#2ecc71",
-        width: "100px",
+        width: "150px",
         textShadow: "2px 2px rgba(0,0,0,0.10)",
+        marginTop: "15px",
         "&:hover,&:focus": {
 
             backgroundColor: "#555555",
@@ -560,9 +561,10 @@ function AllDrugTerms () {
                                 <h1 className="drug-terms-header">List of all Drug Names</h1>
                                 <h2 className="drug-terms-subheader">Total Number Of Drug Terms: {drugTerms.length}</h2>
                                 {loadingFunction()}
-                            </div>
 
-                            <button className="btn btn-primary" onClick={onSubmit}>Load Terms</button>
+
+                                <Button onClick={onSubmit} className={classes.toolCardBtn}>Load Terms</Button>
+                            </div>
                         </div>
                     </div>
                 </Box>

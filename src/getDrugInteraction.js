@@ -247,14 +247,34 @@ const useStyles = makeStyles({
         fontFamily: "Public Sans",
     },
 
-    drugInteractionNameInput: {
+    inputFieldStyle: {
 
         display: "block",
         margin: "20px auto",
         textAlign: "center",
         padding: "14px 10px",
         width: "250px",
-        
+
+        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#555555"
+        },
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "rgba(46, 204, 112, 0.5)"
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "rgba(46, 204, 112, 1)"
+        },
+        "& .MuiFormLabel-root.Mui-root": {
+            color: "#555555"
+        },
+        "&:hover .MuiFormLabel-root.Mui-root": {
+            color: "#2eec71"
+
+        },
+        "& .MuiFormLabel-root.Mui-focused": {
+            color: "#2ecc71"
+        },
+
     },
 
     rxcuiAnswer: {
@@ -600,7 +620,7 @@ function AllInteractions () {
                                     <h2 className={classes.drugInteractionSubTitle}>Find all substances the entered substance name interacts with</h2>
 
                                     <TextField
-                                        className={classes.drugInteractionNameInput}
+                                        className={classes.inputFieldStyle}
                                         label="Enter Drug Name..."
                                         value={nameOne}
                                         onChange={nameChangeOne}
