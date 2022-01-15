@@ -33,7 +33,6 @@ import { fontFamily } from "@mui/system";
 //sidebar width constant
 const drawerWidth = 240;
 
-
 //material ui CSS classes
 const useStyles = makeStyles({
 
@@ -319,182 +318,17 @@ const useStyles = makeStyles({
 
 });
 
-function GetMoleculeStructure () {
-
-    const classes = useStyles();
-
-    //variables using this.state functionality
-    const[nameOne, updateNameOne] = useState("");
-    const[moleculeImage, updateMoleculeImage] = useState("");
-    const[moleculeImageAlert, updateMoleculeImageAlert] = useState(false);
-    const[moleculeImageLoader, updateMoleculeImageLoader] = useState(false);
-
-    const nameChangeOne = event => {
-        updateNameOne(event.target.value);
-    };
-
-    async function getMoleculeStructureAPI() {
-
-        
-        const getMolecule = `http://cactus.nci.nih.gov/chemical/structure/${nameOne.toLowerCase()}/image`;
-        const getMoleculeResponse = await fetch(getMolecule)
-        const getMoleculeData = await getMoleculeResponse;
-
-        updateMoleculeImage(getMoleculeData.url);
-
-        if (getMoleculeData.ok == false) {
-
-            updateMoleculeImageAlert(true);
-        }
-
-        updateMoleculeImageLoader(true);
-        return;
-    }
-
-    const showMoleculeMethod = () => {
-
-        if (moleculeImageAlert == true) {
-
-            return (
-
-                <div className="card-service wow fadeInUp">
-                    <div className="header">
-                        <Alert variant="filled" severity="error">
-                            The molecule structure for {nameOne} can't be found...
-                        </Alert>
-                    </div>
-                    <div className="body">
-                        <h5 className="text-secondary">{nameOne}</h5>
-                    </div>
-                </div>
-            );
-        }
-
-        else {
-
-            
-            if (moleculeImageLoader == true) {
-
-                return (
-
-                    <div className="card-service wow fadeInUp">
-                        <div className="header">
-                            <img className="molecule-image" src={moleculeImage} alt="" />
-                        </div>
-                        <div className="body">
-                            <h5 className="text-secondary">{nameOne}</h5>
-                        </div>
-                    </div>
-                );
-            }
-
-            if (moleculeImageLoader == false) {
-
-                return (
-
-                    <div className="card-service wow fadeInUp">
-                        <div className="header">
-                            <ReactBootStrap.Spinner animation="border" style={{ color: "#2ecc71" }}></ReactBootStrap.Spinner>
-                        </div>
-                        <div className="body">
-                            <h5 className="text-secondary">{nameOne}</h5>
-                        </div>
-                    </div>
-                );
-            }
-
-
-        }
-    }
-
-    const onSubmit = event => {
-
-        event.preventDefault();
-        updateMoleculeImageAlert(false);
-        updateMoleculeImageLoader(false);
-
-        (async () => {
-
-            await getMoleculeStructureAPI();
-            console.log("Waited!");
-        })();
-    }
+function GetDrugPrice () {
 
 
     return (
 
-        
-        <StyledEngineProvider injectFirst>
-            <div sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}>
-
-                <AppBar className={classes.header}>
-                    <Toolbar className={classes.headerToolBar}>
-                        <AppBarSearch />
-                        <Box sx={{ flexGrow: 1 }} />
-
-                        <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-                            <AccountPopover />
-                        </Stack>
-                    </Toolbar>
-                </AppBar>
-
-                
-                <DashboardSidebar />
-
-                <Box 
-                    component="main"
-                    sx={{
-                        flexGrow: 1,
-                        width: `calc(100% - ${drawerWidth}px)`,
-                        marginLeft: 35,
-                    }}
-                >
-                    <Toolbar />
-
-                    <div className="page-section">
-                        <div className="container">
-                            <div className="card-service-large wow fadeInUp">
-                                <form onSubmit={onSubmit}>
-                                    <h1 className="rxcui-header">Molecule View Tool</h1>
-                                    <h2 className="rxcui-subheader">Enter the name of the molecule you'd like to see the structure for below</h2>
-
-
-                                    <TextField
-                                        label="Enter Molecule Name..."
-                                        variant="outlined"
-                                        name="name"
-                                        value={nameOne}
-                                        onChange={nameChangeOne}
-                                        className={classes.inputFieldStyle}
-                                        InputProps={{
-                                            classes: {
-                                                input: classes.inputTextStyle,
-                                            },
-                                        }}
-
-                                    />
-
-                                    <Button type="submit" className={classes.toolCardBtn}>View</Button>
-
-                                    <div className="card-service-large-structures wow fadeInUp">
-                                        {showMoleculeMethod()}
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                </Box>
-            </div>
-        </StyledEngineProvider>
-
+        <div>
+            <h1>Drug Price</h1>
+        </div>
 
     )
+    
 }
 
-
-export default GetMoleculeStructure;
+export default GetDrugPrice;

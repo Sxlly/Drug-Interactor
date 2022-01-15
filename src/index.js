@@ -17,6 +17,7 @@ import InteractionPairPage from './getInteractionPair';
 import drug3dtest from './drug3dtest';
 import NewHomePage from './newHomePage';
 import Dashboard from './Dashboard';
+import GetDrugPrice from './getDrugPricePage';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
@@ -34,6 +35,7 @@ ReactDOM.render(
       <Route path = "/drug3dtest" component={drug3dtest} />
       <Route path = "/newHomePage" component={NewHomePage} />
       <Route path = "/Dashboard" component={Dashboard} />
+      <Route path = "/getDrugPrice" component={GetDrugPrice} />
     </Switch>
   </BrowserRouter>,
   rootElement
