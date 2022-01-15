@@ -238,15 +238,19 @@ const useStyles = makeStyles({
         "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: "rgba(46, 204, 112, 1)"
         },
-        "& .MuiFormLabel-root.Mui-root": {
-            color: "#555555",
-        },
-        "&:hover .MuiFormLabel-root.Mui-root": {
-            color: "#2eec71"
 
-        },
-        "& .MuiFormLabel-root.Mui-focused": {
-            color: "#2ecc71"
+        "& label": {
+            fontFamily: "Public Sans",
+            width: "100%",
+            padding: "10px",
+            textAlign: "center",
+            transformOrigin: "center",
+            color: "rgba(85, 85, 85, 0.5)",
+            "&.Mui-focused": {
+                textAlign: "left",
+                padding: "0px",
+                color: "#2ecc71",
+            }
         },
 
     },
