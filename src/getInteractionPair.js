@@ -36,7 +36,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Container from '@mui/material/Container';
-import { Stack, StyledEngineProvider } from '@mui/material';
+import { Stack, StyledEngineProvider, TextField } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Card, CardActions, CardContent, CardMedia, Grid, Menu, MenuItem, Tooltip } from '@mui/material';
 import AppBarSearch from "./components/appBarSearch";
@@ -219,7 +219,37 @@ const useStyles = makeStyles({
         },
 
 
-    }
+    },
+
+    inputFieldStyle: {
+
+        display: "block",
+        margin: "20px auto",
+        textAlign: "center",
+        padding: "14px 10px",
+        width: "250px",
+
+        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#555555"
+        },
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "rgba(46, 204, 112, 0.5)"
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "rgba(46, 204, 112, 1)"
+        },
+        "& .MuiFormLabel-root.Mui-root": {
+            color: "#555555"
+        },
+        "&:hover .MuiFormLabel-root.Mui-root": {
+            color: "#2eec71"
+
+        },
+        "& .MuiFormLabel-root.Mui-focused": {
+            color: "#2ecc71"
+        },
+
+    },
 
 });
 
@@ -322,8 +352,8 @@ function InteractionPairPage () {
 
             var passableRxcuiOne = getRxcuiIDAPIOneData.idGroup.rxnormId[0];
             var passableRxcuiTwo = getRxcuiIDAPITwoData.idGroup.rxnormId[0];
-            var passableNameOne = getRxcuiIDAPIOneData.idGroup.name.toLowerCase();
-            var passableNameTwo = getRxcuiIDAPITwoData.idGroup.name.toLowerCase();
+            var passableNameOne = nameOne.toLowerCase();
+            var passableNameTwo = nameTwo.toLowerCase();
             updateRxcuiIDOne(passableRxcuiOne);
             updateRxcuiIDTwo(passableRxcuiTwo);
             updateRxcuiIDOneLoader(true);
@@ -822,22 +852,22 @@ function InteractionPairPage () {
                                     <h1 className="rxcui-header">Interaction Pair</h1>
                                     <h2 className="rxcui-subheader">Determine if two substances react</h2>
 
-                                    <input
-                                        className="rxcui-name-input"
+                                    <TextField
+                                        className={classes.inputFieldStyle}
                                         id="nameOne"
                                         name="name"
-                                        type="text"
-                                        placeholder="Enter Drug Name..."
+                                        label="Enter Drug Name..."
+                                        variant="outlined"
                                         value={nameOne}
                                         onChange={(event) => nameChangeOne(event.target.value)}
                                     />
 
-                                    <input
-                                        className="rxcui-name-input"
+                                    <TextField
+                                        className={classes.inputFieldStyle}
                                         id="nameTwo"
                                         name="nameTwo"
-                                        type="text"
-                                        placeholder="Enter Drug Name..."
+                                        variant="outlined"
+                                        label="Enter Drug Name..."
                                         value={nameTwo}
                                         onChange={(event) => nameChangeTwo(event.target.value)}
                                     />
