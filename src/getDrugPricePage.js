@@ -320,12 +320,110 @@ const useStyles = makeStyles({
 
 function GetDrugPrice () {
 
+    const classes = useStyles();
+
+    const[nameOne, updateNameOne] = useState("");
+    const[drugPrice, updateDrugPrice] = useState("");
+    const[drugPriceLoader, updateDrugPriceLoader] = useState(false);
+    const[drugPriceAlert, updateDrugPriceAlert] = useState(false);
+
+    const nameChangeOne = event => {
+
+        updateNameOne(event.target.value);
+    };
+
+    async function getDrugPriceAPI() {
+
+        //waiting on GoodRx API Key approval
+
+
+        return;
+    }
+
+    const onSubmit = event => {
+
+        event.preventDefault();
+        
+        (async () => {
+
+            await getDrugPriceAPI();
+            console.log("Waited!");
+        })();
+    }
+
+
+
 
     return (
 
-        <div>
-            <h1>Drug Price</h1>
-        </div>
+        <StyledEngineProvider injectFirst>
+            <div sx={{
+                display: "flex",
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
+
+                <AppBar className={classes.header}>
+                    <Toolbar className={classes.headerToolBar}>
+                        <AppBarSearch />
+                        <Box sx={{ flexGrow: 1 }} />
+
+                        <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+                            <AccountPopover />
+                        </Stack>
+                    </Toolbar>
+                </AppBar>
+
+                
+                <DashboardSidebar />
+
+                <Box 
+                    component="main"
+                    sx={{
+                        flexGrow: 1,
+                        width: `calc(100% - ${drawerWidth}px)`,
+                        marginLeft: 35,
+                    }}
+                >
+                    <Toolbar />
+
+                    <div className="page-section">
+                        <div className="container">
+                            <div className="card-service-large wow fadeInUp">
+                                <form onSubmit={onSubmit}>
+                                    <h1>Drug Price Finder Tool</h1>
+                                    <h2>Enter the name of the drug you'd like to find the lowest price for</h2>
+
+                                    <TextField
+                                        label="Enter Drug Name..."
+                                        variant="outlined"
+                                        name="name"
+                                        value={nameOne}
+                                        onChange={nameChangeOne}
+                                        className={classes.inputFieldStyle}
+                                        InputProps={{
+                                            classes: {
+                                                input: classes.inputTextStyle,
+                                            },
+                                        }}
+                                    />
+
+                                    <Button type="submit" className={classes.toolCardBtn}>View</Button>
+
+                                    <div className="card-service-large-structures wow fadeInUp">
+
+
+                                    </div>
+                                
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </Box>
+
+            </div>
+        </StyledEngineProvider>
+
 
     )
     
