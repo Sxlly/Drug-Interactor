@@ -239,7 +239,7 @@ const useStyles = makeStyles({
             borderColor: "rgba(46, 204, 112, 1)"
         },
         "& .MuiFormLabel-root.Mui-root": {
-            color: "#555555"
+            color: "#555555",
         },
         "&:hover .MuiFormLabel-root.Mui-root": {
             color: "#2eec71"
@@ -249,6 +249,11 @@ const useStyles = makeStyles({
             color: "#2ecc71"
         },
 
+    },
+
+    inputTextStyle: {
+
+        fontFamily: "Public Sans",
     },
 
 });
@@ -854,6 +859,11 @@ function InteractionPairPage () {
 
                                     <TextField
                                         className={classes.inputFieldStyle}
+                                        InputProps={{
+                                            classes: {
+                                                input: classes.inputTextStyle,
+                                            },
+                                        }}
                                         id="nameOne"
                                         name="name"
                                         label="Enter Drug Name..."
@@ -864,6 +874,11 @@ function InteractionPairPage () {
 
                                     <TextField
                                         className={classes.inputFieldStyle}
+                                        InputProps={{
+                                            classes: {
+                                                input: classes.inputTextStyle,
+                                            },
+                                        }}
                                         id="nameTwo"
                                         name="nameTwo"
                                         variant="outlined"
