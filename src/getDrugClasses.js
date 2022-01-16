@@ -316,7 +316,9 @@ function AllDrugClasses () {
 
     return (
 
-        <div></div>
+        <div>n</div>
 
     )
 }
+
+export default AllDrugClasses;

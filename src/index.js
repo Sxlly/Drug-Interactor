@@ -18,6 +18,7 @@ import drug3dtest from './drug3dtest';
 import NewHomePage from './newHomePage';
 import Dashboard from './Dashboard';
 import GetDrugPrice from './getDrugPricePage';
+import AllDrugClasses from './getDrugClasses';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
@@ -36,6 +37,7 @@ ReactDOM.render(
       <Route path = "/newHomePage" component={NewHomePage} />
       <Route path = "/Dashboard" component={Dashboard} />
       <Route path = "/getDrugPrice" component={GetDrugPrice} />
+      <Route path = "/AllDrugClasses" component={AllDrugClasses} />
     </Switch>
   </BrowserRouter>,
   rootElement
