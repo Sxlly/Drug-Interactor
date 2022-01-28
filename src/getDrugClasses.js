@@ -314,6 +314,21 @@ const useStyles = makeStyles({
 
 function AllDrugClasses () {
 
+    const classes = useStyles();
+
+
+
+    async function getDrugClasses() {
+
+        const getDrugClassesAPI = `https://rxnav.nlm.nih.gov/REST/rxclass/allClasses.json`;
+        const getDrugClassesResponse = await fetch(getDrugClassesAPI)
+        const getDrugClassesData = await getDrugClassesResponse.json();
+
+        console.log(getDrugClassesData);
+
+        return;
+    }
+
     return (
 
         <div>n</div>

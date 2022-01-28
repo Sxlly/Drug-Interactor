@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -316,7 +316,7 @@ const useStyles = makeStyles({
 
 
 
-function AllDrugTerms () {
+export default function AllDrugTerms () {
 
     //material ui classes constant
     const classes = useStyles();
@@ -343,33 +343,6 @@ function AllDrugTerms () {
     function createData(term) {
 
         return {term};
-    }
-
-    async function getDrugTerms() {
-
-        const getDrugTermsAPI = `https://rxnav.nlm.nih.gov/REST/displaynames.json`;
-        const getDrugTermsResponse = await fetch(getDrugTermsAPI)
-        const getDrugTermsData = await getDrugTermsResponse.json();
-
-        console.log(getDrugTermsData);
-
-        const termsArray = [];
-
-        for (var index = 0; index < getDrugTermsData.displayTermsList.term.length-1; index++) {
-
-            termsArray[index] = getDrugTermsData.displayTermsList.term[index];
-
-            termsArray[index] = createData(getDrugTermsData.displayTermsList.term[index]);
-            console.log(termsArray[index]);
-        }
-
-        updateDrugTerms(termsArray);
-        updateTermsLoader(true);
-
-
-
-
-        return;
     }
 
     function drugTermClicked() {
@@ -497,7 +470,7 @@ function AllDrugTerms () {
                                     }}
                                     onPageChange={handleChangePage}
                                     onRowsPerPageChange={handleChangeRowsPerPage}
-                                    ActionsComponent={TablePaginationActions}
+                                    ActionsComponent={PaginationAction}
                                 />
 
                             </TableRow>
@@ -508,18 +481,31 @@ function AllDrugTerms () {
         }
     }
 
-    const onSubmit = event => {
+    useEffect(() => {
 
-        event.preventDefault();
+        const termsArray = [];
 
-        (async () => {
+        fetch(`https://rxnav.nlm.nih.gov/REST/displaynames.json`)
+            .then(results => results.json())
+            .then(data => {
 
-            updateTermsLoader(false);
+                console.log(data.displayTermsList.term);
 
-            await getDrugTerms();
-            console.log("Waited!");
-        })();
-    }
+                for (var index = 0; index < data.displayTermsList.term.length-1; index++) {
+
+                    termsArray[index] = data.displayTermsList.term[index];
+                    termsArray[index] = createData(data.displayTermsList.term[index]);
+                    console.log(termsArray[index]);
+                }
+
+                updateDrugTerms(termsArray);
+
+            });
+        
+
+        return;
+    }, []);
+
 
     //return method
     return (
@@ -560,10 +546,55 @@ function AllDrugTerms () {
                             <div className="card-service-large wow fadeInUp">
                                 <h1 className="drug-terms-header">List of all Drug Names</h1>
                                 <h2 className="drug-terms-subheader">Total Number Of Drug Terms: {drugTerms.length}</h2>
-                                {loadingFunction()}
+
+                                <TableContainer component={Paper}>
+                                    <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+                                        <TableBody>
+                                            {(rowsPerPage > 0
+                                            ? drugTerms.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                            : drugTerms
 
 
-                                <Button onClick={onSubmit} className={classes.toolCardBtn}>Load Terms</Button>
+                                            ).map((row) => (
+                                                <TableRow key={row.name}>
+                                                    <TableCell component="th" scope="row">
+                                                        {row.term}
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+
+                                            {emptyRows > 0 && (
+                                                <TableRow sx={{height: 53 * emptyRows }}>
+                                                    <TableCell colSpan={6} />
+                                                </TableRow>
+                                            )}
+                                        </TableBody>
+                                        <TableFooter>
+                                            <TableRow>
+                                                <TablePagination
+                                                    rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                                                    colSpan={3}
+                                                    count={drugTerms.length}
+                                                    rowsPerPage={rowsPerPage}
+                                                    page={page}
+                                                    SelectProps={{
+                                                        inputProps: {
+                                                            'aria-label': 'rows per page',
+                                                        },
+                                                        native: true,
+                                                    }}
+                                                    onPageChange={handleChangePage}
+                                                    onRowsPerPageChange={handleChangeRowsPerPage}
+                                                    ActionsComponent={PaginationAction}
+                                                />
+
+                                            </TableRow>
+                                        </TableFooter>
+                                    </Table>
+                                </TableContainer>
+
+                                
+
                             </div>
                         </div>
                     </div>
@@ -577,4 +608,4 @@ function AllDrugTerms () {
 
 }
 
-export default AllDrugTerms;
+

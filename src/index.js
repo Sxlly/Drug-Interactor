@@ -9,7 +9,6 @@ import { render } from 'react-dom';
 import 'simplebar/src/simplebar.css';
 
 //Importing Pages ~ Shae
-import AllDrugTerms from './getDrugTerms';
 import getRxcuiId from './getRxcui';
 import getDrugInteraction from './getDrugInteraction';
 import HomePage from './HomePage';
@@ -18,6 +17,7 @@ import drug3dtest from './drug3dtest';
 import NewHomePage from './newHomePage';
 import Dashboard from './Dashboard';
 import GetDrugPrice from './getDrugPricePage';
+import AllDrugTerms from './getDrugTerms';
 import AllDrugClasses from './getDrugClasses';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
