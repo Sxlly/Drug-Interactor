@@ -423,8 +423,8 @@ export default function AllDrugClasses () {
 
                 for (var index = 0; index < data.rxclassMinConceptList.rxclassMinConcept.length-1; index++) {
 
-                    classesArray[index] = data.rxclassMinConceptList.rxclassMinConcept[index].className;
-                    classesArray[index] = createData(data.rxclassMinConceptList.rxclassMinConcept[index].className);
+                    classesArray[index] = data.rxclassMinConceptList.rxclassMinConcept[index].className.toLowerCase();
+                    classesArray[index] = createData(data.rxclassMinConceptList.rxclassMinConcept[index].className.toLowerCase());
                     console.log(classesArray[index]);
                 }
 

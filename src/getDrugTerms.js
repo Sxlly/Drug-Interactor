@@ -493,8 +493,8 @@ export default function AllDrugTerms () {
 
                 for (var index = 0; index < data.displayTermsList.term.length-1; index++) {
 
-                    termsArray[index] = data.displayTermsList.term[index];
-                    termsArray[index] = createData(data.displayTermsList.term[index]);
+                    termsArray[index] = data.displayTermsList.term[index].toLowerCase();
+                    termsArray[index] = createData(data.displayTermsList.term[index].toLowerCase());
                     console.log(termsArray[index]);
                 }
 
