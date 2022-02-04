@@ -19,7 +19,7 @@ import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { Stack, StyledEngineProvider } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Card, CardActions, CardContent, CardMedia, Grid } from '@mui/material';
@@ -390,32 +390,7 @@ function GetDrugPrice () {
                     <div className="page-section">
                         <div className="container">
                             <div className="card-service-large wow fadeInUp">
-                                <form onSubmit={onSubmit}>
-                                    <h1>Drug Price Finder Tool</h1>
-                                    <h2>Enter the name of the drug you'd like to find the lowest price for</h2>
-
-                                    <TextField
-                                        label="Enter Drug Name..."
-                                        variant="outlined"
-                                        name="name"
-                                        value={nameOne}
-                                        onChange={nameChangeOne}
-                                        className={classes.inputFieldStyle}
-                                        InputProps={{
-                                            classes: {
-                                                input: classes.inputTextStyle,
-                                            },
-                                        }}
-                                    />
-
-                                    <Button type="submit" className={classes.toolCardBtn}>View</Button>
-
-                                    <div className="card-service-large-structures wow fadeInUp">
-
-
-                                    </div>
-                                
-                                </form>
+                                <Typography>Coming Soon!</Typography>
                             </div>
                         </div>
                     </div>

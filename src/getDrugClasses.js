@@ -433,6 +433,8 @@ export default function AllDrugClasses () {
 
             });
 
+        
+
         return;
     }, []);
 
