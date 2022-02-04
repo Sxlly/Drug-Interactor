@@ -91,7 +91,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
                 '& .simplebar-content': { height: '100%', display: 'flex', flexDirection: 'column' }
                 }}
             >
-                <Box sx={{ px: 1.5, py: 2.5 }}>
+                <Box sx={{ px: 1.5, py: 0 }}>
                     <Box component={RouterLink} to="/" sx={{ display: "inline-flex" }}>
                       <SvgComponent />
                     </Box>
