@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -56,6 +56,7 @@ import { TextField } from "@mui/material";
 import { Stack, StyledEngineProvider } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Card, CardActions, CardContent, CardMedia, Grid } from '@mui/material';
+import TablePaginationActions from "@mui/material/TablePagination/TablePaginationActions";
 
 
 //google font imports
@@ -312,28 +313,224 @@ const useStyles = makeStyles({
 
 });
 
-function AllDrugClasses () {
+export default function AllDrugClasses () {
 
     const classes = useStyles();
 
+    const [classTerms, updateClassTerms] = useState([]);
+    const [page, updatePage] = useState(0);
+    const [rowsPerPage, updateRowsPerPage] = useState(5);
+
+    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - classTerms.length) : 0;
+
+    const handleChangePage = (event, newPage) => {
+
+        updatePage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+
+        updateRowsPerPage(parseInt(event.target.value, 10));
+        updatePage(0);
+    };
+
+    function createData(term) {
+
+        return {term};
+    }
+
+    function PaginationAction(props) {
+
+        const { count, page, rowsPerPage, onPageChange } = props;
+    
+
+        const handleFirstPageButtonClick = (event) => {
+            onPageChange(event, 0);
+        };
+
+        const handleBackButtonClick = (event) => {
+            onPageChange(event, page - 1);
+        };
+        
+        const handleNextButtonClick = (event) => {
+            onPageChange(event, page + 1);
+        };
+        
+        const handleLastPageButtonClick = (event) => {
+            onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+        };
+
+        //return method => show pagnation within DataTable
+        return (
+
+            <Box sx={{
+                flexShrink: 0,
+                ml: 2.5,
+            }}>
+                <IconButton
+                    onClick={handleFirstPageButtonClick}
+                    disabled={page === 0}
+                    aria-label="first page"
+                >
+                    {'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+                </IconButton>
+
+                <IconButton
+                    onClick={handleBackButtonClick}
+                    disabled={page === 0}
+                    aria-label="previous page"
+                >
+                    {'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                </IconButton>
+
+                <IconButton
+                    onClick={handleNextButtonClick}
+                    disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+                    aria-label="next page"
+                >
+                    {'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                </IconButton>
+
+                <IconButton
+                    onClick={handleLastPageButtonClick}
+                    disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+                    aria-label="last page"
+                >
+                    {'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+                </IconButton>
+            </Box>
+        );
+    
+    }
+
+    TablePaginationActions.propTypes = {
+
+        count: PropTypes.number.isRequired,
+        onPageChange: PropTypes.func.isRequired,
+        page: PropTypes.number.isRequired,
+        rowsPerPage: PropTypes.number.isRequired,
+    };
+
+    useEffect(() => {
+
+        const classesArray = [];
+
+        fetch(`https://rxnav.nlm.nih.gov/REST/rxclass/allClasses.json`)
+            .then(results => results.json())
+            .then(data => {
+
+                console.log(data);
+
+                for (var index = 0; index < data.rxclassMinConceptList.rxclassMinConcept.length-1; index++) {
+
+                    classesArray[index] = data.rxclassMinConceptList.rxclassMinConcept[index].className;
+                    classesArray[index] = createData(data.rxclassMinConceptList.rxclassMinConcept[index].className);
+                    console.log(classesArray[index]);
+                }
+
+                updateClassTerms(classesArray);
 
 
-    async function getDrugClasses() {
-
-        const getDrugClassesAPI = `https://rxnav.nlm.nih.gov/REST/rxclass/allClasses.json`;
-        const getDrugClassesResponse = await fetch(getDrugClassesAPI)
-        const getDrugClassesData = await getDrugClassesResponse.json();
-
-        console.log(getDrugClassesData);
+            });
 
         return;
-    }
+    }, []);
+
 
     return (
 
-        <div>n</div>
+        <StyledEngineProvider injectFirst>
+            <div sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
+
+                <AppBar className={classes.header}>
+                    <Toolbar className={classes.headerToolBar}>
+                        <AppBarSearch />
+                        <Box sx={{ flexGrow: 1 }} />
+
+                        <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+                            <AccountPopover />
+                        </Stack>
+                    </Toolbar>
+                </AppBar>
+
+                <DashboardSidebar />
+
+                <Box
+                    component="main"
+                    sx={{
+                        flexGrow: 1,
+                        width: `calc(100% - ${drawerWidth}px)`,
+                        marginLeft: 35,
+                    }}
+                >
+                    <Toolbar />
+
+                    <div className="page-section">
+                        <div className="container">
+                            <div className="card-service-large wow fadeInUp">
+                                <h1 className="drug-terms-header">List of all Drug Classes</h1>
+                                <h2 className="drug-terms-subheader">Total Number Of Drug Classes: {classTerms.length}</h2>
+
+                                <TableContainer component={Paper}>
+                                    <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+                                        <TableBody>
+                                            {(rowsPerPage > 0
+                                            ? classTerms.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                            : classTerms
+
+
+                                            ).map((row) => (
+                                                <TableRow key={row.name}>
+                                                    <TableCell component="th" scope="row">
+                                                        {row.term}
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+
+                                            {emptyRows > 0 && (
+                                                <TableRow sx={{height: 53 * emptyRows }}>
+                                                    <TableCell colSpan={6} />
+                                                </TableRow>
+                                            )}
+                                        </TableBody>
+                                        <TableFooter>
+                                            <TableRow>
+                                                <TablePagination
+                                                    rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                                                    colSpan={3}
+                                                    count={classTerms.length}
+                                                    rowsPerPage={rowsPerPage}
+                                                    page={page}
+                                                    SelectProps={{
+                                                        inputProps: {
+                                                            'aria-label': 'rows per page',
+                                                        },
+                                                        native: true,
+                                                    }}
+                                                    onPageChange={handleChangePage}
+                                                    onRowsPerPageChange={handleChangeRowsPerPage}
+                                                    ActionsComponent={PaginationAction}
+                                                />
+
+                                            </TableRow>
+                                        </TableFooter>
+                                    </Table>
+                                </TableContainer>
+
+                                
+
+                            </div>
+                        </div>
+                    </div>
+                </Box>
+
+            </div>
+        </StyledEngineProvider>
 
     )
 }
 
-export default AllDrugClasses;
