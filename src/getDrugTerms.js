@@ -325,7 +325,7 @@ export default function AllDrugTerms () {
     const[drugTerms, updateDrugTerms] = useState([]);
     const [termsLoader, updateTermsLoader] = useState(true);
     const [page, updatePage] = useState(0);
-    const [rowsPerPage, updateRowsPerPage] = useState(5);
+    const [rowsPerPage, updateRowsPerPage] = useState(10);
 
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - drugTerms.length) : 0;
 
@@ -391,7 +391,7 @@ export default function AllDrugTerms () {
                     disabled={page === 0}
                     aria-label="previous page"
                 >
-                    {'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                    {'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                 </IconButton>
 
                 <IconButton
@@ -399,7 +399,7 @@ export default function AllDrugTerms () {
                     disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                     aria-label="next page"
                 >
-                    {'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                    {'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowRight />}
                 </IconButton>
 
                 <IconButton

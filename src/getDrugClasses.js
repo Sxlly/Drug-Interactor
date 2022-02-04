@@ -319,7 +319,7 @@ export default function AllDrugClasses () {
 
     const [classTerms, updateClassTerms] = useState([]);
     const [page, updatePage] = useState(0);
-    const [rowsPerPage, updateRowsPerPage] = useState(5);
+    const [rowsPerPage, updateRowsPerPage] = useState(10);
 
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - classTerms.length) : 0;
 
@@ -339,7 +339,7 @@ export default function AllDrugClasses () {
         return {term};
     }
 
-    function PaginationAction(props) {
+    function TablePaginationAction(props) {
 
         const { count, page, rowsPerPage, onPageChange } = props;
     
@@ -380,7 +380,7 @@ export default function AllDrugClasses () {
                     disabled={page === 0}
                     aria-label="previous page"
                 >
-                    {'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                    {'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                 </IconButton>
 
                 <IconButton
@@ -388,7 +388,7 @@ export default function AllDrugClasses () {
                     disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                     aria-label="next page"
                 >
-                    {'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                    {'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowRight />}
                 </IconButton>
 
                 <IconButton
@@ -513,7 +513,7 @@ export default function AllDrugClasses () {
                                                     }}
                                                     onPageChange={handleChangePage}
                                                     onRowsPerPageChange={handleChangeRowsPerPage}
-                                                    ActionsComponent={PaginationAction}
+                                                    ActionsComponent={TablePaginationAction}
                                                 />
 
                                             </TableRow>
