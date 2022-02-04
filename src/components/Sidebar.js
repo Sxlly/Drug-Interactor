@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import SvgComponent from './logoComponent';
 
 import { styled } from '@mui/material/styles';
 import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
@@ -92,7 +93,8 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             >
                 <Box sx={{ px: 2.5, py: 3 }}>
                     <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
-                        <img src="https://www.svgrepo.com/show/65713/pills.svg" width="60px" height="60px" alt="DI" />
+                      <SvgComponent />
+                      
                     </Box>
                 </Box>
         

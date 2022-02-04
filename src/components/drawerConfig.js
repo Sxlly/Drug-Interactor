@@ -28,6 +28,13 @@ const drawerConfig = [
       icon: <svg width="30px" height="30px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
     },
     {
+      title: 'All Substance Classes',
+      path: '/AllDrugClasses',
+      icon: <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="30px" height="30px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M33.53 21.58l-4.94-2.83v-5.66a1 1 0 0 0-.51-.87L22.64 9.1a1 1 0 0 0-1 0l-5.44 3.12a1 1 0 0 0-.51.87v5.66l-4.94 2.83a1 1 0 0 0-.5.87v6.24a1 1 0 0 0 .5.86l5.45 3.12a1 1 0 0 0 1 0l4.95-2.83l4.95 2.83a1 1 0 0 0 .5.14a1 1 0 0 0 .49-.14l5.45-3.12a1 1 0 0 0 .5-.86v-6.24a1 1 0 0 0-.51-.87zM22.14 11.12l4.45 2.55V19l-4.46 2.56l-4.44-2.6v-5.29zm-5.45 19.53l-4.44-2.54V23l4.68-2.68l4.4 2.57V28zM32 28.11l-4.44 2.54L22.93 28v-5.07l4.46-2.57L32 23z" class="clr-i-outline clr-i-outline-path-1" fill="currentColor"/><path d="M7 27.43a1 1 0 0 1-1-1V19.9a1 1 0 0 1 .5-.9l4.95-2.83v-5.63a1 1 0 0 1 .5-.87l5.21-3a1 1 0 0 1 1.37.37a1 1 0 0 1-.38 1.37l-4.7 2.68v5.66a1 1 0 0 1-.51.87L8 20.48v5.95a1 1 0 0 1-1 1z" class="clr-i-outline clr-i-outline-path-2" fill="currentColor"/><path d="M3 25.05a1 1 0 0 1-1-1v-6.52a1 1 0 0 1 .5-.86l5-2.84V8.17a1 1 0 0 1 .5-.86l5.25-3a1 1 0 0 1 1 1.74l-4.8 2.7v5.66a1 1 0 0 1-.51.87L4 18.11v5.94a1 1 0 0 1-1 1z" class="clr-i-outline clr-i-outline-path-3" fill="currentColor"/></svg>
+
+
+    },
+    {
       title: 'Rxcui ID Finder Tool',
       path: '/getRxcuiId',
       icon: <svg width="30px" height="30px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" /></svg>
